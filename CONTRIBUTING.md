@@ -96,6 +96,15 @@ All JavaScript code is linted with [Prettier](https://prettier.io/).
 All JavaScript code should be using modern standards as of ECMAScript6.
 
 
+## CSS Styleguide
+
+All CSS should be written using the SASS compiler.
+
+If CSS is not reusable throughout other components, it should be contained and scoped to the component it relates to.
+
+CSS should be written using [BEM methodology](http://getbem.com/ "BEM methodology")
+
+
 #### Pull Request Labels
 
 | Label name | Description |
