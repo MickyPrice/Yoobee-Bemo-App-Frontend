@@ -2,37 +2,62 @@
 // ******** COLOR **********
 //--------------------------
 // Purple ------------------
-$purple-100: #E8DDFF;
-$purple-300: #BA99FF;
-$purple-500: #8B55FF;
+$purple-100: #e8ddff;
+$purple-300: #ba99ff;
+$purple-500: #8b55ff;
 
 // Green -------------------
-$green-100: #10EFBA;
-$green-300: #00D6A3;
-$green-500: #008F87;
+$green-100: #10efba;
+$green-300: #00d6a3;
+$green-500: #008f87;
 
 //Red ----------------------
-$red-300:#E95F28;
+$red-300: #e95f28;
 
 // Black -------------------
 $black: #303030;
 
 // White -------------------
-$white: #F8F7FC;
+$white: #f8f7fc;
 
 //--------------------------
 // ****** TEXT CLASS *******
 //--------------------------
 
-.text__sm{
-    font-size: 0.75em;
+.text__sm {
+  font-size: 0.75em;
 }
 
-.text__base{
-    font-size: 1em;
+.text__base {
+  font-size: 1em;
 }
 
-.text__base--heavy{
-    font-size: 1em;
-    font-weight: bold;
+.text__base--heavy {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.text__lg {
+  font-size: 1.33em;
+}
+
+.heading__sm {
+  font-size: 1.77em;
+}
+
+.heading__sm--bold {
+  font-size: 1.77em;
+  font-weight: bold;
+}
+
+.heading__base {
+  font-size: 2.369em;
+}
+
+.heading__lg {
+  font-size: 3.157em;
+}
+
+.heading__lg--balance {
+  font-size: 3.783em;
 }
