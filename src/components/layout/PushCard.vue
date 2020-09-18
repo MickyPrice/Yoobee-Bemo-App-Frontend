@@ -3,7 +3,7 @@
     <h1 class="push-card__title heading__base">
       <slot name="PushCardTitle"></slot>
     </h1>
-    <p class="push-card__sub-title text__sm">
+    <p class="push-card__sub-title text__base">
       <slot name="PushCardSubTitle"></slot>
     </p>
     <slot name="SlotComponents"></slot>

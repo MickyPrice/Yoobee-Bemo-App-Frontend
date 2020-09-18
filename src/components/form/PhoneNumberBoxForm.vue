@@ -1,14 +1,21 @@
 <template>
-  <input
-    class="text__base--heavy"
-    type="number"
-    name="fname"
-    placeholder="Please Enter Phone Number"
-  />
+  <div>
+    <label for="fname">
+      <slot name="top-text"></slot>
+    </label>
+    <input
+      class="text__base--heavy"
+      type="number"
+      name="fname"
+      placeholder="Please Enter Phone Number"
+    />
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "PhoneNumberBoxForm",
+};
 </script>
 
 <style scoped lang="scss">

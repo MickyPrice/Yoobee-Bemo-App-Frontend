@@ -44,18 +44,23 @@ $corners-top: 40px 40px 0px 0px;
 $height-btn: 60px;
 
 // Padding -----------------
+$padding-5: 5px;
 $padding-10: 10px;
 $padding-20: 20px;
 $padding-30: 30px;
 $padding-40: 40px;
 
 // Margin -------------------
+$margin-5: 5px;
 $margin-20: 20px;
 $margin-30: 30px;
 
 //--------------------------
 // *** BACKGROND CLASS ****
 //--------------------------
+.bk-purple-300 {
+  background-color: $purple-300;
+}
 .bk-purple-500 {
   background-color: $purple-500;
 }
