@@ -1,12 +1,15 @@
 <template>
   <div class="push-card">
-    <h1 class="push-card__title heading__base">
+    <p class="push-card__title heading__sm--bold">
       <slot name="PushCardTitle"></slot>
-    </h1>
-    <p class="push-card__sub-title text__base">
+    </p>
+    <p class="push-card__sub-title text__sm">
       <slot name="PushCardSubTitle"></slot>
     </p>
     <slot name="SlotComponents"></slot>
+    <h5 class="push-card__bottom-text">
+      <slot name="PushCardBottomText"></slot>
+    </h5>
   </div>
 </template>
 
@@ -29,6 +32,12 @@ export default {
   bottom: 0;
 
   &__sub-title {
+    color: $purple-300;
+    margin-top: $margin-5;
+  }
+  &__bottom-text {
+    text-align: center;
+    margin-top: $margin-30;
     color: $purple-300;
   }
 }

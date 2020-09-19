@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         name: "landing",
-        path: "landing",
+        path: "/",
         component: () => import("../components/login/Landing.vue"),
       },
       {

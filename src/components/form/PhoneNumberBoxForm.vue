@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="fname">
+    <label for="fname" class="text__sm">
       <slot name="top-text"></slot>
     </label>
     <input
@@ -20,19 +20,25 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/_variables.scss";
-input {
-  width: 100%;
-  margin-top: $margin-20;
-  height: $height-btn;
-  background-color: $white-300;
-  border-radius: $corners-10;
-  border: none;
-  outline: none;
-  &[type="number"] {
-    padding-left: $padding-20;
+div {
+  margin-top: $margin-30;
+  label {
+    color: $purple-100;
   }
-  &:active {
-    border: 2px solid $purple-100;
+  input {
+    width: 100%;
+    margin-top: $margin-5;
+    height: $height-btn;
+    background-color: $white-300;
+    border-radius: $corners-10;
+    border: none;
+    outline: none;
+    &[type="number"] {
+      padding-left: $padding-20;
+    }
+    &:active {
+      border: 2px solid $purple-100;
+    }
   }
 }
 </style>
