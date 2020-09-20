@@ -18,9 +18,9 @@
       <slot slot="PushCardTitle">Welcome Back</slot>
       <slot slot="PushCardSubTitle">Enter your phone number to login</slot>
       <template slot="SlotComponents">
-        <form action="login">
-          <PhoneNumberBoxForm>
-            <slot slot="top-text">Only In New Zealand</slot>
+        <form v-on:submit.prevent="checkLogin">
+          <PhoneNumberBoxForm v-model="form.phone">
+            <slot slot="top-text">NZ Only</slot>
           </PhoneNumberBoxForm>
           <SubmitButton></SubmitButton>
         </form>
@@ -35,6 +35,10 @@ import PushCard from "../layout/PushCard.vue";
 import PhoneNumberBoxForm from "../form/PhoneNumberBoxForm.vue";
 import SubmitButton from "../form/SubmitButton.vue";
 import Bibutton from "../buttons/BiButton.vue";
+
+import router from '@/router'
+import { login } from "../../services/api/auth";
+
 export default {
   components: {
     PushCard,
@@ -42,6 +46,21 @@ export default {
     SubmitButton,
     Bibutton,
   },
+  data: function() {
+    return {
+      form: {
+        phone: String,
+      },
+      errors: []
+    }
+  },
+  methods: {
+    checkLogin() {
+      login(this.form).then(() => {
+        router.push({name: 'verify', params: { phone: this.form.phone }});
+      });
+    }
+  }
 };
 </script>
 
