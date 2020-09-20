@@ -1,0 +1,68 @@
+<template>
+  <div class="login">
+    <div class="login__top">
+      <router-link :to="{ name: 'landing' }">
+        <Bibutton>
+          <slot slot="icon" class>
+            <i class="fas fa-angle-left col-purple-500"></i>
+          </slot>
+        </Bibutton>
+      </router-link>
+
+      <div class="head">
+        <h1 class="head__titile heading__lg--balance">Bemo</h1>
+        <p class="head__sub-title heading__sm">Be More</p>
+      </div>
+    </div>
+    <PushCard>
+      <slot slot="PushCardTitle">Welcome Back</slot>
+      <slot slot="PushCardSubTitle">Enter your phone number to login</slot>
+      <template slot="SlotComponents">
+        <form action="login">
+          <PhoneNumberBoxForm>
+            <slot slot="top-text">Only In New Zealand</slot>
+          </PhoneNumberBoxForm>
+          <SubmitButton></SubmitButton>
+        </form>
+      </template>
+      <slot slot="PushCardBottomText">New? Get Started</slot>
+    </PushCard>
+  </div>
+</template>
+
+<script>
+import PushCard from "../layout/PushCard.vue";
+import PhoneNumberBoxForm from "../form/PhoneNumberBoxForm.vue";
+import SubmitButton from "../form/SubmitButton.vue";
+import Bibutton from "../buttons/BiButton.vue";
+export default {
+  components: {
+    PushCard,
+    PhoneNumberBoxForm,
+    SubmitButton,
+    Bibutton,
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import "../../scss/_variables.scss";
+.login {
+  &__top {
+    padding: $padding-40;
+  }
+}
+.head {
+  padding-top: 70px;
+  &__titile {
+    color: $white-300;
+    text-align: center;
+  }
+  &__sub-title {
+    color: $white-300;
+    opacity: 70%;
+    text-align: center;
+    margin-top: -10px;
+  }
+}
+</style>
