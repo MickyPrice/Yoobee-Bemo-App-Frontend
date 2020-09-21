@@ -4,7 +4,7 @@
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme }"
       class="nav__link"
-      to="/about"
+      to="/friends"
     >
       <svg
         class="nav__svg"
@@ -25,7 +25,7 @@
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme, 'nav__link--notification': alertsNotification }"
       class="nav__link"
-      to="/chats"
+      to="/chat"
     >
       <svg
         class="nav__svg"
@@ -69,7 +69,7 @@
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme }"
       class="nav__link"
-      to="/chats"
+      to="/wallet"
     >
       <svg
         class="nav__svg"
@@ -90,7 +90,7 @@
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme, 'nav__link--notification': alertsNotification }"
       class="nav__link"
-      to="/chats"
+      to="/alerts"
     >
       <svg
         class="nav__svg"
