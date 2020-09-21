@@ -1,29 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
+import Index from "../views/Index.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "landing",
-    component: Login,
+    name: "index",
+    component: Index,
     children: [
       {
         name: "landing",
         path: "/",
-        component: () => import("../components/login/Landing.vue"),
+        component: () => import("../views/login/Landing.vue"),
       },
       {
         name: "login",
         path: "login",
-        component: () => import("../components/login/Login.vue"),
+        component: () => import("../views/login/Login.vue"),
       },
       {
         name: "signup",
         path: "signup",
-        component: () => import("../components/login/Signup.vue"),
+        component: () => import("../views/login/Signup.vue"),
       },
     ],
   },

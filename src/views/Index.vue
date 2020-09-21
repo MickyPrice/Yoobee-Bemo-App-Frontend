@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="index">
     <router-view></router-view>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
 <style scoped lang="scss">
 @import "../scss/_variables.scss";
 
-.login {
+.index {
   background: $purple-500;
   width: 100vw;
   min-height: 100vh;
