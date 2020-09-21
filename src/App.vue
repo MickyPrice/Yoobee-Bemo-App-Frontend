@@ -4,6 +4,16 @@
   </div>
 </template>
 
+<script>
+export default {
+  sockets: {
+    connect() {
+      console.log("socket connected");
+    },
+  },
+};
+</script>
+
 <style lang="scss">
 * {
   box-sizing: border-box;

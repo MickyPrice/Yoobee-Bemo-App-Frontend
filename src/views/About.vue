@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{user.data.fullname}}
+    {{chats}}
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import { mapActions } from "vuex";
 
 export default {
  computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "chats"]),
   },
   created() {
     this.updateUser()

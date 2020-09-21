@@ -1,17 +1,16 @@
+
 module.exports = {
   state: () => ({
-    data: null,
+    channels: {},
   }),
   mutations: {
-    UPDATE_USER(state, user) {
-      state.data = user;
+    UPDATE_CHANNEL(state, channel) {
+      state.channels = state.channels[channel.id] = channel.data
     },
   },
   actions: {
-    updateUser({ commit }) {
-      getUser().then((user) => {
-        commit("UPDATE_USER", user.data);
-      });
-    },
-  },
+    socket_updateChannel ({ commit }, channel) {
+      commit('UPDATE_CHANNEL', channel);
+    }
+  }
 };
