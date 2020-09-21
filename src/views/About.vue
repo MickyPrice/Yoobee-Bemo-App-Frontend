@@ -1,16 +1,25 @@
 <template>
   <div>
-    {{user}}
+    {{user.data.fullname}}
   </div>
 </template>
 
 <script>
 // State
 import { mapState } from "vuex";
+// const { getUser } = require("../services/api/user");
+import { mapActions } from "vuex";
 
 export default {
  computed: {
     ...mapState(["user"]),
+  },
+  created() {
+    this.updateUser()
+    console.log(this.user.data)
+  },
+  methods: {
+    ...mapActions(["updateUser"])
   }
 }
 </script>

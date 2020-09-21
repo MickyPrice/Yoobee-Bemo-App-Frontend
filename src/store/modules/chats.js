@@ -1,5 +1,3 @@
-const { getUser } = require("../../services/api/user");
-
 module.exports = {
   state: () => ({
     data: null,

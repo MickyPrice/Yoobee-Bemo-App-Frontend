@@ -4,8 +4,8 @@
       <input v-model="form.code" type="number" maxlength="6" />
       <input type="submit" />
     </form>
-
-    <Numpad/>
+    <div @click="updateUser">User: {{user}}</div>
+    <Numpad />
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
         phone: this.$route.params.phone,
         code: null,
       },
+      user: null,
       errors: [],
     };
   },
