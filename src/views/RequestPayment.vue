@@ -30,7 +30,8 @@
           Request From
           <spline class="col-black-300">{{request}}</spline>
         </h3>
-        <TextBoxForm></TextBoxForm>
+        <MoneyCounter class="col-green-300"></MoneyCounter>
+        <TextGifBoxForm></TextGifBoxForm>
         <BtnFull class="bk-purple-300 BtnFull">
           <slot slot="btn-title">
             Generate Code
@@ -46,11 +47,11 @@
 import PushCardPay from "../components/layout/PushCardPay";
 import Bibutton from "../components/buttons/BiButton";
 import BtnFull from "../components/buttons/BtnFull";
-
 import Title from "../components/text/Title";
 import ProfilePic from "../components/profile/ProfilePic.vue";
 import Direction from "../components/profile/Direction.vue";
-import TextBoxForm from "../components/form/TextBoxForm";
+import MoneyCounter from "../components/form/MoneyCounter.vue";
+import TextGifBoxForm from "../components/form/TextGifBoxForm.vue";
 
 export default {
   name: "RequestPayment",
@@ -60,7 +61,8 @@ export default {
     Title,
     ProfilePic,
     Direction,
-    TextBoxForm,
+    TextGifBoxForm,
+    MoneyCounter,
     BtnFull,
   },
   data() {
@@ -87,6 +89,6 @@ export default {
   }
 }
 .BtnFull {
-  margin-top: 75px;
+  margin-top: 35vw;
 }
 </style>
