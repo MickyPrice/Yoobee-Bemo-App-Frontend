@@ -23,7 +23,7 @@
     </router-link>
     <router-link
       active-class="nav__link--active"
-      :class="{ 'nav__link--light': !darkTheme }"
+      :class="{ 'nav__link--light': !darkTheme, 'nav__link--notification': alertsNotification }"
       class="nav__link"
       to="/chats"
     >
@@ -88,7 +88,7 @@
     </router-link>
     <router-link
       active-class="nav__link--active"
-      :class="{ 'nav__link--light': !darkTheme }"
+      :class="{ 'nav__link--light': !darkTheme, 'nav__link--notification': alertsNotification }"
       class="nav__link"
       to="/chats"
     >
@@ -112,7 +112,7 @@
 
 <script>
 export default {
-  props: ["darkTheme", "active"]
+  props: ["darkTheme", "active","chatNotification","alertsNotification"]
 };
 </script>
 
@@ -139,10 +139,10 @@ export default {
 
   &__link {
     border-radius: 21px;
-    overflow: hidden;
     color: $black-300;
     display: block;
     transition: all 0.4s;
+    position: relative;
 
     // Light theme regular button
     &--light {
@@ -165,12 +165,23 @@ export default {
         background-color: $purple-500;
       }
       &--active {
-          background-color: $purple-500;
+        background-color: $purple-500;
       }
     }
 
     &--active {
       color: $purple-500;
+    }
+
+    &--notification::after {
+        content: '';
+        background-color: $red-300;
+        height: 8px; width: 8px;
+        display: block;
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        border-radius: 100%;
     }
   }
 }
