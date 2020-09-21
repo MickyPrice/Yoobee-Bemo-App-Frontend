@@ -27,6 +27,9 @@ $red-300: #e95f28;
 $black: #303030;
 $black-300: #31313c;
 
+// Grey -------------------
+$grey-100: #cfcfcf;
+
 // White -------------------
 $white-100: #ffffff;
 $white-300: #f8f7fc;
@@ -54,6 +57,19 @@ $padding-40: 40px;
 $margin-5: 5px;
 $margin-20: 20px;
 $margin-30: 30px;
+
+//--------------------------
+// ***** COLOR CLASS ******
+//--------------------------
+.col-green-300 {
+  color: $green-300;
+}
+.col-red-300 {
+  color: $red-300;
+}
+.col-black-300 {
+  color: $black-300;
+}
 
 //--------------------------
 // *** BACKGROND CLASS ****

@@ -28,10 +28,14 @@ const routes = [
     ],
   },
   {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/sendPayment",
+    name: "SendPayment",
+    component: () => import("../views/SendPayment.vue"),
+  },
+  {
+    path: "/requestPayment",
+    name: "RequestPayment",
+    component: () => import("../views/RequestPayment.vue"),
   },
 ];
 
