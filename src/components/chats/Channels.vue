@@ -36,6 +36,9 @@ export default {
 @import "@/scss/_variables";
 .channels {
     padding: 20px 0 100px 0;
+    overflow-x: hidden;
+    width: 100%;
+    border-top: 0.7px solid $white-300; 
 }
 .channel {
     color: $black;

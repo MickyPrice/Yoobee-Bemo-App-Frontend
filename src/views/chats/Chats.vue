@@ -3,7 +3,9 @@
         <Layout>
             <h1 class="heading__base chats__heading">Chats</h1>
             <SearchBar name="search" placeholder="Search" type="search"/>
-            <Friends />
+            <div class="chats__friends">
+                <Friends class="chats__friendsList" />
+            </div>
             <Channels />
         </Layout>
         <Navigation :darkTheme="true" gradientColour="#FFF" />
@@ -35,6 +37,15 @@ export default {
     &__heading {
         color: $purple-500;
         font-weight: bold;
+    }
+
+    &__friends {
+        position: relative;
+        height: 140px;
+    }
+    &__friendsList {
+        position: absolute;
+        left:0;right:0;
     }
 }
 </style>
