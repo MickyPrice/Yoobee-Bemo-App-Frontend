@@ -57,6 +57,7 @@ export default {
         margin-right: $padding-10;
         text-overflow: ellipsis;
         flex: 0 0 80px;
+        cursor: pointer;
         &:focus, &:hover {
             outline: none;
             opacity: 0.6;
