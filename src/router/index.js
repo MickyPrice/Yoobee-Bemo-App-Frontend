@@ -28,6 +28,23 @@ const routes = [
     ],
   },
   {
+    path: "/chats",
+    name: "chatIndex",
+    component: () => import("../views/chats/"),
+    children: [
+      {
+        name: "chats",
+        path: "/",
+        component: () => import("../views/chats/Chats.vue"),
+      },
+      {
+        name: "chat",
+        path: ":chatId",
+        component: () => import("../views/chats/Chat.vue"),
+      }
+    ],
+  },
+  {
     path: "/about",
     name: "About",
     component: () =>
