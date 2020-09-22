@@ -35,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/_variables";
 .channels {
-    padding: $padding-20 $padding-20 100px $padding-20;
+    padding: 20px 0 100px 0;
 }
 .channel {
     color: $black;
@@ -57,6 +57,7 @@ export default {
         font-weight: bold;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-bottom: $margin-5;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
