@@ -28,7 +28,7 @@ const routes = [
     ],
   },
   {
-    path: "/chats",
+    path: "/chat",
     name: "chatIndex",
     component: () => import("../views/chats/"),
     children: [
