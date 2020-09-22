@@ -6,7 +6,7 @@
             <Friends />
             <Channels />
         </Layout>
-        <Navigation :darkTheme="true" />
+        <Navigation :darkTheme="true" gradientColour="#FFF" />
     </div>
 </template>
 
