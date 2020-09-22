@@ -26,7 +26,7 @@ export default {
         SearchBar,
         Friends,
         Channels
-    }    
+    }  
 }
 </script>
 
