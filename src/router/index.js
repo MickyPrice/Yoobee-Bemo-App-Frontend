@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
-import Chats from "../views/Chat/Chats.vue";
 
 Vue.use(VueRouter);
 
@@ -38,23 +37,7 @@ const routes = [
     name: "About",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },{
-    path: "/chats",
-    name: "chats",
-    component: Chats,
-    children: [
-      {
-        name: "viewchats",
-        path: "/",
-        component: () => import("../views/Chat/ListChats.vue"),
-      },
-      // {
-      //   name: "chat",
-      //   path: "chat",
-      //   component: () => import("../components/login/Login.vue"),
-      // }
-    ],
-  },
+  }
 ];
 
 const router = new VueRouter({
