@@ -1,5 +1,5 @@
 <template>
-  <input class="heading__lg--balance" type="number" placeholder="$0.00" min="0.00" step="none" />
+  <input class="heading__lg--balance" type="password" placeholder="****" maxlength="4" />
 </template>
 
 <script>
@@ -10,16 +10,15 @@ export default {};
 @import "../../scss/_variables.scss";
 input {
   width: 100%;
-  margin-top: $margin-40;
-  margin-bottom: $margin-40;
+  margin-top: 60px;
   height: $height-btn;
   background-color: $white-100;
   border-radius: $corners-10;
   border: none;
   outline: none;
-
-  &[type="number"] {
+  &[type="password"] {
     text-align: center;
+    letter-spacing: 35px;
   }
 }
 </style>

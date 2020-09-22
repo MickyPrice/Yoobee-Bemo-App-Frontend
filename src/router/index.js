@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Index from "../views/Index.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +7,7 @@ const routes = [
   {
     path: "/",
     name: "index",
-    component: Index,
+    component: () => import("../views/login/index.vue"),
     children: [
       {
         name: "landing",
@@ -24,6 +23,11 @@ const routes = [
         name: "signup",
         path: "signup",
         component: () => import("../views/login/Signup.vue"),
+      },
+      {
+        name: "Verify",
+        path: "verify",
+        component: () => import("../views/login/Verify.vue"),
       },
     ],
   },

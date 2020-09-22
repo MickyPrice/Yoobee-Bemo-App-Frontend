@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Home",
+  name: "index",
   components: {},
   data() {
     return {};
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../scss/_variables.scss";
+@import "../../scss/_variables.scss";
 
 .index {
   background: $purple-500;

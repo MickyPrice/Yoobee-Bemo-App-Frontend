@@ -26,6 +26,7 @@
       </slot>
       <template slot="SlotComponents">
         <Search></Search>
+        <Favorites></Favorites>
       </template>
     </PushCardPay>
   </div>
@@ -36,6 +37,8 @@ import PushCardPay from "../components/layout/PushCardPay.vue";
 import Bibutton from "../components/buttons/BiButton.vue";
 import Title from "../components/text/Title";
 import ProfilePic from "../components/profile/ProfilePic.vue";
+import Favorites from "../components/profile/Favorites.vue";
+
 import Direction from "../components/profile/Direction.vue";
 import Search from "../components/form/Search";
 
@@ -48,6 +51,7 @@ export default {
     ProfilePic,
     Direction,
     Search,
+    Favorites,
   },
 };
 </script>
