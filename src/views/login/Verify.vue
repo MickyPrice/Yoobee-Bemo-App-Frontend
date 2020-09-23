@@ -11,9 +11,9 @@
 
       <h1 class="verify__top--titile">Enter your code</h1>
       <h5 class="verify__top--sub">The code was sent to +64 021 783 374</h5>
-      <Passcode></Passcode>
+      <Passcode :verifyCode="verifyCode"></Passcode>
     </div>
-    <NumberPad>
+    <NumberPad v-on:add-number="updateCode($event)" v-on:clear="clear()" v-on:back-space="backspace()">
       <template slot="comps">
         <BtnFull class="bk-green-300">
           <slot slot="btn-title">Check Code</slot>
@@ -37,6 +37,27 @@ export default {
     Passcode,
     BtnFull,
   },
+  data(){
+    return{
+      verifyCode:"",
+    }
+  },
+  methods:{
+    backspace:function(){
+      this.verifyCode = this.verifyCode.slice(0,-1);
+    },
+    clear:function(){
+      this.verifyCode = "";
+    },
+    updateCode:function(updatedCode){
+      console.log(updatedCode)
+      if(this.verifyCode.length <= 5){
+      this.verifyCode += updatedCode;
+      return;
+      }
+      console.log(this.verifyCode) 
+    }
+  }
 };
 </script>
 

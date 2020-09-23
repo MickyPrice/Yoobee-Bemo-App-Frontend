@@ -1,9 +1,12 @@
 <template>
-  <input class="heading__lg--balance" type="password" placeholder="****" maxlength="4" />
+  <input class="heading__lg--balance" 
+  type="text" pattern="\d*" placeholder="******" :value="verifyCode" maxlength="6" />
 </template>
 
 <script>
-export default {};
+export default {
+  props:["verifyCode"]
+};
 </script>
 
 <style scoped lang="scss">
@@ -16,7 +19,7 @@ input {
   border-radius: $corners-10;
   border: none;
   outline: none;
-  &[type="password"] {
+  &[type="text"] {
     text-align: center;
     letter-spacing: 35px;
   }
