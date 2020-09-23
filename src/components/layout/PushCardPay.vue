@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .push-card-pay {
   width: 100%;
   background-color: $white-100;

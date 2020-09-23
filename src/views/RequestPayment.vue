@@ -83,7 +83,7 @@ export default {
 
 
 <style scoped lang="scss">
-@import "../scss/_variables.scss";
+@import "@/scss/_variables";
 .requestPayment {
   background: $purple-500;
   width: 100vw;

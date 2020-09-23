@@ -10,7 +10,7 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 div {
   label {
     color: $purple-100;

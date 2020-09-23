@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .profile {
   height: 120px;
   width: 120px;

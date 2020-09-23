@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .numberPad {
   background-color: $purple-500;
   width: 100%;

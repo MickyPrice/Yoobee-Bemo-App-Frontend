@@ -9,7 +9,7 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .padding {
   padding: $padding-40;
 }
