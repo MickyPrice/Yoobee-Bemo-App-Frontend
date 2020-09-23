@@ -1,37 +1,45 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "landing",
-    component: Login,
+    name: "index",
+    component: () => import("../views/login/index.vue"),
     children: [
       {
         name: "landing",
         path: "/",
-        component: () => import("../components/login/Landing.vue"),
+        component: () => import("../views/login/Landing.vue"),
       },
       {
         name: "login",
         path: "login",
-        component: () => import("../components/login/Login.vue"),
+        component: () => import("../views/login/Login.vue"),
       },
       {
         name: "signup",
         path: "signup",
-        component: () => import("../components/login/Signup.vue"),
+        component: () => import("../views/login/Signup.vue"),
+      },
+      {
+        name: "Verify",
+        path: "verify",
+        component: () => import("../views/login/Verify.vue"),
       },
     ],
   },
   {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/sendPayment",
+    name: "SendPayment",
+    component: () => import("../views/SendPayment.vue"),
+  },
+  {
+    path: "/requestPayment",
+    name: "RequestPayment",
+    component: () => import("../views/RequestPayment.vue"),
   },
 ];
 
