@@ -26,7 +26,6 @@ export default {
 .btn-full {
   width: 100%;
   height: $height-btn;
-
   margin-top: $margin-20;
   border-radius: $corners-10;
   border: none;
