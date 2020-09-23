@@ -5,7 +5,7 @@
     </label>
     <input
       class="text__base--heavy"
-      type="number"
+      type="tel"
       name="fname"
       placeholder="Please Enter Phone Number"
       :value="value"

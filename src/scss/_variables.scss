@@ -26,6 +26,10 @@ $red-300: #e95f28;
 // Black -------------------
 $black: #303030;
 $black-300: #31313c;
+$black-500: #565661;
+
+// Grey -------------------
+$grey-100: #cfcfcf;
 
 // White -------------------
 $white-100: #ffffff;
@@ -54,6 +58,24 @@ $padding-40: 40px;
 $margin-5: 5px;
 $margin-20: 20px;
 $margin-30: 30px;
+$margin-40: 40px;
+
+//--------------------------
+// ***** COLOR CLASS ******
+//--------------------------
+.col-green-300 {
+  color: $green-300;
+}
+.col-red-300 {
+  color: $red-300;
+}
+.col-black-300 {
+  color: $black-300;
+}
+
+.col-white-100 {
+  color: $white-100;
+}
 
 //--------------------------
 // *** BACKGROND CLASS ****
@@ -110,4 +132,11 @@ $margin-30: 30px;
 
 .heading__lg--balance {
   font-size: 3.783em;
+  font-weight: bold;
 }
+
+//--------------------------
+// ******** FONTS **********
+//--------------------------
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');
+$font-noto: 'Noto Sans JP', sans-serif;
