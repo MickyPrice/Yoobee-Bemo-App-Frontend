@@ -33,14 +33,12 @@
 </template>
 
 <script>
-import PushCard from "../layout/PushCard.vue";
-import TextBoxForm from "../form/TextBoxForm.vue";
-
-import EmailBoxForm from "../form/EmailBoxForm.vue";
-
-import PhoneNumberBoxForm from "../form/PhoneNumberBoxForm.vue";
-import SubmitButton from "../form/SubmitButton.vue";
-import Bibutton from "../buttons/BiButton.vue";
+import PushCard from "../../components/layout/PushCard.vue";
+import TextBoxForm from "../../components/form/TextBoxForm.vue";
+import EmailBoxForm from "../../components/form/EmailBoxForm.vue";
+import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
+import SubmitButton from "../../components/form/SubmitButton.vue";
+import Bibutton from "../../components/buttons/BiButton.vue";
 export default {
   components: {
     PushCard,

@@ -1,12 +1,12 @@
 <template>
-  <div class="login">
+  <div class="index">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "index",
   components: {},
   data() {
     return {};
@@ -15,9 +15,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../scss/_variables.scss";
+@import "../../scss/_variables.scss";
 
-.login {
+.index {
   background: $purple-500;
   width: 100vw;
   min-height: 100vh;
