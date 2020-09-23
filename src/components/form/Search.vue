@@ -1,27 +1,17 @@
 <template>
   <div>
-    <label for="fname" class="text__sm">
-      <slot name="top-text"></slot>
-    </label>
-    <input
-      class="text__base--heavy"
-      type="tel"
-      name="fname"
-      placeholder="Please Enter Phone Number"
-    />
+    <label for="fname" class="text__lg">Search</label>
+    <input class="text__base--heavy" type="text" name="fname" placeholder="Search" />
   </div>
 </template>
 
 <script>
-export default {
-  name: "PhoneNumberBoxForm",
-};
+export default {};
 </script>
 
 <style scoped lang="scss">
 @import "../../scss/_variables.scss";
 div {
-  margin-top: $margin-30;
   label {
     color: $purple-100;
   }
@@ -33,7 +23,7 @@ div {
     border-radius: $corners-10;
     border: none;
     outline: none;
-    &[type="number"] {
+    &[type="text"] {
       padding-left: $padding-20;
     }
     &:active {

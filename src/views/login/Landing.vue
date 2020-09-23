@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import BtnFull from "../buttons/BtnFull";
+import BtnFull from "../../components/buttons/BtnFull.vue";
 export default {
   components: {
     BtnFull,
