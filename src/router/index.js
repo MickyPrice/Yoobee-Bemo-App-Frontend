@@ -32,6 +32,29 @@ const routes = [
     ],
   },
   {
+    path: "/chat",
+    name: "chatIndex",
+    component: () => import("../views/chats/"),
+    children: [
+      {
+        name: "chats",
+        path: "/",
+        component: () => import("../views/chats/Chats.vue"),
+      },
+      {
+        name: "chat",
+        path: ":channelId",
+        component: () => import("../views/chats/Chat.vue"),
+      },
+    ],
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
     path: "/sendPayment",
     name: "SendPayment",
     component: () => import("../views/SendPayment.vue"),

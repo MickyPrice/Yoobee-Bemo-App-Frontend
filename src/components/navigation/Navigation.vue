@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" :style=" { backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), ${gradientColour} 60%)` }">
     <router-link
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme }"
@@ -112,7 +112,12 @@
 
 <script>
 export default {
-  props: ["darkTheme", "active","chatNotification","alertsNotification"]
+  props: {
+    darkTheme: Boolean,
+    chatNotification: Boolean,
+    alertsNotification: Boolean,
+    gradientColour: String
+  }
 };
 </script>
 
@@ -124,7 +129,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   display: flex;
   justify-content: space-around;
   align-items: baseline;

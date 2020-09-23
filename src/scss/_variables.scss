@@ -26,6 +26,7 @@ $red-300: #e95f28;
 // Black -------------------
 $black: #303030;
 $black-300: #31313c;
+$black-500: #565661;
 
 // Grey -------------------
 $grey-100: #cfcfcf;
@@ -133,3 +134,9 @@ $margin-40: 40px;
   font-size: 3.783em;
   font-weight: bold;
 }
+
+//--------------------------
+// ******** FONTS **********
+//--------------------------
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');
+$font-noto: 'Noto Sans JP', sans-serif;
