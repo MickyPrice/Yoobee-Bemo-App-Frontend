@@ -32,7 +32,8 @@ export default {
   bottom: 0;
 
   &__transaction {
-    width: 65%;
+    width: 70%;
+    max-width: 350px;
     margin: auto;
     position: relative;
     top: -95px;

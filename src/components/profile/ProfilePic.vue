@@ -1,8 +1,5 @@
 <template>
-  <div class="profile">
-    <div class="profile__image-container">
-      <!-- <slot name="profileImage"></slot> -->
-    </div>
+  <div class="profile" v-bind:style="{ 'background-image': 'url(' + imagelink + ')' }">
     <h5 class="profile__id text__sm">
       #
       <slot name="profileName"></slot>
@@ -11,30 +8,29 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {},
+  props: ["imagelink"],
+};
 </script>
 
 <style scoped lang="scss">
 @import "../../scss/_variables.scss";
 .profile {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  &__image-container {
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
-    border-radius: 100px;
-    background-color: grey;
-    border: 5px solid $white-100;
-    img {
-      width: 100%;
-      width: 100%;
-      background-position: center;
-    }
-  }
+  height: 120px;
+  width: 120px;
+
+  border-radius: 100px;
+  border: 5px solid $white-100;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   &__id {
     color: $purple-100;
+    position: relative;
+    bottom: -105%;
+    text-align: center;
   }
 }
 </style>
