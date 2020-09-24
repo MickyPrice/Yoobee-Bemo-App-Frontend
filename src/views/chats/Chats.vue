@@ -34,13 +34,15 @@ export default {
 @import "@/scss/_variables";
 
 .chats {
+    padding-top: $padding-40;
     &__heading {
         color: $purple-500;
         font-weight: bold;
     }
 
     &__friends {
-        position: relative;
+        position: absolute;
+        left: 0; right: 0;
         height: 140px;
     }
     &__friendsList {
