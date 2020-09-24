@@ -1,20 +1,19 @@
 <template>
-    <div class="chat">
-        <div class="chat__top">
-            <Bibutton class="bk-purple-500">
-        <slot slot="icon" >
+  <div class="chat">
+    <div class="chat__top">
+      <Bibutton class="bk-purple-500">
+        <slot slot="icon">
           <i class="fas fa-angle-left col-white-100"></i>
         </slot>
       </Bibutton>
-    <ProfilePic class="chat__top--small" :imagelink="imagelink2">
-          <slot slot="profileName">{{ $route.params.channelId }}</slot>
-    </ProfilePic>
-        </div>
-        <div class="chat__bottom">
-                <ChatPushCard></ChatPushCard>
-
-        </div>
+      <ProfilePic class="chat__top--small" :imagelink="imagelink2">
+        <slot slot="profileName">{{ $route.params.channelId }}</slot>
+      </ProfilePic>
     </div>
+    <div class="chat__bottom">
+      <ChatPushCard></ChatPushCard>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,9 +21,8 @@ import Bibutton from "@/components/buttons/BiButton.vue";
 import ProfilePic from "@/components/profile/ProfilePic.vue";
 import ChatPushCard from "@/components/chats/ChatPushCard.vue";
 
-
 export default {
-    data() {
+  data() {
     return {
       imagelink1:
         "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
@@ -32,33 +30,37 @@ export default {
         "https://images.unsplash.com/photo-1538960792157-b2e2b62d1f3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     };
   },
-components:{
-Bibutton,
-ProfilePic,
-ChatPushCard
-}
-}
+  components: {
+    Bibutton,
+    ProfilePic,
+    ChatPushCard,
+  },
+};
 </script>
 
 <style scoped lang="scss">
 @import "@/scss/_variables";
 
-.chat{
-    &__top{
-        height: 25vh;
-        padding: $padding-40;
-        display: grid;
-        grid-template-columns: repeat(3,1fr); 
-        align-items: center;
-        &--small{
-  justify-self: center;
-            height: 75px;
-            width: 75px;
-        }
+.chat {
+  background-color: $white-300;
+  width: 100vw;
+  height: 100vh;
+
+  &__top {
+    height: 20%;
+    margin: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    &--small {
+      justify-self: center;
+      height: 75px;
+      width: 75px;
     }
-    &__bottom{
-        height: 75vh;
-        min-height: 350px;
-    }
+  }
+  &__bottom {
+    height: 80%;
+    min-height: 350px;
+  }
 }
 </style>
