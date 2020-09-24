@@ -25,7 +25,7 @@ const routes = [
         component: () => import("../views/login/Signup.vue"),
       },
       {
-        name: "Verify",
+        name: "verify",
         path: "verify",
         component: () => import("../views/login/Verify.vue"),
       },
@@ -53,6 +53,12 @@ const routes = [
     name: "About",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: () =>
+      import("../views/Logout.vue"),
   },
   {
     path: "/sendPayment",

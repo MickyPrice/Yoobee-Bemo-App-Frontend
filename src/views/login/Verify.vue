@@ -11,11 +11,12 @@
 
       <h1 class="verify__top--titile">Enter your code</h1>
       <h5 class="verify__top--sub">The code was sent to +64 021 783 374</h5>
-      <Passcode :verifyCode="verifyCode"></Passcode>
+      <Passcode :verifyCode="form.code"></Passcode>
     </div>
+    {{$route.params.phone}}
     <NumberPad v-on:add-number="updateCode($event)" v-on:clear="clear()" v-on:back-space="backspace()">
       <template slot="comps">
-        <BtnFull class="bk-green-300">
+        <BtnFull class="bk-green-300" @click="verifyUser">
           <slot slot="btn-title">Check Code</slot>
         </BtnFull>
         <h3 class="col-green-300 text__sm verify__bot">Resend Code</h3>
@@ -30,6 +31,8 @@ import Passcode from "../../components/form/Passcode.vue";
 import NumberPad from "../../components/layout/NumberPad.vue";
 import BtnFull from "../../components/buttons/BtnFull.vue";
 
+import { verify } from "@/services/api/auth.js";
+
 export default {
   components: {
     Bibutton,
@@ -39,23 +42,32 @@ export default {
   },
   data(){
     return{
-      verifyCode:"",
+      form: {
+        phone: this.$route.params.phone,
+        code: ""
+      }
     }
   },
   methods:{
-    backspace:function(){
-      this.verifyCode = this.verifyCode.slice(0,-1);
+    backspace(){
+      this.form.code = this.form.code.slice(0,-1);
     },
-    clear:function(){
-      this.verifyCode = "";
+    clear(){
+      this.form.code = "";
     },
-    updateCode:function(updatedCode){
+    updateCode(updatedCode){
       console.log(updatedCode)
-      if(this.verifyCode.length <= 5){
-      this.verifyCode += updatedCode;
+      if(this.form.code.length <= 5){
+      this.form.code += updatedCode;
       return;
       }
-      console.log(this.verifyCode) 
+      console.log(this.form.code) 
+    },
+    verifyUser() {
+      console.log(this.form)
+      verify(this.form).then(()=> {
+        this.$router.push('about')
+      });
     }
   }
 };
