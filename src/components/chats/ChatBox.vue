@@ -52,12 +52,18 @@ export default {
       }
       &:active {
         border: 2px solid $purple-500;
+
       }
     }
     .submit {
       z-index: 1;
       position: absolute;
-      right: 5%;
+      right: 6%;
+      bottom:14px;
+      min-width: 45px;
+      height: 45px;
+
+      
     }
   }
 
@@ -70,6 +76,10 @@ export default {
     outline: none;
     cursor: pointer;
     border-radius: 50px;
+
+     &:active {
+        border: 2px solid $purple-500;
+      }
   }
 }
 </style>

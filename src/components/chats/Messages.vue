@@ -1,51 +1,57 @@
 <template>
-  <ul class="messages">
-    <li class="me">hello</li>
-    <li class="me">sssss</li>
-  </ul>
+  <div class="messages">
+
+    <div class="message-block">
+      <div class="message-container">
+        <div class="message">Hell Hell</div>
+      </div>
+      <div class="message-container">
+        <div
+          class="message"
+        >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+      </div>
+      <div class="message-container">
+        <div class="message">Hell Hell</div>
+      </div>
+    </div>
+  
+  </div>
 </template>
 
 <script>
 export default {
   props: ["newMessage"],
   watch: {
-    newMessage: function () {
+    newMessage: function() {
       console.log("new message in" + this.newMessage);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/scss/_variables";
 
+      
 .messages {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  li {
-    display: inline-block;
-    clear: both;
-    font-size: 0.75em;
-    max-width: 70%;
-    padding: 10px 20px;
-    border-radius: 30px;
-    margin-bottom: 2px;
-  }
+  outline: 1px solid green;
+   padding-left: 5%;
+   padding-right: 5%;
 
-  .me {
-    float: right;
-    background: $purple-500;
-    color: $white-100;
+  .message-block {
+    outline: 1px solid red;
+    padding-left: 20%;
+    .message-container {
+      outline: 1px solid red;
+      margin: 3px 0px;
+      display: flex;
+      justify-content: flex-end;
+      
+    }
   }
-
-  .me + .me {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
-  .me:last-of-type {
-    border-bottom-right-radius: 30px;
-  }
-}
+}.message {
+        outline: 1px solid $purple-500;
+        margin: 5px 0 5px 5px;
+        font-size: 0.75em;
+      }
 </style>

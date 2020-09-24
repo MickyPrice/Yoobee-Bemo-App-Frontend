@@ -41,10 +41,12 @@ export default {
   border-radius: $corners-top;
   display: flex;
   flex-direction: column;
+  background-color: pink;
 
   &__message-box {
     height: 100%;
-    margin: 0 5%;
+  overflow-y: scroll;
+
   }
 }
 </style>
