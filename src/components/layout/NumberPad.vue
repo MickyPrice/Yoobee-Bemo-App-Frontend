@@ -10,19 +10,16 @@
       <button @click="$emit('add-number','7')" class="heading__sm btn">7</button>
       <button @click="$emit('add-number','8')" class="heading__sm btn">8</button>
       <button @click="$emit('add-number','9')" class="heading__sm btn">9</button>
-      <button @click="$emit('clear')" class=" heading__sm btn">C</button>
+      <button @click="$emit('clear')" class="heading__sm btn">C</button>
       <button @click="$emit('add-number','0')" class="heading__sm btn">0</button>
-      <button @click="$emit('back-space')" class=" heading__sm btn">kill</button>
-
+      <button @click="$emit('back-space')" class="heading__sm btn">kill</button>
     </div>
     <slot name="comps"></slot>
   </div>
 </template>
 
 <script>
-export default {
-  components: {},
-};
+export default {};
 </script>
 
 <style scoped lang="scss">
@@ -42,7 +39,6 @@ export default {
     margin-bottom: $margin-30;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-  
   }
   .btn {
     height: 75px;

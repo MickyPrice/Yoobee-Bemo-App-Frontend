@@ -2,15 +2,28 @@
   <div class="chat-box">
     <button class="text__base--heavy">$</button>
     <button class="text__base--heavy">GIF</button>
-    <form class="message">
-      <input type="text" />
-      <button type="submit" class="text__base--heavy submit">@</button>
-    </form>
+    <div class="message">
+      <input type="text" v-model="string" />
+      <button class="text__base--heavy submit" @click="submit()">@</button>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      string: "",
+    };
+  },
+  methods: {
+    submit: function () {
+      console.log(this.string);
+      this.$emit("newPost", this.string);
+      this.string = "";
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

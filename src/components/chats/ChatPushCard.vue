@@ -18,7 +18,7 @@
         <li class="me">hell hell hell</li>
       </ul>
     </div>
-    <ChatBox />
+    <ChatBox v-on:newPost="postNewMessage($event)" />
   </div>
 </template>
 
@@ -28,6 +28,11 @@ import ChatBox from "./ChatBox";
 export default {
   components: {
     ChatBox,
+  },
+  methods: {
+    postNewMessage: function (event) {
+      console.log("Just got a new post saying....." + event);
+    },
   },
 };
 </script>
