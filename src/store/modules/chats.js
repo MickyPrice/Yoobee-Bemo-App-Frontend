@@ -10,25 +10,24 @@ module.exports = {
     },
     INIT_CHANNELS(state, channels) {
       state.channels = channels
-    },
-    UPDATE_CURRENT_CHANNEL(state, channel) {
-      state.currentChannel = channel
-    },
+    }
   },
   actions: {
-    socket_updateChannel ({ commit }, channel) {
+    /**
+     * Update local channel copy from socket
+     *  
+     * @param { Object } channel - Update channel in local dict
+     */
+    socket_updateChannel({ commit }, channel) {
       commit('UPDATE_CHANNEL', channel);
     },
-    socket_initChannels ({commit}, channels) {
+    /**
+     * On socket connection init channels
+     * 
+     * @param { Array } channels - Array of users channels 
+     */
+    socket_initChannels({ commit }, channels) {
       commit('INIT_CHANNELS', channels);
-    },
-    joinChannel({commit},channel) {
-      commit('UPDATE_CURRENT_CHANNEL', channel);
-      this._vm.$socket.client.emit('joinChannel', channel);
-    },
-    leaveChannel({commit}, channel) {
-      commit('UPDATE_CURRENT_CHANNEL', null);
-      this._vm.$socket.client.emit('leaveChannel', channel);
     }
   }
 };
