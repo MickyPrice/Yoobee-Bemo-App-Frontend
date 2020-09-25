@@ -64,6 +64,11 @@ const routes = [
     name: "RequestPayment",
     component: () => import("../views/RequestPayment.vue"),
   },
+  {
+    path: "/generateQR",
+    name: "GenerateQR",
+    component: () => import("../views/qr/Generator.vue"),
+  }
 ];
 
 const router = new VueRouter({
