@@ -69,6 +69,12 @@ const routes = [
     name: "GenerateQR",
     component: () => import("../views/qr/Generator.vue"),
   }
+  ,
+  {
+    path: "/readqr",
+    name: "ReadQR",
+    component: () => import("../views/qr/Reader.vue"),
+  }
 ];
 
 const router = new VueRouter({
