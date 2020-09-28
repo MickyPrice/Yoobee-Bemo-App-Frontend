@@ -36,17 +36,16 @@ export default {
 .chat-push-card {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
   background-color: $white-100;
   border-radius: $corners-top;
   display: flex;
   flex-direction: column;
-  background-color: pink;
+  background-color: $white-100;
 
   &__message-box {
     height: 100%;
-  overflow-y: scroll;
-
+    // overflow-y: scroll;
   }
 }
 </style>
