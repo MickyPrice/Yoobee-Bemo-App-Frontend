@@ -1,6 +1,8 @@
 <template>
   <div>
-    {{chats}}
+    {{user}}
+    <br/> .................. <br/>
+    {{chat}}
   </div>
 </template>
 
@@ -10,10 +12,7 @@ import { mapState } from "vuex";
 
 export default {
  computed: {
-    ...mapState(["user", "chats"]),
-  },
-  created() {
-    console.log(this.user.data)
+    ...mapState(["user", "chat"]),
   }
 }
 </script>
