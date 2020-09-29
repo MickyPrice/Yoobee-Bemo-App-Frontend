@@ -9,7 +9,7 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .direction {
   background-color: $white-100;
   border-radius: 50px;

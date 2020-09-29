@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .signup {
   &__top {
     padding: $padding-40;

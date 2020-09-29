@@ -11,10 +11,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 h1 {
   color: $white-100;
   text-align: center;
-  margin: $margin-20;
+  margin: $margin-10;
 }
 </style>
