@@ -18,8 +18,8 @@
       <slot slot="PushCardTitle">Welcome Back</slot>
       <slot slot="PushCardSubTitle">Enter your phone number to login</slot>
       <template slot="SlotComponents">
-        <form action="login">
-          <PhoneNumberBoxForm>
+        <form @submit.prevent="loginUser">
+          <PhoneNumberBoxForm v-model="form.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
           <SubmitButton></SubmitButton>
@@ -35,13 +35,30 @@ import PushCard from "../../components/layout/PushCard.vue";
 import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "../../components/form/SubmitButton.vue";
 import Bibutton from "../../components/buttons/BiButton.vue";
+
+import { login } from "@/services/api/auth.js"
+
 export default {
+  data: function() {
+    return {
+      form: {
+        phone: ""
+      }
+    }
+  },
   components: {
     PushCard,
     PhoneNumberBoxForm,
     SubmitButton,
     Bibutton,
   },
+  methods: {
+    loginUser() {
+      login(this.form).then(() => {
+        this.$router.push({ name: 'verify', params: { phone: this.form.phone } });
+      })
+    }
+  }
 };
 </script>
 

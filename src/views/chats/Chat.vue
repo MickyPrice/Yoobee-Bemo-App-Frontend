@@ -63,4 +63,4 @@ export default {
     min-height: 350px;
   }
 }
-</style>
+</script>

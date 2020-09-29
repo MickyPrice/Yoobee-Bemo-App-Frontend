@@ -2,6 +2,7 @@
 module.exports = {
   state: () => ({
     channels: {},
+    currentChannel: null
   }),
   mutations: {
     UPDATE_CHANNEL(state, channel) {
@@ -9,14 +10,24 @@ module.exports = {
     },
     INIT_CHANNELS(state, channels) {
       state.channels = channels
-    },
+    }
   },
   actions: {
-    socket_updateChannel ({ commit }, channel) {
+    /**
+     * Update local channel copy from socket
+     *  
+     * @param { Object } channel - Update channel in local dict
+     */
+    socket_updateChannel({ commit }, channel) {
       commit('UPDATE_CHANNEL', channel);
     },
-    socket_initChannels ({commit}, channels) {
-      commit('INIT_CHANNELS', channels)
-    } 
+    /**
+     * On socket connection init channels
+     * 
+     * @param { Array } channels - Array of users channels 
+     */
+    socket_initChannels({ commit }, channels) {
+      commit('INIT_CHANNELS', channels);
+    }
   }
 };

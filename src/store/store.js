@@ -6,6 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     user: require("./modules/user"),
-    chats: require("./modules/chats")
+    chats: require("./modules/chats"),
+    chat: require("./modules/chat"),
+    users: require("./modules/users")
   }
 });
