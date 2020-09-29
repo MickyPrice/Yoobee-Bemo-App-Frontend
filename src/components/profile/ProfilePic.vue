@@ -1,7 +1,6 @@
 <template>
   <div class="profile" v-bind:style="{ 'background-image': 'url(' + imagelink + ')' }">
     <h5 class="profile__id text__sm">
-      #
       <slot name="profileName"></slot>
     </h5>
   </div>
@@ -9,7 +8,6 @@
 
 <script>
 export default {
-  data() {},
   props: ["imagelink"],
 };
 </script>
@@ -27,7 +25,7 @@ export default {
   background-size: cover;
 
   &__id {
-    color: $purple-100;
+    color: $purple-300;
     position: relative;
     bottom: -105%;
     text-align: center;

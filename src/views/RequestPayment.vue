@@ -32,7 +32,7 @@
       <template slot="SlotComponents">
         <h3 class="requestPayment__request-name text__lg">
           Request From
-          <spline class="col-black-300">{{request}}</spline>
+          <span class="col-black-300">{{request}}</span>
         </h3>
         <MoneyCounter class="col-green-300"></MoneyCounter>
         <TextGifBoxForm></TextGifBoxForm>

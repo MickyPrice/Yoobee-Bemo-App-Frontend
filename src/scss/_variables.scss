@@ -30,10 +30,11 @@ $black-500: #565661;
 
 // Grey -------------------
 $grey-100: #cfcfcf;
+$grey-500: #b1b1b1;
 
 // White -------------------
 $white-100: #ffffff;
-$white-300: #f8f7fc;
+$white-300: #f7f6f8;
 
 //--------------------------
 // ****** UTILITIES ********
@@ -138,5 +139,5 @@ $margin-40: 40px;
 //--------------------------
 // ******** FONTS **********
 //--------------------------
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');
-$font-noto: 'Noto Sans JP', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap");
+$font-noto: "Noto Sans JP", sans-serif;
