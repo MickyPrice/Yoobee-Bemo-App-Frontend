@@ -2,8 +2,13 @@
   <div class="favs">
     <h5 class="favs__text text__lg">Favourites</h5>
     <div class="favs__grid">
-      <ProfilePic v-for="fav in favs" :key="fav.index" :imagelink="fav.imagelink" class="small">
-        <slot slot="profileName">{{fav.name}}</slot>
+      <ProfilePic
+        v-for="fav in favs"
+        :key="fav.index"
+        :imagelink="fav.imagelink"
+        class="small"
+      >
+        <slot slot="profileName">{{ fav.name }}</slot>
       </ProfilePic>
     </div>
   </div>
@@ -65,8 +70,8 @@ export default {
     grid-row-gap: 20px;
 
     .small {
-      width: 90px;
-      height: 90px;
+      width: 20vw;
+      height: 20vw;
     }
   }
 }

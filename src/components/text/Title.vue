@@ -15,6 +15,6 @@ export default {
 h1 {
   color: $white-100;
   text-align: center;
-  margin: $margin-20;
+  margin: $margin-10;
 }
 </style>

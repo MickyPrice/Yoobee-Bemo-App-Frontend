@@ -25,18 +25,19 @@ export default {
 @import "@/scss/_variables";
 .push-card-pay {
   width: 100%;
-  background-color: $white-100;
-  border-radius: $corners-top;
-  padding: $padding-40;
   position: absolute;
   bottom: 0;
 
+  background-color: $white-100;
+  border-radius: $corners-top;
+  padding: $pad-bor;
+
   &__transaction {
-    width: 70%;
+    width: 100%;
     max-width: 350px;
-    margin: auto;
+    padding: 0 40px 0 40px;
     position: relative;
-    top: -95px;
+    top: -60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
