@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .landing {
   .head {
     width: 100%;

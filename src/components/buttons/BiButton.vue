@@ -14,7 +14,7 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .biButton {
   width: 40px;
   height: 40px;

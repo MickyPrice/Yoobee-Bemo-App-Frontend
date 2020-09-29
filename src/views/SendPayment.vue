@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../scss/_variables.scss";
+@import "@/scss/_variables";
 .BtnFull {
   margin-top: $margin-40;
 }
@@ -83,7 +83,7 @@ export default {
   width: 100vw;
   min-height: 100vh;
   &__top {
-    padding: $padding-40;
+    padding: $pad-bor;
   }
 }
 </style>

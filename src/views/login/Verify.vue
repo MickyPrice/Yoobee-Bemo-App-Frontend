@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/_variables.scss";
+@import "@/scss/_variables";
 .verify {
   background-color: $white-100;
   width: 100vw;

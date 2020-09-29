@@ -12,7 +12,7 @@
     </div>
     <PushCardPay>
       <slot slot="profile-1">
-        <ProfilePic :imagelink="imagelink1">
+        <ProfilePic :imagelink="imagelink1" class="sml">
           <slot slot="profileName">Help</slot>
         </ProfilePic>
       </slot>
@@ -24,7 +24,7 @@
         </Direction>
       </slot>
       <slot slot="profile-2">
-        <ProfilePic :imagelink="imagelink2">
+        <ProfilePic :imagelink="imagelink2" class="sml">
           <slot slot="profileName">Shrimp</slot>
         </ProfilePic>
       </slot>
@@ -32,7 +32,7 @@
       <template slot="SlotComponents">
         <h3 class="requestPayment__request-name text__lg">
           Request From
-          <spline class="col-black-300">{{request}}</spline>
+          <span class="col-black-300">{{ request }}</span>
         </h3>
         <MoneyCounter class="col-green-300"></MoneyCounter>
         <TextGifBoxForm></TextGifBoxForm>
@@ -83,13 +83,17 @@ export default {
 
 
 <style scoped lang="scss">
-@import "../scss/_variables.scss";
+@import "@/scss/_variables";
+.sml {
+  height: 25vw;
+  width: 25vw;
+}
 .requestPayment {
   background: $purple-500;
   width: 100vw;
   min-height: 100vh;
   &__top {
-    padding: $padding-40;
+    padding: $pad-bor;
   }
   &__request-name {
     text-align: center;
@@ -97,6 +101,6 @@ export default {
   }
 }
 .BtnFull {
-  margin-top: 150px;
+  // margin-top: 150px;
 }
 </style>
