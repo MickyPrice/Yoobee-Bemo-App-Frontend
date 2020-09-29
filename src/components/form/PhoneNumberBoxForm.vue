@@ -8,6 +8,8 @@
       type="tel"
       name="fname"
       placeholder="Please Enter Phone Number"
+      :value="value"
+      v-on:input="updateValue($event.target.value)"
     />
   </div>
 </template>
@@ -15,6 +17,12 @@
 <script>
 export default {
   name: "PhoneNumberBoxForm",
+  props: ["value"],
+  methods: {
+    updateValue: function(value) {
+      this.$emit("input", value);
+    }
+  }
 };
 </script>
 

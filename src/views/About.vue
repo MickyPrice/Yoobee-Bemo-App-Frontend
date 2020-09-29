@@ -1,5 +1,23 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    {{chats}}
   </div>
 </template>
+
+<script>
+// State
+import { mapState } from "vuex";
+
+export default {
+ computed: {
+    ...mapState(["user", "chats"]),
+  },
+  created() {
+    console.log(this.user.data)
+  }
+}
+</script>
+
+<style>
+
+</style>
