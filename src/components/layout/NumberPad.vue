@@ -27,8 +27,9 @@ export default {};
 .numberPad {
   background-color: $purple-500;
   width: 100%;
+  height: 60%;
   border-radius: $corners-top;
-  padding: $padding-40;
+  padding: 0px $pad-bor;
   position: absolute;
   bottom: 0;
 
@@ -41,7 +42,7 @@ export default {};
     grid-template-columns: repeat(3, 1fr);
   }
   .btn {
-    height: 75px;
+    height: 7vh;
     border: none;
     color: $white-100;
     text-decoration: none;
