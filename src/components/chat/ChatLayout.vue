@@ -1,42 +1,35 @@
 <template>
   <div class="chat-push-card">
-    <div class="chat-push-card__message-box">
-      <Messages :newMessage="newMessage" />
+    <div id="msgScroll" class="chat-push-card__message-box">
+      <slot />
+      <ChatBox v-on:newPost="sendMsg" />
     </div>
-    <ChatBox v-on:newPost="postNewMessage($event)" />
   </div>
 </template>
 
 <script>
 import ChatBox from "./ChatBox.vue";
-import Messages from "./Messages.vue";
 
 export default {
-  data() {
-    return {
-      newMessage: "",
-    };
-  },
   components: {
     ChatBox,
-    Messages,
   },
   methods: {
-    postNewMessage: function (event) {
-      console.log("Just got a new post saying....." + event);
-      this.newMessage = event;
+    sendMsg(msg) {
+      this.$socket.client.emit("sendMsg", {
+        channel: this.$route.params.channelId,
+        message: { content: msg, contentType: "TEXT/PLAIN" },
+      });
     },
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import "@/scss/_variables";
 .chat-push-card {
   width: 100%;
   height: 100%;
-  // overflow: hidden;
   background-color: $white-100;
   border-radius: $corners-top;
   display: flex;
@@ -44,8 +37,12 @@ export default {
   background-color: $white-100;
 
   &__message-box {
-    height: 100%;
-    // overflow-y: scroll;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    // flex-wrap: wrap;
   }
 }
 </style>
