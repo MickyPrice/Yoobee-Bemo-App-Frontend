@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-full text__base--heavy" v-on:click="log">
+  <button class="btn-full text__base--heavy" @click="$emit('click')">
     <p class="btn-full__text">
       <slot name="btn-title"></slot>
     </p>

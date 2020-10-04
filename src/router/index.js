@@ -25,7 +25,7 @@ const routes = [
         component: () => import("../views/login/Signup.vue"),
       },
       {
-        name: "Verify",
+        name: "verify",
         path: "verify",
         component: () => import("../views/login/Verify.vue"),
       },
@@ -58,7 +58,13 @@ const routes = [
     path: "/home",
     name: "Home",
     component: () =>
-      import("../views/home/Home.vue"),
+    import("../views/home/Home.vue"),
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: () =>
+    import("../views/Logout.vue"),
   },
   {
     path: "/sendPayment",

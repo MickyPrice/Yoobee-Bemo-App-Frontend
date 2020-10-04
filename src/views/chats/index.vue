@@ -11,9 +11,15 @@ export default {
   data() {
     return {};
   },
+  created() {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.$socket.client.emit("init");
+    },
+  },
 };
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

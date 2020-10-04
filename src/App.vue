@@ -9,7 +9,7 @@ export default {
   sockets: {
     connect() {
       console.log("socket connected");
-    },
+    }
   },
 };
 </script>
