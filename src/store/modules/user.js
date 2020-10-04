@@ -2,11 +2,13 @@ const { getUser } = require("../../services/api/user");
 
 module.exports = {
   state: () => ({
-    data: null
+    data: null,
+    status: 0
   }),
   mutations: {
     UPDATE_USER(state, user) {
       state.data = user;
+      state.status = 1
     },
   },
   actions: {
