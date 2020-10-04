@@ -30,12 +30,13 @@ components:{
   width: 100vw;
   min-height: 100vh;
   padding-top: 45%;
+  font-family: $font-noto;
   &__center{
-border: 1px solid black;
 
-      width: 90%;
+      width: 80%;
       height: 40vh;
       margin:  auto;
+      position: relative;
 
       &--balance{
           color: $white-100;
