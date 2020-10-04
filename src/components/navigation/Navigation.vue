@@ -162,7 +162,8 @@ export default {
 
     // Large button
     &--large {
-      background-color: $black-300;
+        background-color: $purple-500;
+      // background-color: $black-300;
       color: $white-100;
       padding: 16px 20px;
       // Light large button

@@ -70,6 +70,11 @@ const routes = [
     name: "RequestPayment",
     component: () => import("../views/RequestPayment.vue"),
   },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: () => import("../views/ProfileSettings.vue"),
+  },
 ];
 
 const router = new VueRouter({
