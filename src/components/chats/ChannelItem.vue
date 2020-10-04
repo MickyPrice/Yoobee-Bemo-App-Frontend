@@ -59,7 +59,7 @@ export default {
         }
     }).join(", ")
     } else {
-      this.name = "Solo Channel"
+      this.name = "Just You"
     }
   }
 };
