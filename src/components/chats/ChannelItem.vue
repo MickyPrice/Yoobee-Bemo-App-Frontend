@@ -1,38 +1,67 @@
 <template>
-  <router-link class="channel" :class=" { 'channel--unread': unread } " :to="`/chat/${ channelId }`">
+  <router-link
+    class="channel"
+    :class="{ 'channel--unread': unread }"
+    :to="`/chat/${channelKey}`"
+  >
     <div class="channel__image_wrapper">
       <img class="channel__image" :src="image" aria-hidden="true" />
     </div>
     <div class="channel__content">
       <div class="channel__flex">
-        <h3 class="channel__title">{{ title }}</h3>
+        <h3 class="channel__title">{{ name }}</h3>
         <time class="channel__time">{{ lastMessage.time }}</time>
       </div>
       <div class="channel__flex">
-        <p class="channel__message">{{ lastMessage.text }}</p>
+        <p class="channel__message">{{ message }}</p>
         <span v-if="unread" class="channel__unreadDot"></span>
       </div>
-      <hr class="channel__underline"/>
+      <hr class="channel__underline" />
     </div>
   </router-link>
 </template>
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
-      channelId: "CHANNELID",
       image: "https://thumbs.gfycat.com/ShabbyEagerBarebirdbat-max-1mb.gif",
       title: "Michael Price aoihfpuaiw fuio;awifokajw;fioajwf",
       lastMessage: {
         text: "Thank the 🍔 😍 😍 awbfiua wbfilawbfliabwjfklahwbf",
         time: "5:00 PM",
-      }
-    }
+      },
+
+      name: "Error!",
+      message: "Error!",
+    };
   },
   props: {
-    unread: Boolean
-  }  
+    channel: Object,
+    channelKey: String,
+    unread: Boolean,
+    currentUser: String
+  },
+  created() {
+    this.id = this.latestMsg;
+    if ( this.channel.latestMsg ) {
+      this.message = this.channel.latestMsg.content;
+    }
+
+    delete this.channel.members[this.currentUser];
+
+    if ( this.channel.members.length > 0 ) {
+      this.name = Object.keys(this.channel.members).map((key) => {
+        if(this.channel.members.length > 1){
+          return this.channel.members[key].fullname.split(' ')[0];
+        } else {
+          return this.channel.members[key].fullname
+        }
+    }).join(", ")
+    } else {
+      this.name = "Just You"
+    }
+  }
 };
 </script>
 
@@ -62,11 +91,12 @@ export default {
     border-left: none;
     border-right: none;
     position: absolute;
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     bottom: -8px;
   }
   &__content {
-    width: 100%; 
+    width: 100%;
     position: relative;
   }
   &__flex {
@@ -117,6 +147,5 @@ export default {
       color: $black-500;
     }
   }
-
 }
 </style>

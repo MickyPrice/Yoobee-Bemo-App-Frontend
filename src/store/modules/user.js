@@ -10,7 +10,7 @@ module.exports = {
     },
   },
   actions: {
-    updateUser({ commit }) {
+    socket_initUser({ commit }) {
       getUser().then((user) => {
         commit("UPDATE_USER", user.data);
       });
