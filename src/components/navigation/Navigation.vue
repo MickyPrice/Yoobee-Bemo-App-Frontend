@@ -141,7 +141,7 @@ export default {
   padding: 50px 20px 20px 20px;
   display: flex;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: flex-end;
 
   // Style individual icons
   &__svg {
@@ -157,6 +157,7 @@ export default {
     display: block;
     transition: all 0.4s;
     position: relative;
+    padding-bottom: 5px;
 
     // Light theme regular button
     &--light {

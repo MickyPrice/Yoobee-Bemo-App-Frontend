@@ -57,7 +57,7 @@ export default {
     },
     updateCode(updatedCode){
       console.log(updatedCode)
-      if(this.form.code.length <= 5){
+      if(this.form.code.length <= 7) {
       this.form.code += updatedCode;
       return;
       }

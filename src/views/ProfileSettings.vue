@@ -4,12 +4,7 @@
       <Layout>
         <BiButton class="settings__back_btn">
           <slot slot="icon" class>
-            <svg
-              width="21"
-              height="21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M13.125 16.625L7 10.5l6.125-6.125"
                 stroke="#8B55FF"
@@ -23,10 +18,34 @@
         <h1 class="settings__heading heading__sm">Your Profile</h1>
       </Layout>
     </header>
-    <main class="settings__main">
+    <main class="settings__main" v-if="user.status == 1">
       <PushCard class="settings__push_card">
         <template slot="SlotComponents">
-          <ProfilePic class="settings__profile" imagelink="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79"></ProfilePic>        </template>
+          <!-- Profile Photo -->
+          <label for="pfp">
+            <ProfilePic class="settings__profile" :imagelink="user.data.profilePic"></ProfilePic>
+          </label>
+          <form method="POST" ref="uploadPhotoForm" action="http://localhost:3000/user/profile">
+              <!-- class="settings__file_input" -->
+            <input
+              @change="uploadImage"
+              id="pfp"
+              type="file"
+              name="photo"
+              accept="image/*"
+            />
+          </form>
+          <h2 class="settings__name text__lg">{{ user.data.fullname }}</h2>
+          <p class="settings__username text__sm">@{{ user.data.username }}</p>
+          <Btn text="Setup Pin" class="settings__pinbtn text__base" />
+
+          <!-- Form -->
+          <label for="profileTag" class="settings__label">Profile Tag</label>
+          <TextInput v-model="this.user.data.username" class="settings__input" id="profileTag" />
+
+          <label for="fullName" class="settings__label">Full Name</label>
+          <TextInput v-model="this.user.data.fullname" class="settings__input" id="fullName" />
+        </template>
       </PushCard>
     </main>
     <Navigation :darkTheme="true" />
@@ -39,6 +58,10 @@ import BiButton from "@/components/buttons/BiButton.vue";
 import Layout from "@/components/layout/Layout.vue";
 import PushCard from "@/components/layout/PushCard.vue";
 import ProfilePic from "@/components/profile/EditableProfilePic.vue";
+import Btn from "@/components/buttons/SmallRoundedBtn.vue";
+import TextInput from "@/components/form/FormInput.vue";
+
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -46,8 +69,20 @@ export default {
     BiButton,
     Layout,
     PushCard,
-    ProfilePic
+    ProfilePic,
+    Btn,
+    TextInput
   },
+  computed: {
+    ...mapState(["user"])
+  },
+  methods: {
+    uploadImage: function(data) {
+      console.log(data);
+      const formData = new FormData();
+
+    }
+  }
 };
 </script>
 
@@ -75,11 +110,40 @@ export default {
   &__main {
   }
   &__push_card {
-    height: 70vh;
-    max-height: 500px;
+    height: 550px;
   }
   &__profile {
     margin-top: -100px;
+  }
+
+  &__name {
+    color: lighten($black-500, 20%);
+    font-family: $font-noto;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 10px;
+  }
+  &__username {
+    color: lighten($purple-500, 20%);
+    text-align: center;
+  }
+  &__pinbtn {
+    margin: 0 auto;
+    display: block;
+    margin-top: $margin-20;
+    color: lighten($black-300, 20%);
+  }
+
+  // Form
+  &__label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: -10px;
+    color: desaturate($purple-500, 50%);
+    font-weight: 500;
+  }
+  &__file_input {
+    display: none;
   }
 }
 </style>
