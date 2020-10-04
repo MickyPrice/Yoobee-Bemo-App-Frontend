@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="send()"
     class="profile"
     :style="{ 'background-image': 'url(' + imagelink + ')' }"
   >
@@ -12,6 +13,11 @@
 <script>
 export default {
   props: ["imagelink"],
+  methods: {
+    send: function () {
+      this.$emit("updateExchange", this.imagelink);
+    },
+  },
 };
 </script>
 

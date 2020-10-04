@@ -1,7 +1,12 @@
 <template>
   <div>
-    <label for="fname" class="text__lg">Search</label>
-    <input class="text__base--heavy" type="text" name="fname" placeholder="Search" />
+    <label for="fname" class="text__sm">Search</label>
+    <input
+      class="text__base--heavy"
+      type="text"
+      name="fname"
+      placeholder="Search"
+    />
   </div>
 </template>
 
@@ -17,8 +22,7 @@ div {
   }
   input {
     width: 100%;
-    margin-top: $margin-5;
-    height: $height-btn;
+    height: $height-srch;
     background-color: $white-300;
     border-radius: $corners-10;
     border: none;
