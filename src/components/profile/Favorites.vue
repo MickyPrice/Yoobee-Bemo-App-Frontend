@@ -3,6 +3,7 @@
     <h5 class="favs__text text__lg">Favourites</h5>
     <div class="favs__grid">
       <ProfilePic
+        @updateExchange="sendSelected($event)"
         v-for="fav in favs"
         :key="fav.index"
         :imagelink="fav.imagelink"
@@ -51,6 +52,12 @@ export default {
   components: {
     ProfilePic,
   },
+  methods: {
+    sendSelected: function (profile) {
+      console.log("Image caught by favs" + profile);
+      this.$emit("toDirectionProfile", profile);
+    },
+  },
 };
 </script>
 
@@ -59,7 +66,7 @@ export default {
 
 .favs {
   width: 100%;
-  margin-top: $margin-30;
+  margin: 5% 0 0;
   &__text {
     margin-bottom: $margin-20;
     color: $black;

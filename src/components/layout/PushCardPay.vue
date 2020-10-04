@@ -1,17 +1,19 @@
 <template>
   <div class="push-card-pay">
-    <div class="push-card-pay__transaction">
-      <div class="push-card-pay__transaction--profile-1">
+    <div class="transaction">
+      <div class="transaction--profile-1">
         <slot name="profile-1"></slot>
       </div>
-      <div class="push-card-pay__transaction--direction">
+      <div class="transaction--direction">
         <slot name="direction"></slot>
       </div>
-      <div class="push-card-pay__transaction--profile-2">
+      <div class="transaction--profile-2">
         <slot name="profile-2"></slot>
       </div>
     </div>
-    <slot name="SlotComponents"></slot>
+    <div class="push-card-pay__slot">
+      <slot name="SlotComponents"></slot>
+    </div>
   </div>
 </template>
 
@@ -23,6 +25,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/_variables";
+
 .push-card-pay {
   width: 100%;
   position: absolute;
@@ -31,16 +34,20 @@ export default {
   background-color: $white-100;
   border-radius: $corners-top;
   padding: $pad-bor;
+  .transaction {
+    z-index: 2;
+    width: 80%;
 
-  &__transaction {
-    width: 100%;
-    max-width: 350px;
-    padding: 0 40px 0 40px;
-    position: relative;
-    top: -60px;
+    margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    position: relative;
+    top: -18vw;
+  }
+  &__slot {
+    position: relative;
+    top: -10vw;
   }
 }
 </style>
