@@ -1,5 +1,5 @@
 <template>
-  <input class="text__base--heavy" :type="type" :name="name" :placeholder="placeholder" aria-label="Search for friends"/>
+  <input class="text__base--heavy" :type="type" :name="name" :placeholder="placeholder"/>
 </template>
 
 <script>

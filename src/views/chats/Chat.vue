@@ -1,5 +1,6 @@
 <template>
   <div class="chat">
+    <Transaction />
     <div class="chat__top">
       <Bibutton class="bk-purple-500">
         <slot slot="icon">
@@ -20,6 +21,7 @@
 import Bibutton from "@/components/buttons/BiButton.vue";
 import ProfilePic from "@/components/profile/ProfilePic.vue";
 import ChatPushCard from "@/components/chats/ChatPushCard.vue";
+import Transaction from "@/components/chats/NewTransaction.vue";
 
 export default {
   data() {
@@ -34,6 +36,7 @@ export default {
     Bibutton,
     ProfilePic,
     ChatPushCard,
+    Transaction,
   },
 };
 </script>
@@ -63,4 +66,4 @@ export default {
     min-height: 350px;
   }
 }
-</script>
+</style>
