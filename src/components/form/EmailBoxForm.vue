@@ -1,5 +1,10 @@
 <template>
-  <input class="text__base--heavy" type="email" name="fname" placeholder="Please Enter Eamil" />
+  <input
+    class="text__base--heavy"
+    type="email"
+    name="fname"
+    placeholder="Please Enter Eamil"
+  />
 </template>
 
 <script>
@@ -10,9 +15,9 @@ export default {};
 @import "@/scss/_variables";
 input {
   width: 100%;
-  margin-top: $margin-20;
-
   height: $height-btn;
+  margin-top: 5%;
+
   background-color: $white-300;
   border-radius: $corners-10;
   border: none;

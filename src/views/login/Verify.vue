@@ -13,8 +13,12 @@
       <h5 class="verify__top--sub">The code was sent to +64 021 783 374</h5>
       <Passcode :verifyCode="form.code"></Passcode>
     </div>
-    {{$route.params.phone}}
-    <NumberPad v-on:add-number="updateCode($event)" v-on:clear="clear()" v-on:back-space="backspace()">
+    {{ $route.params.phone }}
+    <NumberPad
+      v-on:add-number="updateCode($event)"
+      v-on:clear="clear()"
+      v-on:back-space="backspace()"
+    >
       <template slot="comps">
         <BtnFull class="bk-green-300" @click="verifyUser">
           <slot slot="btn-title">Check Code</slot>
@@ -40,36 +44,36 @@ export default {
     Passcode,
     BtnFull,
   },
-  data(){
-    return{
+  data() {
+    return {
       form: {
         phone: this.$route.params.phone,
-        code: ""
-      }
-    }
+        code: "",
+      },
+    };
   },
-  methods:{
-    backspace(){
-      this.form.code = this.form.code.slice(0,-1);
+  methods: {
+    backspace() {
+      this.form.code = this.form.code.slice(0, -1);
     },
-    clear(){
+    clear() {
       this.form.code = "";
     },
-    updateCode(updatedCode){
-      console.log(updatedCode)
-      if(this.form.code.length <= 5){
-      this.form.code += updatedCode;
-      return;
+    updateCode(updatedCode) {
+      console.log(updatedCode);
+      if (this.form.code.length <= 5) {
+        this.form.code += updatedCode;
+        return;
       }
-      console.log(this.form.code) 
+      console.log(this.form.code);
     },
     verifyUser() {
-      console.log(this.form)
-      verify(this.form).then(()=> {
-        this.$router.push('about')
+      console.log(this.form);
+      verify(this.form).then(() => {
+        this.$router.push("about");
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -81,8 +85,8 @@ export default {
   height: 100vh;
 
   &__top {
-    padding: $padding-40;
-
+    padding: $pad-bor;
+    height: 40%;
     &--titile {
       margin-top: $margin-30;
       color: $black-300;
@@ -95,7 +99,7 @@ export default {
 
   &__bot {
     text-align: center;
-    margin-top: $margin-30;
+    margin: $margin-10 0;
   }
 }
 </style>
