@@ -81,8 +81,8 @@ export default {
   height: 100vh;
 
   &__top {
-    padding: $padding-40;
-
+    padding: $pad-bor;
+  height: 40%;
     &--titile {
       margin-top: $margin-30;
       color: $black-300;
