@@ -4,7 +4,12 @@
       <Layout>
         <BiButton class="settings__back_btn">
           <slot slot="icon" class>
-            <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="21"
+              height="21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M13.125 16.625L7 10.5l6.125-6.125"
                 stroke="#8B55FF"
@@ -23,12 +28,19 @@
         <template slot="SlotComponents">
           <!-- Profile Photo -->
           <label for="pfp">
-            <ProfilePic class="settings__profile" :imagelink="user.data.profilePic"></ProfilePic>
+            <ProfilePic
+              class="settings__profile"
+              :imagelink="user.data.profilePic"
+            ></ProfilePic>
           </label>
-          <form method="POST" ref="uploadPhotoForm" action="http://localhost:3000/user/profile">
-              <!-- class="settings__file_input" -->
+          <form
+            method="POST"
+            ref="uploadPhotoForm"
+            action="http://localhost:3000/user/profile"
+          >
             <input
               @change="uploadImage"
+              class="settings__file_input"
               id="pfp"
               type="file"
               name="photo"
@@ -41,10 +53,18 @@
 
           <!-- Form -->
           <label for="profileTag" class="settings__label">Profile Tag</label>
-          <TextInput v-model="this.user.data.username" class="settings__input" id="profileTag" />
+          <TextInput
+            v-model="this.user.data.username"
+            class="settings__input"
+            id="profileTag"
+          />
 
           <label for="fullName" class="settings__label">Full Name</label>
-          <TextInput v-model="this.user.data.fullname" class="settings__input" id="fullName" />
+          <TextInput
+            v-model="this.user.data.fullname"
+            class="settings__input"
+            id="fullName"
+          />
         </template>
       </PushCard>
     </main>
@@ -61,6 +81,7 @@ import ProfilePic from "@/components/profile/EditableProfilePic.vue";
 import Btn from "@/components/buttons/SmallRoundedBtn.vue";
 import TextInput from "@/components/form/FormInput.vue";
 
+import { uploadPhoto } from "@/services/api/profilePic.js";
 import { mapState } from "vuex";
 
 export default {
@@ -71,18 +92,24 @@ export default {
     PushCard,
     ProfilePic,
     Btn,
-    TextInput
+    TextInput,
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
   methods: {
-    uploadImage: function(data) {
-      console.log(data);
-      const formData = new FormData();
-
-    }
-  }
+    uploadImage: function () {
+      const file = event.target.files[0];
+      uploadPhoto(file)
+      .then(() => {
+        // RELOAD PAGE WHEN FILE IS UPLOADED
+        this.$router.go();
+      })
+      .catch(function(err) {
+        alert(`Can't upload that photo. Sorry\n(${err})`)
+      })
+    },
+  },
 };
 </script>
 
@@ -107,10 +134,8 @@ export default {
   }
 
   // MAIN CONTENT
-  &__main {
-  }
   &__push_card {
-    height: 550px;
+    height: 500px;
   }
   &__profile {
     margin-top: -100px;
