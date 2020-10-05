@@ -28,7 +28,7 @@ function groupPastMsgs(commit, state, msgs) {
     if (state.messages.length === 0) {
       commit("ADD_OLDMSG", { msg: msg, newMsg: true, lastMsg: null });
     } else {
-      const OldestMsg = state.messages[0]
+      const OldestMsg = state.messages[0];
 
       if (msg.author == OldestMsg[0].author && msg.createdAt) {
         const OldestMsgTime = moment(OldestMsg[0].createdAt);
@@ -53,7 +53,7 @@ module.exports = {
     messages: [],
     chatLength: 0,
     currentChannel: {},
-    status: 0
+    status: 0,
   }),
   mutations: {
     UPDATE_CURRENT_CHANNEL(state, channel) {
@@ -72,7 +72,7 @@ module.exports = {
         state.messages[request.lastMsg].push(request.msg);
       }
 
-      state.status = 1
+      state.status = 1;
     },
     ADD_OLDMSG(state, request) {
       if (request.newMsg) {
@@ -81,11 +81,11 @@ module.exports = {
         state.messages[request.lastMsg].unshift(request.msg);
       }
 
-      state.status = 1
+      state.status = 1;
     },
     UPDATE_CHAT_LENGTH(state, len) {
       state.chatLength = len;
-    }
+    },
   },
   actions: {
     socket_receiveMsg({ state, commit }, request) {
@@ -99,14 +99,29 @@ module.exports = {
     socket_updateChannel({ commit }, channel) {
       commit("UPDATE_CURRENT_CHANNEL", channel);
     },
+    /**
+     * Join a regular channel
+     *
+     * @param {String} channel - Channel._id
+     */
     joinChannel({ commit }, channel) {
       commit("RESET_CHAT");
       this._vm.$socket.client.emit("joinChannel", channel);
     },
-    joinDirect({ commit }, channel) {
+    /**
+     * Join a direct message channel
+     *
+     * @param {String} user - User._id
+     */
+    joinDirect({ commit }, user) {
       commit("RESET_CHAT");
-      this._vm.$socket.client.emit("joinDirect", channel);
+      this._vm.$socket.client.emit("joinDirect", user);
     },
+    /**
+     * Leave a channel
+     *
+     * @param {String} channel - Channel._id
+     */
     leaveChannel({ commit }, channel) {
       commit("RESET_CHAT");
       this._vm.$socket.client.emit("leaveChannel", channel);

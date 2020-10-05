@@ -13,7 +13,7 @@
       </ProfilePic>
     </div>
     <div class="chat__bottom">
-      <Room></Room>
+      <Room v-if="!loading"></Room>
     </div>
   </div>
 </template>
@@ -48,11 +48,7 @@ export default {
     ...mapActions(["joinChannel", "leaveChannel"]),
   },
   created() {
-    if ( this.$route.query.type == "direct" ){
-      this.joinDirect(this.channelId);
-    } else {
-      this.joinChannel(this.channelId);
-    }
+    this.joinChannel(this.channelId);
   },
   destroyed() {
     this.leaveChannel(this.channelId);

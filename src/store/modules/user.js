@@ -13,9 +13,7 @@ module.exports = {
   },
   actions: {
     socket_initUser({ commit }) {
-      console.log("yea?")
       getUser().then((user) => {
-        console.log(user)
         commit("UPDATE_USER", user.data);
       });
     },
