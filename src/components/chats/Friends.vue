@@ -23,7 +23,7 @@
       v-for="(user, index) in users.active"
       :key="index"
       class="friends__item"
-      @click="loadDM(user)"
+      @click="loadDirectChannel(user)"
     >
       <img class="friends__image" :src="user.img" aria-hidden="true" />
       <span class="friends__name">{{ user.username }}</span>
@@ -39,8 +39,9 @@ export default {
     ...mapState(["users"]),
   },
   methods: {
-    loadDM(user){
-      this.$router.push({ path: `/chat/${user._id}`, query: { type: 'direct' } })
+    loadDirectChannel(user){
+      this.$socket.client.emit('getDirectChannel', user._id);
+      // this.$router.push({ path: `/chat/${user._id}`, query: { type: 'direct' } })
     }
   }
 };
