@@ -1,12 +1,11 @@
 <template>
   <div class="home">
-      <div class="home__center">
-          <h1 class="home__center--balance heading__lg">$300.26</h1>
-          <h4 class="home__center--sub-heading text__base--heavy">Bemo Balance</h4>
-          <PayAndRequestButton />
-      </div>
+    <div class="home__center">
+      <h1 class="home__center--balance heading__lg">$300.26</h1>
+      <h4 class="home__center--sub-heading text__base--heavy">Bemo Balance</h4>
+      <PayAndRequestButton />
+    </div>
     <Navigation :darkTheme="false" />
-
   </div>
 </template>
 
@@ -14,39 +13,37 @@
 import Navigation from "@/components/navigation/Navigation";
 import PayAndRequestButton from "@/components/buttons/PayAndReqestButton.vue";
 
-
 export default {
-components:{
+  components: {
     Navigation,
-    PayAndRequestButton
-}
-}
+    PayAndRequestButton,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/scss/_variables";
-.home{
-    background: $purple-500;
+.home {
+  background: $purple-500;
   width: 100vw;
   min-height: 100vh;
   padding-top: 45%;
   font-family: $font-noto;
-  &__center{
+  &__center {
+    width: 80%;
+    height: 40vh;
+    margin: auto;
+    position: relative;
 
-      width: 80%;
-      height: 40vh;
-      margin:  auto;
-      position: relative;
+    &--balance {
+      color: $white-100;
+      text-align: center;
+    }
+    &--sub-heading {
+      color: $white-100;
 
-      &--balance{
-          color: $white-100;
-          text-align: center;
-      }
-      &--sub-heading{
-                    color: $white-100;
-
-          text-align: center;
-      }
+      text-align: center;
+    }
   }
 }
 </style>

@@ -27,7 +27,7 @@
           <SubmitButton></SubmitButton>
         </form>
       </template>
-      <slot slot="PushCardBottomText">Already Us? Login</slot>
+      <slot slot="PushCardBottomText">Already with Us? Login</slot>
     </PushCard>
   </div>
 </template>
