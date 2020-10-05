@@ -101,8 +101,11 @@ module.exports = {
     },
     joinChannel({ commit }, channel) {
       commit("RESET_CHAT");
-      // commit("UPDATE_CURRENT_CHANNELID", channel);
       this._vm.$socket.client.emit("joinChannel", channel);
+    },
+    joinDirect({ commit }, channel) {
+      commit("RESET_CHAT");
+      this._vm.$socket.client.emit("joinDirect", channel);
     },
     leaveChannel({ commit }, channel) {
       commit("RESET_CHAT");

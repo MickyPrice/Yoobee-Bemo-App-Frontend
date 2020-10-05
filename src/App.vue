@@ -5,11 +5,18 @@
 </template>
 
 <script>
+import { getUser } from "./services/api/user";
+
 export default {
   sockets: {
     connect() {
       console.log("socket connected");
-    }
+    },
+  },
+  created() {
+    getUser().then((user) => {
+      console.log(user.data);
+    });
   },
 };
 </script>

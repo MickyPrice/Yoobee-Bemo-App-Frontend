@@ -48,17 +48,11 @@ export default {
     ...mapActions(["joinChannel", "leaveChannel"]),
   },
   created() {
-    this.joinChannel(this.channelId);
-
-    // delete this.channel.members[this.currentUser];
-
-    console.log(this.chat)
-
-    // this.name = Object.keys(this.chats.channel[this.channel].members)
-    //   .map((key) => {
-    //     return this.chats.channel[this.channel].members[key].fullname.split(" ")[0];
-    //   })
-    //   .join(", ");
+    if ( this.$route.query.type == "direct" ){
+      this.joinDirect(this.channelId);
+    } else {
+      this.joinChannel(this.channelId);
+    }
   },
   destroyed() {
     this.leaveChannel(this.channelId);

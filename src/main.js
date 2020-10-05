@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 
 Vue.config.productionTip = false
 
-var socket = io("http://localhost:3000");
+var socket = io("http://45.76.121.221");
 Vue.use(VueSocketIOExt, socket, { store });
 
 new Vue({
