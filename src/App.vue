@@ -15,7 +15,7 @@ export default {
   },
   created() {
     getUser().then((user) => {
-      console.log(user.data);
+      console.log("this user: " + user.data);
     });
   },
 };
