@@ -55,10 +55,9 @@ export default {
 @import "@/scss/_variables";
 .signup {
   &__top {
-    padding: $padding-40;
+    padding: $pad-bor;
   }
   .head {
-    padding-top: 70px;
     &__titile {
       color: $white-300;
       text-align: center;
