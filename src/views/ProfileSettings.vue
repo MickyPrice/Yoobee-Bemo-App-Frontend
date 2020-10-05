@@ -1,5 +1,9 @@
 <template>
   <div class="settings">
+    <Modal ref="setupPin" title="HELLO WORLD" :open="setupPinModal">
+      hello world
+    </Modal>
+
     <header class="settings__header">
       <Layout>
         <BiButton class="settings__back_btn">
@@ -49,7 +53,8 @@
           </form>
           <h2 class="settings__name text__lg">{{ user.data.fullname }}</h2>
           <p class="settings__username text__sm">@{{ user.data.username }}</p>
-          <Btn text="Setup Pin" class="settings__pinbtn text__base" />
+          <Btn text="Reset Pin" v-if="user.data.pinCode" class="settings__pinbtn text__base" />
+          <Btn text="Setup Pin" @click="setupPinModal = true" v-else class="settings__pinbtn text__base" />
 
           <!-- Form -->
           <label for="profileTag" class="settings__label">Profile Tag</label>
@@ -80,11 +85,17 @@ import PushCard from "@/components/layout/PushCard.vue";
 import ProfilePic from "@/components/profile/EditableProfilePic.vue";
 import Btn from "@/components/buttons/SmallRoundedBtn.vue";
 import TextInput from "@/components/form/FormInput.vue";
+import Modal from "@/components/modals/Modal.vue";
 
 import { uploadPhoto } from "@/services/api/profilePic.js";
 import { mapState } from "vuex";
 
 export default {
+  data: function() {
+    return {
+      setupPinModal: false
+    }
+  },
   components: {
     Navigation,
     BiButton,
@@ -93,6 +104,7 @@ export default {
     ProfilePic,
     Btn,
     TextInput,
+    Modal,
   },
   computed: {
     ...mapState(["user"]),
@@ -101,14 +113,17 @@ export default {
     uploadImage: function () {
       const file = event.target.files[0];
       uploadPhoto(file)
-      .then(() => {
-        // RELOAD PAGE WHEN FILE IS UPLOADED
-        this.$router.go();
-      })
-      .catch(function(err) {
-        alert(`Can't upload that photo. Sorry\n(${err})`)
-      })
+        .then(() => {
+          // RELOAD PAGE WHEN FILE IS UPLOADED
+          this.$router.go();
+        })
+        .catch(function (err) {
+          alert(`Can't upload that photo. Sorry\n(${err})`);
+        });
     },
+    openSetupPin: function() {
+      this.setupPinModal = true;
+    }
   },
 };
 </script>
