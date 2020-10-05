@@ -23,6 +23,9 @@ export default {};
   border: none;
   outline: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:active {
     opacity: 70%;
