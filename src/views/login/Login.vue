@@ -36,15 +36,15 @@ import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "../../components/form/SubmitButton.vue";
 import Bibutton from "../../components/buttons/BiButton.vue";
 
-import { login } from "@/services/api/auth.js"
+import { login } from "@/services/api/auth.js";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       form: {
-        phone: ""
-      }
-    }
+        phone: "",
+      },
+    };
   },
   components: {
     PushCard,
@@ -55,10 +55,13 @@ export default {
   methods: {
     loginUser() {
       login(this.form).then(() => {
-        this.$router.push({ name: 'verify', params: { phone: this.form.phone } });
-      })
-    }
-  }
+        this.$router.push({
+          name: "verify",
+          params: { phone: this.form.phone },
+        });
+      });
+    },
+  },
 };
 </script>
 
@@ -66,11 +69,11 @@ export default {
 @import "@/scss/_variables";
 .login {
   &__top {
-    padding: $padding-40;
+    padding: $pad-bor;
   }
 }
 .head {
-  padding-top: 70px;
+  padding-top: 5%;
   &__titile {
     color: $white-300;
     text-align: center;

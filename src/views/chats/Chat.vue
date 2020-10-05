@@ -1,17 +1,19 @@
 <template>
   <div class="chat">
     <div class="chat__top">
-      <Bibutton class="bk-purple-500">
-        <slot slot="icon">
-          <i class="fas fa-angle-left col-white-100"></i>
-        </slot>
-      </Bibutton>
+      <router-link to="/chat">
+        <Bibutton class="bk-purple-500">
+          <slot slot="icon">
+            <i class="fas fa-angle-left col-white-100"></i>
+          </slot>
+        </Bibutton>
+      </router-link>
       <ProfilePic class="chat__top--small" :imagelink="imagelink2">
-        <slot slot="profileName">{{ $route.params.channelId }}</slot>
+        <slot slot="profileName">{{ name }}</slot>
       </ProfilePic>
     </div>
     <div class="chat__bottom">
-      <ChatPushCard></ChatPushCard>
+      <Room></Room>
     </div>
   </div>
 </template>
@@ -19,21 +21,47 @@
 <script>
 import Bibutton from "@/components/buttons/BiButton.vue";
 import ProfilePic from "@/components/profile/ProfilePic.vue";
-import ChatPushCard from "@/components/chats/ChatPushCard.vue";
+// import ChatPushCard from "@/components/chats/ChatPushCard.vue";
+import Room from "@/components/chat/Room.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
-  data() {
+  components: {
+    Bibutton,
+    ProfilePic,
+    Room,
+  },
+  data: function() {
     return {
+      name: "",
+      channelId: this.$route.params.channelId,
       imagelink1:
         "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
       imagelink2:
         "https://images.unsplash.com/photo-1538960792157-b2e2b62d1f3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     };
   },
-  components: {
-    Bibutton,
-    ProfilePic,
-    ChatPushCard,
+  computed: {
+    ...mapState(["chats"]),
+  },
+  methods: {
+    ...mapActions(["joinChannel", "leaveChannel"]),
+  },
+  created() {
+    this.joinChannel(this.channelId);
+
+    // delete this.channel.members[this.currentUser];
+
+    console.log(this.chat)
+
+    // this.name = Object.keys(this.chats.channel[this.channel].members)
+    //   .map((key) => {
+    //     return this.chats.channel[this.channel].members[key].fullname.split(" ")[0];
+    //   })
+    //   .join(", ");
+  },
+  destroyed() {
+    this.leaveChannel(this.channelId);
   },
 };
 </script>
@@ -63,4 +91,4 @@ export default {
     min-height: 350px;
   }
 }
-</script>
+</style>
