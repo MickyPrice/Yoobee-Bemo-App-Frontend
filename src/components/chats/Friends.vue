@@ -39,11 +39,17 @@ export default {
     ...mapState(["users"]),
   },
   methods: {
-    loadDirectChannel(user){
-      this.$socket.client.emit('getDirectChannel', user._id);
-      // this.$router.push({ path: `/chat/${user._id}`, query: { type: 'direct' } })
-    }
-  }
+    loadDirectChannel(user) {
+      this.$socket.client.emit("getDirectChannel", user._id);
+    },
+  },
+  sockets: {
+    openChannel(channel) {
+      this.$router.push({
+        path: `/chat/${channel}`
+      });
+    },
+  },
 };
 </script>
 

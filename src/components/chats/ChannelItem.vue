@@ -10,7 +10,7 @@
     <div class="channel__content">
       <div class="channel__flex">
         <h3 class="channel__title">{{ name }}</h3>
-        <time class="channel__time">{{ lastMessage.time }}</time>
+        <time class="channel__time">{{ lastUpdated }}</time>
       </div>
       <div class="channel__flex">
         <p class="channel__message">{{ message }}</p>
@@ -22,16 +22,28 @@
 </template>
 
 <script>
+import moment from 'moment';
+moment.updateLocale('en', {
+    relativeTime : {
+        s:  "a moment",
+        m:  "a min",
+        mm: "%dm",
+        h:  "an hour",
+        hh: "%dh",
+        d:  "a day",
+        dd: "%dd",
+        M:  "a mth",
+        MM: "%dmths",
+        y:  "a year",
+        yy: "%d y"
+    }
+});
+
 export default {
   data: function() {
     return {
       image: "https://thumbs.gfycat.com/ShabbyEagerBarebirdbat-max-1mb.gif",
-      title: "Michael Price aoihfpuaiw fuio;awifokajw;fioajwf",
-      lastMessage: {
-        text: "Thank the 🍔 😍 😍 awbfiua wbfilawbfliabwjfklahwbf",
-        time: "5:00 PM",
-      },
-
+      lastUpdated: "",
       name: "Error!",
       message: "Error!",
     };
@@ -46,6 +58,10 @@ export default {
     this.id = this.latestMsg;
     if ( this.channel.latestMsg ) {
       this.message = this.channel.latestMsg.content;
+    }
+
+    if ( this.channel.updatedAt ) {
+      this.lastUpdated = moment(this.channel.updatedAt).fromNow();
     }
 
     delete this.channel.members[this.currentUser];

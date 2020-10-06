@@ -1,16 +1,16 @@
 <template>
   <section class="channels" v-if="user.status == 1">
-    <!-- <Channel :unread="true" /> -->
     <Channel
-      v-for="(channel, index) in chats.channels"
+      v-for="(channel, index) in orderByDate(chats.channels)"
       :key="index"
       :currentUser="user.data._id"
-      :channelKey="index"
+      :channelKey="channel.key"
       :channel="channel"
+      :unread="true"
     />
   </section>
   <section class="channels" v-else>
-    <Skeleton :count="10" height="75px" :duration="5"/>
+    <Skeleton :count="10" height="75px" :duration="5" />
   </section>
 </template>
 
@@ -24,6 +24,17 @@ Vue.use(Skeleton);
 export default {
   computed: {
     ...mapState(["chats", "user"]),
+  },
+  methods: {
+    orderByDate(dict) {
+      let array = Object.keys(dict).map(function(key) {
+        return { ...dict[key], key };
+      });
+
+      return array.sort(
+        (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
+      ).reverse();
+    },
   },
   components: {
     Channel,

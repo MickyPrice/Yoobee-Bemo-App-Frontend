@@ -1,4 +1,3 @@
-
 module.exports = {
   state: () => ({
     channels: {},
@@ -8,7 +7,6 @@ module.exports = {
   mutations: {
     UPDATE_CHANNEL(state, channel) {
       state.channels[channel.id] = channel.data
-      state.status = 1
     },
     INIT_CHANNELS(state, channels) {
       state.channels = channels

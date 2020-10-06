@@ -13,7 +13,7 @@
       </ProfilePic>
     </div>
     <div class="chat__bottom">
-      <Room v-if="!loading"></Room>
+      <Room></Room>
     </div>
   </div>
 </template>
