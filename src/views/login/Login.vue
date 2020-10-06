@@ -22,7 +22,7 @@
           <PhoneNumberBoxForm v-model="form.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
-          <SubmitButton></SubmitButton>
+          <SubmitButton />
         </form>
       </template>
       <slot slot="PushCardBottomText">New? Get Started</slot>

@@ -18,13 +18,15 @@
       <slot slot="PushCardTitle">Get Started</slot>
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
       <template slot="SlotComponents">
-        <form action="login">
-          <TextBoxForm></TextBoxForm>
-          <EmailBoxForm></EmailBoxForm>
-          <PhoneNumberBoxForm>
+        <form @submit.prevent="signupUser">
+          <TextBoxForm v-model="signupObject.username" />
+          <EmailBoxForm @emailUpdate="email($event)"/>
+          <PhoneNumberBoxForm
+          v-model="signupObject.phone"
+          >
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
-          <SubmitButton></SubmitButton>
+          <SubmitButton />
         </form>
       </template>
       <slot slot="PushCardBottomText">Already with Us? Login</slot>
@@ -33,12 +35,15 @@
 </template>
 
 <script>
-import PushCard from "../../components/layout/PushCard.vue";
-import TextBoxForm from "../../components/form/TextBoxForm.vue";
-import EmailBoxForm from "../../components/form/EmailBoxForm.vue";
-import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
-import SubmitButton from "../../components/form/SubmitButton.vue";
-import Bibutton from "../../components/buttons/BiButton.vue";
+import PushCard from "@/components/layout/PushCard.vue";
+import TextBoxForm from "@/components/form/TextBoxForm.vue";
+import EmailBoxForm from "@/components/form/EmailBoxForm.vue";
+import PhoneNumberBoxForm from "@/components/form/PhoneNumberBoxForm.vue";
+import SubmitButton from "@/components/form/SubmitButton.vue";
+import Bibutton from "@/components/buttons/BiButton.vue";
+
+// import { signup } from "@/services/api/auth.js"
+
 export default {
   components: {
     PushCard,
@@ -48,6 +53,35 @@ export default {
     SubmitButton,
     Bibutton,
   },
+  data: function() {
+    return{
+      signupObject: {
+        username: "",
+        email: "",
+        phone: ""
+      },
+    }
+  },
+  methods:{
+
+    signupUser(){
+      console.log(this.signupObject)
+    }
+    // checkSignup(){
+    //   try{
+    //     // if(){
+    //     //   throw new error("Phone number missing");
+    //     // }
+    //     signup(signupObject).then((res) => {
+    //       console.log(res)
+    //     })
+    //   }
+    //   catch {(error) => {
+    //       console.log(error)
+    //   }}
+    // }
+  },
+ 
 };
 </script>
 

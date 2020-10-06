@@ -42,7 +42,7 @@ div {
     border-radius: $corners-10;
     border: none;
     outline: none;
-    &[type="number"] {
+    &[type="tel"] {
       padding-left: $padding-20;
     }
     &:active {
