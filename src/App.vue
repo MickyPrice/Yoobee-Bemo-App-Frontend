@@ -24,10 +24,10 @@ export default {
 @import "./scss/_variables.scss";
 @font-face {
   src: url(./scss/font/aileron-regular.otf);
-  font-family: ail;
+  font-family: Aileron;
 }
 #app {
-  font-family: ail;
+  font-family: Aileron;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $black-300;
