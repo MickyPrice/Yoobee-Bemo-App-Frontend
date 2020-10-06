@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home__center">
-      <h1 class="home__center--balance heading__lg">$300.26</h1>
+      <h1 class="home__center--balance heading__lg">{{ balance }}</h1>
       <h4 class="home__center--sub-heading text__base--heavy">Bemo Balance</h4>
       <PayAndRequestButton />
     </div>
@@ -19,8 +19,13 @@ export default {
     Navigation,
     PayAndRequestButton,
   },
+  data() {
+    return {
+      balance: "$",
+    };
+  },
   computed: {
-    ...mapState(["chats"]),
+    ...mapState(["user"]),
   },
 };
 </script>
@@ -31,12 +36,16 @@ export default {
   background: $purple-500;
   width: 100vw;
   min-height: 100vh;
-  padding-top: 45%;
   font-family: $font-noto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   &__center {
     width: 80%;
-    height: 40vh;
-    margin: auto;
+    max-width: 600px;
+    max-height: 200px;
     position: relative;
 
     &--balance {
@@ -45,8 +54,8 @@ export default {
     }
     &--sub-heading {
       color: $white-100;
-
       text-align: center;
+      margin-bottom: 300px;
     }
   }
 }
