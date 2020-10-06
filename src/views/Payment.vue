@@ -38,11 +38,14 @@
             />
           </svg>
         </Direction>
-        <Profile />
+        <div @click="display = 'ONLINE'">
+            <Profile />            
+        </div>
       </div>
 
       <!-- CODE -->
-      <PayRequest :mode="mode" :lang="lang" v-on:updateMode="mode=$event" />
+      <PayRequest v-if="display=='PAYREQUEST'" :mode="mode" :lang="lang" v-on:updateMode="mode=$event" />
+      <OnlineUsers v-if="display=='ONLINE'" />
     </PushCard>
   </div>
 </template>
@@ -97,6 +100,7 @@ import PushCard from "@/components/layout/BasicPushCard";
 import Profile from "@/components/profile/Photo";
 import Direction from "@/components/profile/Direction";
 import PayRequest from "@/components/payment/PayRequest";
+import OnlineUsers from "@/components/payment/OnlineUsers";
 import { mapState } from "vuex";
 
 export default {
@@ -106,7 +110,8 @@ export default {
     PushCard,
     Profile,
     Direction,
-    PayRequest
+    PayRequest,
+    OnlineUsers
   },
   data: function() {
     return {
@@ -122,7 +127,8 @@ export default {
           tofrom: "from"
         }
       },
-      amount: 0
+      amount: 0,
+      display: "PAYREQUEST" // PAYREQUEST, ONLINE
     };
   },
   computed: {

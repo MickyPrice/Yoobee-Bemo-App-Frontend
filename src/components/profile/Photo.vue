@@ -2,7 +2,7 @@
   <div>
     <div v-if="source" class="profile">
       <img :src="source" class="profile__img">
-      <svg
+      <!-- <svg
         class="profile__icon"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -22,7 +22,7 @@
           stroke-width="2"
           d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
         />
-      </svg>
+      </svg> -->
     </div>
     <div v-else class="profile profile--empty">
       <svg width="20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,9 +80,6 @@ export default {
       opacity: 1;
     }
   }
-  &:hover &__icon {
-    opacity: 1;
-  }
 
   &__img {
     height: 100%;
@@ -91,10 +88,6 @@ export default {
     object-fit: cover;
     object-position: center;
     transition: 0.2s all;
-  }
-  &:hover &__img {
-    opacity: 0.5;
-    filter: brightness(130%);
   }
 }
 </style>
