@@ -1,6 +1,5 @@
 <template>
   <ChatLayout>
-    {{ messages }}
     <div class="messages">
       <div class="messages__padding">
         <div

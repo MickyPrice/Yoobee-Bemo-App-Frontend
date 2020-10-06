@@ -25,7 +25,7 @@
       class="friends__item"
       @click="loadDirectChannel(user)"
     >
-      <img class="friends__image" :src="user.img" aria-hidden="true" />
+      <img class="friends__image" :src="api.VUE_APP_API_URL + '/user/profile/' + user._id" aria-hidden="true" />
       <span class="friends__name">{{ user.username }}</span>
     </button>
   </section>
@@ -37,6 +37,11 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState(["users"]),
+  },
+  data: function() {
+    return {
+      api: process.env
+    }
   },
   methods: {
     loadDirectChannel(user) {
