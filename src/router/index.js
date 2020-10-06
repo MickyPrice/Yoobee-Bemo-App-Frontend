@@ -55,10 +55,16 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
+    path: "/home",
+    name: "Home",
+    component: () =>
+    import("../views/home/Home.vue"),
+  },
+  {
     path: "/logout",
     name: "logout",
     component: () =>
-      import("../views/Logout.vue"),
+    import("../views/Logout.vue"),
   },
   {
     path: "/sendPayment",
@@ -69,6 +75,11 @@ const routes = [
     path: "/requestPayment",
     name: "RequestPayment",
     component: () => import("../views/RequestPayment.vue"),
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: () => import("../views/ProfileSettings.vue"),
   },
 ];
 

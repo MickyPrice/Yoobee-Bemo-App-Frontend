@@ -25,9 +25,10 @@ export default {
 
 .push-card {
   width: 100%;
+  max-height: 75%;
   background-color: $white-100;
   border-radius: $corners-top;
-  padding: $padding-40;
+  padding: 20px $pad-bor 0 $pad-bor;
   position: absolute;
   bottom: 0;
 
@@ -37,7 +38,7 @@ export default {
   }
   &__bottom-text {
     text-align: center;
-    margin-top: $margin-30;
+    margin: 4%;
     color: $purple-300;
   }
 }
