@@ -1,11 +1,15 @@
 <template>
   <div class="requestPayment">
     <div class="requestPayment__top">
+            <router-link :to="{ name: 'Home' }">
+
       <Bibutton>
         <slot slot="icon" class>
           <i class="fas fa-angle-left col-purple-500"></i>
         </slot>
       </Bibutton>
+            </router-link>
+
       <h1 class="requestPayment__top--title text__lg">Request Payment</h1>
     </div>
     <PushCardPay>
