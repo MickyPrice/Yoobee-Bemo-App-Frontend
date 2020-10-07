@@ -79,7 +79,7 @@ module.exports = {
     },
     UPDATE_CHAT_LENGTH(state, len) {
       state.chatLength = len;
-    }
+    },
   },
   actions: {
     socket_receiveMsg({ state, commit }, request) {
