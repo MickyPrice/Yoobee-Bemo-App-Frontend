@@ -2,13 +2,22 @@
   <input
     class="text__base--heavy"
     type="email"
+    :value="value"
     name="fname"
     placeholder="Please Enter Eamil"
+    @input="updateDate($event.target.value)"
   />
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["value"],
+  methods: {
+    updateDate(value) {
+      this.$emit("input", value);
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

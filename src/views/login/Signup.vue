@@ -18,12 +18,10 @@
       <slot slot="PushCardTitle">Get Started</slot>
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
       <template slot="SlotComponents">
-        <form @submit.prevent="signupUser">
+        <form @submit.prevent="checkSignup">
           <TextBoxForm v-model="signupObject.username" />
-          <EmailBoxForm @emailUpdate="email($event)"/>
-          <PhoneNumberBoxForm
-          v-model="signupObject.phone"
-          >
+          <EmailBoxForm v-model="signupObject.email" />
+          <PhoneNumberBoxForm v-model="signupObject.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
           <SubmitButton />
@@ -53,35 +51,31 @@ export default {
     SubmitButton,
     Bibutton,
   },
-  data: function() {
-    return{
+  data: function () {
+    return {
       signupObject: {
         username: "",
         email: "",
-        phone: ""
+        phone: "",
       },
-    }
+    };
   },
-  methods:{
-
-    signupUser(){
-      console.log(this.signupObject)
-    }
-    // checkSignup(){
-    //   try{
-    //     // if(){
-    //     //   throw new error("Phone number missing");
-    //     // }
-    //     signup(signupObject).then((res) => {
-    //       console.log(res)
-    //     })
-    //   }
-    //   catch {(error) => {
-    //       console.log(error)
-    //   }}
-    // }
+  methods: {
+    checkSignup() {
+      try {
+        // if(){
+        //   throw new error("Phone number missing");
+        // }
+        signup(signupObject).then((res) => {
+          console.log(res);
+        });
+      } catch {
+        (error) => {
+          console.log(error);
+        };
+      }
+    },
   },
- 
 };
 </script>
 
