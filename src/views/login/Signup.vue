@@ -3,9 +3,8 @@
     <div class="signup__top">
       <router-link :to="{ name: 'landing' }">
         <Bibutton>
-          <slot slot="icon" class>
-            <i class="fas fa-angle-left col-purple-500"></i>
-          </slot>
+          <slot slot="icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>          </slot>
         </Bibutton>
       </router-link>
 
@@ -19,11 +18,12 @@
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
       <template slot="SlotComponents">
         <form @submit.prevent="checkSignup">
-          <TextBoxForm v-model="signupObject.username" />
-          <EmailBoxForm v-model="signupObject.email" />
-          <PhoneNumberBoxForm v-model="signupObject.phone">
+          <TextBoxForm placeholder="Full Name" v-model="signupObject.fullname" />
+          <TextBoxForm placeholder="User Name" v-model="signupObject.username" />
+          <PhoneNumberBoxForm v-model="signupObject.phone" >
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
+          <p>{{signupObject.phone}}</p>
           <SubmitButton />
         </form>
       </template>
@@ -35,7 +35,6 @@
 <script>
 import PushCard from "@/components/layout/PushCard.vue";
 import TextBoxForm from "@/components/form/TextBoxForm.vue";
-import EmailBoxForm from "@/components/form/EmailBoxForm.vue";
 import PhoneNumberBoxForm from "@/components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 import Bibutton from "@/components/buttons/BiButton.vue";
@@ -46,7 +45,6 @@ export default {
   components: {
     PushCard,
     TextBoxForm,
-    EmailBoxForm,
     PhoneNumberBoxForm,
     SubmitButton,
     Bibutton,
@@ -54,36 +52,29 @@ export default {
   data: function () {
     return {
       signupObject: {
+        fullname: "",
         username: "",
-        email: "",
         phone: "",
       },
     };
   },
+
   methods: {
+   
     checkSignup() {
       console.log("checking form");
       console.log(this.signupObject);
       try {
+        //Full Name
+        if(this.signupObject.fullname === ""){
+          throw "Full Name error, Missing Full Name"
+        }
         // User Name
         if (this.signupObject.username === "") {
-          throw "Username error, Missing";
+          throw "Username error, Missing User Name";
         }
         if (/\s/.test(this.signupObject.username)) {
-          throw "Username error, no spaces";
-        }
-        if (this.signupObject.email === "") {
-          //Email
-          throw "Email missing";
-        }
-
-        //not working ******************
-        if (
-          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-            !this.signupObject.email
-          )
-        ) {
-          throw "Email Error";
+          throw "Username error, invalid text";
         }
         //Phone number
         if (this.signupObject.phone === "") {
@@ -126,6 +117,11 @@ export default {
   }
   form {
     margin-top: $margin-30;
+  }
+  svg{
+    height: 24px;
+    width: 24px;
+    color: $purple-500;
   }
 }
 </style>

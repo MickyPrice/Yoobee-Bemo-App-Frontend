@@ -5,13 +5,13 @@
     name="fname"
     :value="value"
     @input="updateDate($event.target.value)"
-    placeholder="Please Enter Name"
+    :placeholder="placeholder"
   />
 </template>
 
 <script>
 export default {
-  props: ["value"],
+  props: ["value", "placeholder"],
 
   methods: {
     updateDate(value) {
@@ -26,7 +26,7 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
-
+  margin-top: 10px;
   background-color: $white-300;
   border-radius: $corners-10;
   border: none;

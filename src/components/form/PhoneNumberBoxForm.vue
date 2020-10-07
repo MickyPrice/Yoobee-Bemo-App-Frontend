@@ -3,23 +3,33 @@
     <label for="fname" class="text__sm">
       <slot name="top-text"></slot>
     </label>
-    <input
-      class="text__base--heavy"
-      type="tel"
-      name="fname"
-      placeholder="Please Enter Phone Number"
-      :value="value"
-      v-on:input="updateValue($event.target.value)"
-    />
+    <input-mask 
+    class="text__base--heavy"
+    placeholder="Please Enter Cellphone Number"
+    v-model="value" 
+    mask="+64 \ 999 999 9999" 
+    maskChar=""
+    v-on:blur="updateValue(value)"
+    >
+    </input-mask>
+
   </div>
 </template>
 
 <script>
 export default {
   name: "PhoneNumberBoxForm",
-  props: ["value"],
+  data: function(){
+    return{
+      value:"",
+    }
+  },
   methods: {
     updateValue: function (value) {
+      console.log("phone number is being cleaned " + value);
+      value.trim();
+      console.log(value);
+
       this.$emit("input", value);
     },
   },
@@ -37,17 +47,16 @@ div {
     width: 100%;
     margin-top: $margin-5;
     height: $height-srch;
-
     background-color: $white-300;
     border-radius: $corners-10;
     border: none;
     outline: none;
-    &[type="tel"] {
-      padding-left: $padding-20;
-    }
+    padding-left: $padding-20;
+
     &:active {
       border: 2px solid $purple-100;
     }
+    
   }
 }
 </style>
