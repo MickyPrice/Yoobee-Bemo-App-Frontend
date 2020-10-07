@@ -59,11 +59,11 @@ export default {
     clear() {
       this.form.code = "";
     },
-    updateCode(updatedCode) {
-      console.log(updatedCode);
-      if (this.form.code.length <= 5) {
-        this.form.code += updatedCode;
-        return;
+    updateCode(updatedCode){
+      console.log(updatedCode)
+      if(this.form.code.length <= 7) {
+      this.form.code += updatedCode;
+      return;
       }
       console.log(this.form.code);
     },
