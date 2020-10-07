@@ -1,17 +1,25 @@
 <template>
-  <div
-    :class="currentUser ? 'msg-container__stack' : 'msg-container__stack-other'"
-  >
-    <div v-if="currentUser()" class="msg-container__stack-other--profile">
-      <ProfilePic class="small" imagelink="https://images.unsplash.com/photo-1588337598656-f2b0693deb48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"> </ProfilePic>
+  <div class="msg-container__group">
+    <div v-if="messageGroup[0].author != currentUser()" class="msg-container__stack-other--profile">
+      <ProfilePic
+        class="small"
+        :imagelink="api.VUE_APP_API_URL + '/user/profile/' + messageGroup[0].author"
+      >
+      </ProfilePic>
     </div>
-    <Message
-      v-for="(message, $index) in messageGroup"
-      :key="$index"
-      :content="message.content"
-      :contentType="message.contentType"
-      :currentUser="message.author == currentUser()"
-    />
+    <div
+      :class="
+        currentUser ? 'msg-container__stack' : 'msg-container__stack-other'
+      "
+    >
+      <Message
+        v-for="(message, $index) in messageGroup"
+        :key="$index"
+        :content="message.content"
+        :contentType="message.contentType"
+        :currentUser="message.author == currentUser()"
+      />
+    </div>
   </div>
 </template>
 
@@ -21,6 +29,11 @@ import { mapState } from "vuex";
 import ProfilePic from "../profile/ProfilePic.vue";
 
 export default {
+  data: function() {
+    return {
+      api: process.env,
+    };
+  },
   computed: {
     ...mapState(["user"]),
   },
@@ -31,7 +44,7 @@ export default {
   },
   components: {
     Message,
-    ProfilePic
+    ProfilePic,
   },
   methods: {
     currentUser() {
@@ -50,6 +63,9 @@ export default {
 
 .msg-container {
   width: 100%;
+  &__group {
+    position: relative;
+  }
   &__stack {
     margin-left: 10%;
     margin-bottom: 10px;
@@ -85,9 +101,10 @@ export default {
     display: flex;
 
     &--profile {
-      width: 10%;
-      display: flex;
-      align-items: flex-end;
+      max-width: 32px;
+      max-height: 32px;
+      position: absolute;
+      bottom: 0;
     }
     &--clear {
       width: 80%;
@@ -108,6 +125,11 @@ export default {
         border-radius: 20px;
       }
     }
+  }
+  .small {
+    width: 7vw;
+    height: 7vw;
+    border: none;
   }
 }
 </style>

@@ -3,8 +3,21 @@
     <div class="chat__top">
       <router-link to="/chat">
         <Bibutton class="bk-purple-500">
-          <slot slot="icon">
-            <i class="fas fa-angle-left col-white-100"></i>
+          <slot slot="icon" class>
+            <svg
+              width="21"
+              height="21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.125 16.625L7 10.5l6.125-6.125"
+                stroke="#FFFFFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </slot>
         </Bibutton>
       </router-link>

@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const repository = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://bemo.michaelprice.co.nz',
     withCredentials: true,
     crossorigin: true,
     timeout: 10000, // 10 second
