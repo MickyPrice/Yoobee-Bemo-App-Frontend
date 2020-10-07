@@ -3,7 +3,12 @@
     <Layout>
       <BackButton>
         <slot slot="icon">
-          <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="21"
+            height="21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M13.125 16.625L7 10.5l6.125-6.125"
               stroke="#8B55FF"
@@ -14,11 +19,13 @@
           </svg>
         </slot>
       </BackButton>
-      <h1 class="payments__title heading__sm">{{ lang[mode].paymentDisplay }} Payment</h1>
+      <h1 class="payments__title heading__sm">
+        {{ lang[mode].paymentDisplay }} Payment
+      </h1>
     </Layout>
     <PushCard class="payments__push-card">
       <div class="payments__actors">
-        <Profile :source="user.data.profilePic" />
+        <Profile :clickable="false" :source="user.data.profilePic" />
         <Direction
           class="payments__direction"
           :class="{ 'payments__direction--flipped': mode != 'SEND' }"
@@ -39,13 +46,19 @@
           </svg>
         </Direction>
         <div @click="display = 'ONLINE'">
-            <Profile />            
+          <Profile :clickable="true" :source="imgUrlStart + otherUser._id" />
         </div>
       </div>
 
       <!-- CODE -->
-      <PayRequest v-if="display=='PAYREQUEST'" :mode="mode" :lang="lang" v-on:updateMode="mode=$event" />
-      <OnlineUsers v-if="display=='ONLINE'" />
+      <PayRequest
+        v-if="display == 'PAYREQUEST'"
+        :mode="mode"
+        :lang="lang"
+        v-on:updatemode="mode = $event"
+        :otherUser="otherUser"
+      />
+      <OnlineUsers @select-user="otherUser = $event; display = 'PAYREQUEST'" v-if="display == 'ONLINE'" />
     </PushCard>
   </div>
 </template>
@@ -111,28 +124,30 @@ export default {
     Profile,
     Direction,
     PayRequest,
-    OnlineUsers
+    OnlineUsers,
   },
-  data: function() {
+  data: function () {
     return {
       env: process.env,
       mode: "SEND",
       lang: {
         SEND: {
           paymentDisplay: "Send",
-          tofrom: "to"
+          tofrom: "to",
         },
         REQUEST: {
           paymentDisplay: "Request",
-          tofrom: "from"
-        }
+          tofrom: "from",
+        },
       },
       amount: 0,
-      display: "PAYREQUEST" // PAYREQUEST, ONLINE
+      display: "PAYREQUEST", // PAYREQUEST, ONLINE
+      otherUser: {},
+      imgUrlStart: `${process.env.VUE_APP_API_URL}/user/profile/`
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
   methods: {
     setPaymentType(type) {
@@ -140,22 +155,22 @@ export default {
     },
     sendFufill() {
       this.$socket.client.emit("fufillRequest", {
-        payment: "5f7bdcafb771a4c6ff515550"
+        payment: "5f7bdcafb771a4c6ff515550",
       });
     },
     sendPayment() {
       this.$socket.client.emit("payment", {
         mode: "SEND",
         actor: "5f67e7fcf5731e102a0379ac",
-        amount: 51
+        amount: 51,
       });
-    }
+    },
   },
   sockets: {
     paymentResponse(data) {
       console.log(data);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -5,18 +5,18 @@
       <button
         class="payments__btn"
         :class="{ 'payments__btn--active': mode == 'SEND' }"
-        @click="$emit('updateMode', 'SEND')"
+        @click="$emit('updatemode', 'SEND')"
       >Send</button>
       <button
         class="payments__btn"
         :class="{ 'payments__btn--active': mode != 'SEND' }"
-        @click="$emit('updateMode', 'REQUEST')"
+        @click="$emit('updatemode', 'REQUEST')"
       >Request</button>
     </div>
 
     <p class="payments__transferStatue">
-      Transfer ${{ amount }} {{ lang[mode].tofrom }}
-      <strong>Jimmy Bo Jankins</strong>
+      Transfer {{ lang[mode].tofrom }}
+      <strong>{{ otherUser.fullname }}</strong>
     </p>
     <div
       class="payments__amount"
@@ -50,7 +50,8 @@ export default {
   props: {
     mode: String,
     lang: Object,
-    amount: Number
+    amount: Number,
+    otherUser: Object
   },
   methods: {
     paymentInput(e) {
