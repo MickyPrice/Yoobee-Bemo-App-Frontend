@@ -2,14 +2,17 @@ module.exports = {
   state: () => ({
     channels: {},
     currentChannel: null,
+    status: 0
   }),
   mutations: {
     UPDATE_CHANNEL(state, channel) {
-      state.channels[channel.id] = channel.data;
+      state.channels[channel.id] = channel.data
+      state.status = 1
     },
     INIT_CHANNELS(state, channels) {
-      state.channels = channels;
-    },
+      state.channels = channels
+      state.status = 1
+    }
   },
   actions: {
     /**
