@@ -102,6 +102,7 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    font-size: 12px;
     &:before {
       content: "@";
       margin-right: 2px;

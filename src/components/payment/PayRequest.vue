@@ -14,7 +14,7 @@
       >Request</button>
     </div>
 
-    <p class="payments__transferStatue">
+    <p class="payments__transferStatus" v-if="otherUser">
       Transfer {{ lang[mode].tofrom }}
       <strong>{{ otherUser.fullname }}</strong>
     </p>
@@ -28,13 +28,23 @@
       tabindex="0"
       @keyup="paymentInput"
     ></div>
-    <FormInput type="text" name="message" placeholder="Message..." />
-    <BtnFull v-if="amount > 0" class="payments__send">
-      <template slot="btn-title">{{ lang[mode].paymentDisplay }} Payment</template>
+    <FormInput type="text" name="message" placeholder="💬 Message..." />
+
+    <BtnFull v-if="mode == 'SEND'" class="payments__send" :class="{ 'payments__send--disabled': !checkCash || (!otherUser) }">
+      <template slot="btn-title">Send Payment</template>
     </BtnFull>
-    <BtnFull v-else class="payments__send payments__send--disabled">
-      <template slot="btn-title">{{ lang[mode].paymentDisplay }} Payment</template>
-    </BtnFull>
+    <div class="payments__buttons" v-if="mode == 'REQUEST'">
+      <button
+        class="payments__btn payments__btn--purple"
+        :class="{ 'payments__btn--purple_disabled': !checkCash || (!otherUser) }"
+        @click="$emit('submit', 'REQUEST')"
+      >Request</button>
+      <button
+        class="payments__btn payments__btn--purple"
+        :class="{ 'payments__btn--purple_disabled': !checkCash }"
+        @click="$emit('submit', 'GENERATEQR')"
+      >QR Code</button>
+    </div>
   </div>
 </template>
 
@@ -47,10 +57,12 @@ export default {
     BtnFull,
     FormInput
   },
+  data: function() {
+    return {amount: Number}
+  },
   props: {
     mode: String,
     lang: Object,
-    amount: Number,
     otherUser: Object
   },
   methods: {
@@ -64,6 +76,18 @@ export default {
         this.amount = (0).toFixed(2);
       }
     }
+  },
+  computed: {
+    cashAmount() {
+      if (this.amount) {
+        return this.amount;
+      } else {
+        return 0;
+      }
+    },
+    checkCash() {
+      return (this.amount > 0);
+    }
   }
 };
 </script>
@@ -76,14 +100,21 @@ export default {
     display: flex;
     border-radius: $corners-10;
     overflow: hidden;
+    margin-top: $margin-20;
     height: 50px;
+    .payments__btn:first-child {
+      border-right: 1px solid #fff;
+    }
+    .payments__btn:last-child {
+      border-left: 1px solid #fff;
+    }
   }
   &__btn {
     width: 50%;
     display: block;
     background: #d8d8d8;
     color: $white-100;
-    font-size: 20px;
+    font-size: 18px;
     font-family: $font-noto;
     padding: 10px 5px;
     border: none;
@@ -91,9 +122,15 @@ export default {
     &--active {
       background-color: $green-300;
     }
+    &--purple {
+      background-color: $purple-500;
+      &_disabled {
+        background-color: lighten($purple-500, 20%);
+      }
+    }
   }
 
-  &__transferStatue {
+  &__transferStatus {
     text-align: center;
     margin-top: $margin-20;
     font-family: $font-aileron;
@@ -121,6 +158,8 @@ export default {
   }
   &__send {
     background-color: $purple-500;
+    font-size: 18px;
+    font-weight: 400;
     &--disabled {
       background-color: lighten($purple-500, 20%);
     }

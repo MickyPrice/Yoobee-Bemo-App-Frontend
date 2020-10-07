@@ -46,7 +46,8 @@
           </svg>
         </Direction>
         <div @click="display = 'ONLINE'">
-          <Profile :clickable="true" :source="imgUrlStart + otherUser._id" />
+          <Profile v-if="otherUser != null" :source="imgUrlStart + destination._id" />
+          <Profile v-else />
         </div>
       </div>
 
@@ -56,7 +57,7 @@
         :mode="mode"
         :lang="lang"
         v-on:updatemode="mode = $event"
-        :otherUser="otherUser"
+        :otherUser="destination"
       />
       <OnlineUsers @select-user="otherUser = $event; display = 'PAYREQUEST'" v-if="display == 'ONLINE'" />
     </PushCard>
@@ -142,12 +143,18 @@ export default {
       },
       amount: 0,
       display: "PAYREQUEST", // PAYREQUEST, ONLINE
-      otherUser: {},
+      otherUser: null,
       imgUrlStart: `${process.env.VUE_APP_API_URL}/user/profile/`
     };
   },
   computed: {
     ...mapState(["user"]),
+    destination() {
+      if(this.otherUser != {}) {
+        return this.otherUser;
+      }
+      return undefined;
+    }
   },
   methods: {
     setPaymentType(type) {
