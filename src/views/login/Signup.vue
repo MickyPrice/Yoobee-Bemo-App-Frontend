@@ -62,21 +62,48 @@ export default {
   },
   methods: {
     checkSignup() {
+      console.log("checking form");
+      console.log(this.signupObject);
       try {
-        // if(){
-        //   throw new error("Phone number missing");
-        // }
-        signup(signupObject).then((res) => {
-          console.log(res);
-        });
-      } catch {
-        (error) => {
-          console.log(error);
-        };
+        // User Name
+        if (this.signupObject.username === "") {
+          throw "Username error, Missing";
+        }
+        if (/\s/.test(this.signupObject.username)) {
+          throw "Username error, no spaces";
+        }
+        if (this.signupObject.email === "") {
+          //Email
+          throw "Email missing";
+        }
+
+        //not working ******************
+        if (
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+            !this.signupObject.email
+          )
+        ) {
+          throw "Email Error";
+        }
+        //Phone number
+        if (this.signupObject.phone === "") {
+          throw "Phone number missing";
+        }
+
+        //not working ******************
+        if (/^[0-9]+$/.test(!this.signupObject.phone)) {
+          throw "Phone error, letter found";
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
   },
 };
+
+// signup(signupObject).then((res) => {
+//   console.log(res);
+// });
 </script>
 
 <style scoped lang="scss">
