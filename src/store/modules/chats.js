@@ -1,3 +1,5 @@
+let Vue = require('vue').default
+
 module.exports = {
   state: () => ({
     channels: {},
@@ -6,7 +8,8 @@ module.exports = {
   }),
   mutations: {
     UPDATE_CHANNEL(state, channel) {
-      state.channels[channel.id] = channel.data
+      // state.channels[channel.id] = channel.data
+      Vue.set(state.channels, channel.id, channel.data);
     },
     INIT_CHANNELS(state, channels) {
       state.channels = channels

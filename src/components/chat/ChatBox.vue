@@ -49,6 +49,7 @@
           role="textbox"
           style="outline: none; white-space: pre-wrap; overflow-wrap: break-word; -webkit-user-modify: read-write-plaintext-only;"
           @input="typing"
+          @keydown="keyPress"
         ></div>
       </div>
       <button class="submit" :disabled="string == ''">
@@ -71,6 +72,8 @@
 </template>
 
 <script>
+import { isMobile } from 'mobile-device-detect';
+
 export default {
   data() {
     return {
@@ -84,10 +87,18 @@ export default {
     },
     checkForm() {
       if (this.string != "") {
-        this.$emit("newPost", this.string);
+        this.$emit("newPost", this.string.trim());
         this.$refs.textbox.innerText = "";
       }
     },
+    keyPress(event) {
+      if(event.key == "Enter" && !isMobile) {
+        if(!event.shiftKey){
+          event.preventDefault();
+          this.checkForm();
+        }
+      }
+    }
   },
 };
 </script>

@@ -2,6 +2,9 @@
   <div
     :class="currentUser ? 'msg-container__stack' : 'msg-container__stack-other'"
   >
+    <div v-if="currentUser()" class="msg-container__stack-other--profile">
+      <ProfilePic class="small" imagelink="https://images.unsplash.com/photo-1588337598656-f2b0693deb48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"> </ProfilePic>
+    </div>
     <Message
       v-for="(message, $index) in messageGroup"
       :key="$index"
@@ -15,6 +18,7 @@
 <script>
 import Message from "./Message.vue";
 import { mapState } from "vuex";
+import ProfilePic from "../profile/ProfilePic.vue";
 
 export default {
   computed: {
@@ -27,6 +31,7 @@ export default {
   },
   components: {
     Message,
+    ProfilePic
   },
   methods: {
     currentUser() {

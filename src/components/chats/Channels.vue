@@ -1,7 +1,7 @@
 <template>
   <section class="channels" v-if="user.status == 1">
     <Channel
-      v-for="(channel, index) in orderByDate(chats.channels)"
+      v-for="(channel, index) in currrentChannel"
       :key="index"
       :currentUser="user.data._id"
       :channelKey="channel.key"
@@ -24,16 +24,21 @@ Vue.use(Skeleton);
 export default {
   computed: {
     ...mapState(["chats", "user"]),
-  },
-  methods: {
-    orderByDate(dict) {
-      let array = Object.keys(dict).map(function(key) {
-        return { ...dict[key], key };
+    currrentChannel: function() {
+      let channels = this.chats.channels;
+      let array = Object.keys(channels).map(function(key) {
+        return { ...channels[key], key };
       });
 
-      return array.sort(
-        (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
-      ).reverse();
+      return array
+        .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+        .reverse();
+      // return this.chats.channels
+    },
+  },
+  watch: {
+    chats(newValue, oldValue) {
+      console.log(newValue + "yes" + oldValue);
     },
   },
   components: {
