@@ -131,11 +131,6 @@ export default {
     setPaymentType(type) {
       this.mode = type.toUpperCase();
     },
-    sendFufill(paymentId) {
-      this.$socket.client.emit("fufillRequest", {
-        payment: paymentId,
-      });
-    },
     sendPayment() {
       try {
         if (!this.cashAmount > 0) {
@@ -144,7 +139,7 @@ export default {
         if (!this.destination) {
           throw("You're missing a destination user");
         }
-        this.$socket.client.emit("payment", {
+        this.$socket.client.emit("instantPayment", {
           mode: "SEND",
           actor: this.destination._id,
           amount: this.cashAmount,
@@ -168,10 +163,13 @@ export default {
   sockets: {
     paymentResponse(data) {
       console.log(data);
+
       this.sendFufill(data);
     },
     paymentFufilled(data) {
       this.$router.push(`/chat/${data.callback}`);
+      console.log(data.callback);
+      
     }
   },
 };
