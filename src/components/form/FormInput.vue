@@ -1,5 +1,5 @@
 <template>
-  <input class="text__base--heavy" :type="type" :name="name" :placeholder="placeholder" aria-label="Search for friends"/>
+  <input :type="type" :name="name" :placeholder="placeholder" @keydown="$emit('input-keydown', $event)" @keyup="$emit('input-keyup', $event)"/>
 </template>
 
 <script>
@@ -21,6 +21,9 @@ input {
   outline: none;
   overflow: hidden;
   padding: 20px;
+  font-weight: 400;
+  font-family: $font-noto;
+  font-size: 16px;
   &[type="text"] {
     padding-left: $padding-20;
   }
