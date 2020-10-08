@@ -4,7 +4,21 @@
       <router-link :to="{ name: 'landing' }">
         <Bibutton>
           <slot slot="icon">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>          </slot>
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+          </slot>
         </Bibutton>
       </router-link>
 
@@ -17,13 +31,19 @@
       <slot slot="PushCardTitle">Get Started</slot>
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
       <template slot="SlotComponents">
+        <p class="errorHandler text__sm">{{ error }}</p>
         <form @submit.prevent="checkSignup">
-          <TextBoxForm placeholder="Full Name" v-model="signupObject.fullname" />
-          <TextBoxForm placeholder="User Name" v-model="signupObject.username" />
-          <PhoneNumberBoxForm v-model="signupObject.phone" >
+          <TextBoxForm
+            placeholder="Full Name"
+            v-model="signupObject.fullname"
+          />
+          <TextBoxForm
+            placeholder="User Name"
+            v-model="signupObject.username"
+          />
+          <PhoneNumberBoxForm v-model="signupObject.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
-          <p>{{signupObject.phone}}</p>
           <SubmitButton />
         </form>
       </template>
@@ -39,7 +59,7 @@ import PhoneNumberBoxForm from "@/components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 import Bibutton from "@/components/buttons/BiButton.vue";
 
-// import { signup } from "@/services/api/auth.js"
+import { signup } from "@/services/api/auth.js";
 
 export default {
   components: {
@@ -51,6 +71,8 @@ export default {
   },
   data: function () {
     return {
+      error: "",
+
       signupObject: {
         fullname: "",
         username: "",
@@ -60,41 +82,43 @@ export default {
   },
 
   methods: {
-   
     checkSignup() {
-      console.log("checking form");
-      console.log(this.signupObject);
+      this.error = "";
       try {
         //Full Name
-        if(this.signupObject.fullname === ""){
-          throw "Full Name error, Missing Full Name"
+        if (this.signupObject.fullname === "") {
+          throw "Missing Full Name";
         }
         // User Name
-        if (this.signupObject.username === "") {
-          throw "Username error, Missing User Name";
-        }
-        if (/\s/.test(this.signupObject.username)) {
-          throw "Username error, invalid text";
+        else if (this.signupObject.username === "") {
+          throw "Missing Username";
+        } else if (/[A-Z]/.test(this.signupObject.username)) {
+          throw "Username error, No Uppercase in Username";
+        } else if (/\W/g.test(this.signupObject.username)) {
+          throw "Username error, Only A-Z 0-9";
         }
         //Phone number
-        if (this.signupObject.phone === "") {
-          throw "Phone number missing";
-        }
-
-        //not working ******************
-        if (/^[0-9]+$/.test(!this.signupObject.phone)) {
-          throw "Phone error, letter found";
+        else if (this.signupObject.phone === "") {
+          throw "Cellphone Number missing";
+        } else if (this.signupObject.phone.length < 8) {
+          throw "Cellphone Number too short";
+        } else {
+          console.log(this.signupObject);
+          signup(this.signupObject).then((res) => {
+            console.log(res);
+            this.$router.push({
+              name: "verify",
+              params: { phone: this.signupObject.phone },
+            });
+          });
         }
       } catch (err) {
         console.log(err);
+        this.error = err;
       }
     },
   },
 };
-
-// signup(signupObject).then((res) => {
-//   console.log(res);
-// });
 </script>
 
 <style scoped lang="scss">
@@ -115,13 +139,16 @@ export default {
       margin-top: -10px;
     }
   }
-  form {
-    margin-top: $margin-30;
-  }
-  svg{
+
+  svg {
     height: 24px;
     width: 24px;
     color: $purple-500;
+  }
+
+  .errorHandler {
+    color: $red-300;
+    margin-top: 15px;
   }
 }
 </style>
