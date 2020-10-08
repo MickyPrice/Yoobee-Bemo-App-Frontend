@@ -134,9 +134,7 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 .signup {
-  .overflow{
-    overflow-y: scroll;
-  }
+ 
   &__top {
     padding: $pad-bor;
   }
