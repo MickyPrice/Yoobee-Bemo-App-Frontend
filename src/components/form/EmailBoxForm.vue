@@ -25,7 +25,7 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
-  margin-top: 5%;
+  margin: 2% 0;
 
   background-color: $white-300;
   border-radius: $corners-10;

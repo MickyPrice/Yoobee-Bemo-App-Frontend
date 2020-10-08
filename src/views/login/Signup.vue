@@ -30,9 +30,9 @@
     <PushCard>
       <slot slot="PushCardTitle">Get Started</slot>
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
-      <template slot="SlotComponents">
+      <template slot="SlotComponents" class="template">
         <p class="errorHandler text__sm">{{ error }}</p>
-        <form @submit.prevent="checkSignup">
+        <form @submit.prevent="checkSignup" >
           <TextBoxForm
             placeholder="Full Name"
             v-model="signupObject.fullname"
@@ -41,6 +41,10 @@
             placeholder="User Name"
             v-model="signupObject.username"
           />
+          <EmailBoxForm 
+            v-model="signupObject.email"
+          > 
+          </EmailBoxForm>
           <PhoneNumberBoxForm v-model="signupObject.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
@@ -55,6 +59,7 @@
 <script>
 import PushCard from "@/components/layout/PushCard.vue";
 import TextBoxForm from "@/components/form/TextBoxForm.vue";
+import EmailBoxForm from "@/components/form/EmailBoxForm.vue";
 import PhoneNumberBoxForm from "@/components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 import Bibutton from "@/components/buttons/BiButton.vue";
@@ -65,6 +70,7 @@ export default {
   components: {
     PushCard,
     TextBoxForm,
+    EmailBoxForm,
     PhoneNumberBoxForm,
     SubmitButton,
     Bibutton,
@@ -76,6 +82,7 @@ export default {
       signupObject: {
         fullname: "",
         username: "",
+        email: "",
         phone: "",
       },
     };
@@ -97,13 +104,16 @@ export default {
         } else if (/\W/g.test(this.signupObject.username)) {
           throw "Username error, Only A-Z 0-9";
         }
+        //Email
+        else if(this.signupObject.email === ""){
+          throw "Missing Email";
+        }
         //Phone number
         else if (this.signupObject.phone === "") {
           throw "Cellphone Number missing";
         } else if (this.signupObject.phone.length < 8) {
           throw "Cellphone Number too short";
         } else {
-          console.log(this.signupObject);
           signup(this.signupObject).then((res) => {
             console.log(res);
             this.$router.push({
@@ -124,6 +134,9 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 .signup {
+  .overflow{
+    overflow-y: scroll;
+  }
   &__top {
     padding: $pad-bor;
   }

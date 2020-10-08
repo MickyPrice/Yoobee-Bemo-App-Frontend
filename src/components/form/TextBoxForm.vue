@@ -26,7 +26,7 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
-  margin-top: 10px;
+  margin: 2% 0;
   background-color: $white-300;
   border-radius: $corners-10;
   border: none;
@@ -35,7 +35,7 @@ input {
     padding-left: $padding-20;
   }
   &:active {
-    border: 2px solid $purple-100;
+    outline: 2px solid $purple-100;
   }
 }
 </style>

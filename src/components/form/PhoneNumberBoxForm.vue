@@ -35,13 +35,13 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 div {
-  margin: 5% 0;
+    margin: 2% 0;
+
   label {
     color: $purple-100;
   }
   input {
     width: 100%;
-    margin-top: $margin-5;
     height: $height-srch;
     background-color: $white-300;
     border-radius: $corners-10;
