@@ -68,49 +68,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "@/scss/_variables";
-
-.payments {
-  height: 100vh;
-  background-color: $purple-500;
-
-  &__title {
-    color: $white-100;
-    text-align: center;
-    margin-top: $margin-20;
-  }
-
-  &__push-card {
-    height: 500px;
-    padding: $padding-40;
-  }
-  &__actors {
-    display: flex;
-    justify-content: center;
-    height: 120px;
-    margin-top: -$padding-40;
-    transform: translateY(-50%);
-    align-items: center;
-  }
-  &__direction {
-    flex-shrink: 0;
-    height: 30px;
-    width: 30px;
-    margin: 0 15px;
-    position: relative;
-    color: $red-300;
-    transition: color 0.4s linear,
-      transform 0.4s cubic-bezier(0, 1.8, 0.99, 0.89);
-    &--flipped {
-      transform: rotate(540deg);
-      color: $green-300;
-    }
-  }
-}
-</style>
-
-
 <script>
 import BackButton from "@/components/buttons/BiButton";
 import Layout from "@/components/layout/Layout";
@@ -174,22 +131,36 @@ export default {
     setPaymentType(type) {
       this.mode = type.toUpperCase();
     },
-    sendFufill() {
+    sendFufill(paymentId) {
       this.$socket.client.emit("fufillRequest", {
-        payment: "5f7bdcafb771a4c6ff515550",
+        payment: paymentId,
       });
     },
     sendPayment() {
-      this.$socket.client.emit("payment", {
-        mode: "SEND",
-        actor: "5f67e7fcf5731e102a0379ac",
-        amount: 51,
-      });
+      try {
+        if (!this.cashAmount > 0) {
+          throw("You must send more than $1.00");
+        }
+        if (!this.destination) {
+          throw("You're missing a destination user");
+        }
+        this.$socket.client.emit("payment", {
+          mode: "SEND",
+          actor: this.destination._id,
+          amount: this.cashAmount,
+        });
+      } catch (e) {
+        alert(e);
+      }
+
     },
     paymentSubmit(e) {
       if(!e.ignored) {
         if(e.event == "GENERATEQR") {
          this.qrcodeOpened = true;
+        }
+        if(e.event == "SEND"  ) {
+          this.sendPayment();
         }
       }
     }
@@ -197,8 +168,56 @@ export default {
   sockets: {
     paymentResponse(data) {
       console.log(data);
+      this.sendFufill(data);
     },
+    paymentFufilled(data) {
+      this.$router.push(`/chat/${data.callback}`);
+    }
   },
 };
 </script>
 
+
+
+
+<style lang="scss" scoped>
+@import "@/scss/_variables";
+
+.payments {
+  height: 100vh;
+  background-color: $purple-500;
+
+  &__title {
+    color: $white-100;
+    text-align: center;
+    margin-top: $margin-20;
+  }
+
+  &__push-card {
+    height: 500px;
+    padding: $padding-40;
+  }
+  &__actors {
+    display: flex;
+    justify-content: center;
+    height: 120px;
+    margin-top: -$padding-40;
+    transform: translateY(-50%);
+    align-items: center;
+  }
+  &__direction {
+    flex-shrink: 0;
+    height: 30px;
+    width: 30px;
+    margin: 0 15px;
+    position: relative;
+    color: $red-300;
+    transition: color 0.4s linear,
+      transform 0.4s cubic-bezier(0, 1.8, 0.99, 0.89);
+    &--flipped {
+      transform: rotate(540deg);
+      color: $green-300;
+    }
+  }
+}
+</style>
