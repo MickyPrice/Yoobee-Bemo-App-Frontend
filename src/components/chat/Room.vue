@@ -122,10 +122,12 @@ export default {
     padding-right: 5%;
     padding-left: 5%;
     padding-top: 20px;
+    display: flex;
+    align-items: flex-end;
 
     .msg-container {
       width: 100%;
-      height: 100%;
+      max-height: 100%;
       overflow-y: scroll;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */

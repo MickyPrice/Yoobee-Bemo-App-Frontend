@@ -125,8 +125,8 @@ export default {
       padding: 15px 15px 15px 20px;
       border: none;
       outline: none;
-      border-radius: 50px 0 0 50px;
-      max-height: 200px;
+      border-radius: 22px 0 0 22px;
+      max-height: 150px;
       overflow-y: scroll;
       background-color: $white-300;
     }
@@ -142,7 +142,7 @@ export default {
       height: auto;
       width: 20%;
       background-color: $white-300;
-      border-radius: 0 50px 50px 0;
+      border-radius: 0 22px 22px 0;
       border: none;
       outline: none;
       svg {

@@ -21,9 +21,17 @@
           </slot>
         </Bibutton>
       </router-link>
-      <ProfilePic class="chat__top--small" :imagelink="imagelink2">
-        <slot slot="profileName">{{ name }}</slot>
-      </ProfilePic>
+      <div class="chat__users">
+        <ChatPic
+          v-for="(user, userId, num) in users"
+          :key="userId"
+          :overlap="num"
+          :imagelink="api.VUE_APP_API_URL + '/user/profile/' + userId"
+        />
+        <div class="chat__name">
+          {{ name }}
+        </div>
+      </div>
     </div>
     <div class="chat__bottom">
       <Room></Room>
@@ -33,29 +41,54 @@
 
 <script>
 import Bibutton from "@/components/buttons/BiButton.vue";
-import ProfilePic from "@/components/profile/ProfilePic.vue";
-// import ChatPushCard from "@/components/chats/ChatPushCard.vue";
+import ChatPic from "@/components/profile/ChatPic.vue";
 import Room from "@/components/chat/Room.vue";
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
     Bibutton,
-    ProfilePic,
+    ChatPic,
     Room,
   },
   data: function() {
     return {
-      name: "",
+      api: process.env,
       channelId: this.$route.params.channelId,
-      imagelink1:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-      imagelink2:
-        "https://images.unsplash.com/photo-1538960792157-b2e2b62d1f3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
     };
   },
   computed: {
-    ...mapState(["chats"]),
+    ...mapState(["chats", "user"]),
+    name() {
+      if (this.user.status == 1) {
+        let members = this.chats.channels[this.channelId].members;
+        if (members) {
+          let users = Object.keys(members);
+          return users
+            .map((id) => {
+              if (users > 1) {
+                return members[id].fullname.split(" ")[0];
+              } else {
+                return members[id].fullname;
+              }
+            })
+            .join(", ");
+        } else {
+          ("Just Your");
+        }
+      }
+      return "Loading...";
+    },
+    users() {
+      if (this.chats.status == 1 && this.user.status == 1) {
+        const members = this.chats.channels[this.channelId].members;
+        delete members[this.user.data._id];
+        if (this.chats.status == 1) {
+          return members;
+        }
+      }
+      return null;
+    },
   },
   methods: {
     ...mapActions(["joinChannel", "leaveChannel"]),
@@ -76,7 +109,6 @@ export default {
   background-color: $white-300;
   width: 100vw;
   height: 100vh;
-
   &__top {
     height: 20%;
     margin: 0 40px;
@@ -92,6 +124,18 @@ export default {
   &__bottom {
     height: 80%;
     min-height: 350px;
+  }
+  &__users {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  &__name {
+    padding-top: 5px;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>
