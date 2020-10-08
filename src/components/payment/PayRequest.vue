@@ -6,12 +6,16 @@
         class="payments__btn"
         :class="{ 'payments__btn--active': mode == 'SEND' }"
         @click="$emit('updatemode', 'SEND')"
-      >Send</button>
+      >
+        Send
+      </button>
       <button
         class="payments__btn"
         :class="{ 'payments__btn--active': mode != 'SEND' }"
         @click="$emit('updatemode', 'REQUEST')"
-      >Request</button>
+      >
+        Request
+      </button>
     </div>
 
     <p class="payments__transferStatus" v-if="otherUser">
@@ -30,20 +34,29 @@
     ></div>
     <FormInput type="text" name="message" placeholder="💬 Message..." />
 
-    <BtnFull v-if="mode == 'SEND'" class="payments__send" :class="{ 'payments__send--disabled': !checkCash || (!otherUser) }">
+    <BtnFull
+      v-if="mode == 'SEND'"
+      class="payments__send"
+      :class="{ 'payments__send--disabled': !checkCash || !otherUser }"
+      @click="$emit('submit', {event: 'SEND', ignored: !checkCash || !otherUser})"
+    >
       <template slot="btn-title">Send Payment</template>
     </BtnFull>
     <div class="payments__buttons" v-if="mode == 'REQUEST'">
       <button
         class="payments__btn payments__btn--purple"
-        :class="{ 'payments__btn--purple_disabled': !checkCash || (!otherUser) }"
-        @click="$emit('submit', 'REQUEST')"
-      >Request</button>
+        :class="{ 'payments__btn--purple_disabled': !checkCash || !otherUser }"
+        @click="$emit('submit', {event: 'REQUEST', ignored: !checkCash || !otherUser})"
+      >
+        Request
+      </button>
       <button
         class="payments__btn payments__btn--purple"
         :class="{ 'payments__btn--purple_disabled': !checkCash }"
-        @click="$emit('submit', 'GENERATEQR')"
-      >QR Code</button>
+        @click="$emit('submit', {event: 'GENERATEQR', ignored: !checkCash})"
+      >
+        QR Code
+      </button>
     </div>
   </div>
 </template>
@@ -55,27 +68,29 @@ import FormInput from "@/components/form/FormInput";
 export default {
   components: {
     BtnFull,
-    FormInput
+    FormInput,
   },
-  data: function() {
-    return {amount: Number}
+  data: function () {
+    return { amount: 0.0 };
   },
   props: {
     mode: String,
     lang: Object,
-    otherUser: Object
+    otherUser: Object,
   },
   methods: {
     paymentInput(e) {
       if (!isNaN(e.target.innerText)) {
         this.amount = e.target.innerText
-          ? parseInt(e.target.innerText).toFixed(2)
-          : (0).toFixed(2);
+          ? parseInt(e.target.innerText * 100)
+          : 0;
+          console.log(this.amount);
       } else {
         e.target.innerText = "";
-        this.amount = (0).toFixed(2);
+        this.amount = 0;
       }
-    }
+      this.$emit('update:cash', this.amount)
+    },
   },
   computed: {
     cashAmount() {
@@ -86,9 +101,9 @@ export default {
       }
     },
     checkCash() {
-      return (this.amount > 0);
-    }
-  }
+      return this.amount > 0;
+    },
+  },
 };
 </script>
 
@@ -102,6 +117,7 @@ export default {
     overflow: hidden;
     margin-top: $margin-20;
     height: 50px;
+    align-content: center;
     .payments__btn:first-child {
       border-right: 1px solid #fff;
     }

@@ -46,7 +46,7 @@
           </svg>
         </Direction>
         <div @click="display = 'ONLINE'">
-          <Profile v-if="otherUser != null" :source="imgUrlStart + destination._id" />
+          <Profile v-if="otherUser" :source="imgUrlStart + destination._id" />
           <Profile v-else />
         </div>
       </div>
@@ -56,11 +56,15 @@
         v-if="display == 'PAYREQUEST'"
         :mode="mode"
         :lang="lang"
-        v-on:updatemode="mode = $event"
         :otherUser="destination"
+        v-on:updatemode="mode = $event"
+        v-on:submit="paymentSubmit"
+        v-on:update:cash="amount = $event"
       />
       <OnlineUsers @select-user="otherUser = $event; display = 'PAYREQUEST'" v-if="display == 'ONLINE'" />
     </PushCard>
+
+    <QRCode v-if="qrcodeOpened" @close-qr="qrcodeOpened = false" :amount="cashAmount" />
   </div>
 </template>
 
@@ -115,6 +119,7 @@ import Profile from "@/components/profile/Photo";
 import Direction from "@/components/profile/Direction";
 import PayRequest from "@/components/payment/PayRequest";
 import OnlineUsers from "@/components/payment/OnlineUsers";
+import QRCode from "@/components/payment/QRCode";
 import { mapState } from "vuex";
 
 export default {
@@ -126,6 +131,7 @@ export default {
     Direction,
     PayRequest,
     OnlineUsers,
+    QRCode
   },
   data: function () {
     return {
@@ -141,6 +147,7 @@ export default {
           tofrom: "from",
         },
       },
+      qrcodeOpened: false,
       amount: 0,
       display: "PAYREQUEST", // PAYREQUEST, ONLINE
       otherUser: null,
@@ -154,6 +161,13 @@ export default {
         return this.otherUser;
       }
       return undefined;
+    },
+    cashAmount() {
+      if(!isNaN(this.amount)) {
+        return this.amount;
+      } else {
+        return 0;
+      }
     }
   },
   methods: {
@@ -172,6 +186,13 @@ export default {
         amount: 51,
       });
     },
+    paymentSubmit(e) {
+      if(!e.ignored) {
+        if(e.event == "GENERATEQR") {
+         this.qrcodeOpened = true;
+        }
+      }
+    }
   },
   sockets: {
     paymentResponse(data) {
