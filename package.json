@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-chat-scroll": "^1.4.0",
     "vue-infinite-loading": "^2.4.5",
+    "vue-qrcode": "^0.3.3",
     "vue-router": "^3.2.0",
     "vue-socket.io-extended": "^4.0.4",
     "vuex": "^3.5.1"
