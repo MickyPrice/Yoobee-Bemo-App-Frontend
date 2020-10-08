@@ -19,52 +19,55 @@
       </div>
       <span class="friends__name">Create Chat</span>
     </button>
-    <button v-for="(user, index) in friends" :key="index" class="friends__item">
-      <img class="friends__image" :src="user.image" aria-hidden="true" />
-      <span class="friends__name">{{ user.name }}</span>
+    <button
+      v-for="(user, index) in friends"
+      :key="index"
+      class="friends__item"
+      @click="loadDirectChannel(user)"
+    >
+      <img
+        class="friends__image"
+        :src="api.VUE_APP_API_URL + '/user/profile/' + user._id"
+        aria-hidden="true"
+      />
+      <span class="friends__name">@{{ user.username }}</span>
     </button>
   </section>
 </template>
 
-
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: {
+    ...mapState(["users", "user"]),
+    friends() {
+      if (this.user.status == 1) {
+        let activeUsers = this.users.active;
+        delete activeUsers[this.user.data._id];
+        return activeUsers;
+      } else {
+        return []
+      }
+    },
+  },
   data: function() {
     return {
-      friends: [
-        {
-          name: "Tom Hendrikz",
-          image:
-            "https://images.unsplash.com/photo-1539605480396-a61f99da1041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-        },
-        {
-          name: "Michael Price",
-          image:
-            "https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=582&q=80"
-        },
-        {
-          name: "Oliver Griffith-Jones",
-          image:
-            "https://images.unsplash.com/photo-1584999734482-0361aecad844?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
-        },
-        {
-          name: "Tom Hendrikz",
-          image:
-            "https://images.unsplash.com/photo-1539605480396-a61f99da1041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-        },
-        {
-          name: "Michael Price",
-          image:
-            "https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=582&q=80"
-        },
-        {
-          name: "Oliver Griffith-Jones",
-          image:
-            "https://images.unsplash.com/photo-1584999734482-0361aecad844?ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
-        }
-      ]
+      api: process.env,
     };
-  }
+  },
+  methods: {
+    loadDirectChannel(user) {
+      this.$socket.client.emit("getDirectChannel", user._id);
+    },
+  },
+  sockets: {
+    openChannel(channel) {
+      this.$router.push({
+        path: `/chat/${channel}`,
+      });
+    },
+  },
 };
 </script>
 
@@ -79,7 +82,8 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   flex-basis: content;
   flex-shrink: 0;
   align-items: flex-start;

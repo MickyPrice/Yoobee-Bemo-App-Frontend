@@ -1,27 +1,50 @@
 <template>
-  <section class="channels">
-    <!-- <Channel />
-        <Channel :unread="true" />
-        <Channel />
-        <Channel />
-        <Channel />
-        <Channel /> -->
-
-    <Channel v-for="(channel, index) in chats.channels" :key="index" :currentUser="user._id" :channelKey="index" :channel="channel"/>
+  <section class="channels" v-if="user.status == 1">
+    <Channel
+      v-for="(channel, index) in currrentChannel"
+      :key="index"
+      :currentUser="user.data._id"
+      :channelKey="channel.key"
+      :channel="channel"
+      :unread="true"
+    />
+  </section>
+  <section class="channels" v-else>
+    <Skeleton :count="10" height="75px" :duration="5" />
   </section>
 </template>
 
 <script>
 import Channel from "@/components/chats/ChannelItem";
 import { mapState } from "vuex";
+import Vue from "vue";
+import { Skeleton } from "vue-loading-skeleton";
+Vue.use(Skeleton);
 
 export default {
   computed: {
     ...mapState(["chats", "user"]),
+    currrentChannel: function() {
+      let channels = this.chats.channels;
+      let array = Object.keys(channels).map(function(key) {
+        return { ...channels[key], key };
+      });
+
+      return array
+        .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+        .reverse();
+      // return this.chats.channels
+    },
+  },
+  watch: {
+    chats(newValue, oldValue) {
+      console.log(newValue + "yes" + oldValue);
+    },
   },
   components: {
     Channel,
-  }
+    Skeleton,
+  },
 };
 </script>
 

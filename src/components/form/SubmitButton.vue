@@ -16,7 +16,6 @@ input {
   height: $height-btn;
   border-radius: $corners-40;
   background-color: $purple-500;
-  // margin-top: $margin-30;
   color: $white-300;
   border: none;
   outline: none;

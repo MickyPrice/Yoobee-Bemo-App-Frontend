@@ -7,7 +7,7 @@ const repository = axios.create({
     timeout: 10000, // 10 second
     headers: {
         "Content-Type": "application/json",
-        // "Access-Control-Allow-Origin": "http://localhost:8080/"
+        // "Access-Control-Allow-Origin": "http://localhost:8080"
     }
 });
 
