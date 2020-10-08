@@ -59,18 +59,15 @@ export default {
     clear() {
       this.form.code = "";
     },
-    updateCode(updatedCode){
-      console.log(updatedCode)
-      if(this.form.code.length <= 7) {
-      this.form.code += updatedCode;
-      return;
+    updateCode(updatedCode) {
+      if (this.form.code.length <= 7) {
+        this.form.code += updatedCode;
+        return;
       }
-      console.log(this.form.code);
     },
     verifyUser() {
-      console.log(this.form);
       verify(this.form).then(() => {
-        this.$router.push("about");
+        this.$router.push("home");
       });
     },
   },

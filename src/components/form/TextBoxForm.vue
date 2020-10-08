@@ -3,12 +3,22 @@
     class="text__base--heavy"
     type="text"
     name="fname"
-    placeholder="Please Enter Name"
+    :value="value"
+    @input="updateDate($event.target.value)"
+    :placeholder="placeholder"
   />
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["value", "placeholder"],
+
+  methods: {
+    updateDate(value) {
+      this.$emit("input", value);
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -16,7 +26,7 @@ export default {};
 input {
   width: 100%;
   height: $height-btn;
-
+  margin-top: 10px;
   background-color: $white-300;
   border-radius: $corners-10;
   border: none;

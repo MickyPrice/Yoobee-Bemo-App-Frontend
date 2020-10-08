@@ -1,15 +1,14 @@
-import repository from './repository';
+import repository from "./repository";
 
-const END_POINT = '/auth';
+const END_POINT = "/auth";
 
-const login = ( request ) => repository.post(END_POINT + '/login', request);
+const signup = (request) => repository.post(END_POINT + "/signup", request);
 
-const logout = () => repository.get(END_POINT + '/logout');
+const login = (request) => repository.post(END_POINT + "/login", request);
 
-const verify = ( request ) => repository.post(END_POINT + '/login/verify', request);
+const logout = () => repository.get(END_POINT + "/logout");
 
-export {
-    login,
-    verify,
-    logout
-}
+const verify = (request) =>
+  repository.post(END_POINT + "/login/verify", request);
+
+export { signup, login, verify, logout };
