@@ -5,11 +5,16 @@
 </template>
 
 <script>
+
+
 export default {
   sockets: {
     connect() {
       console.log("socket connected");
     },
+    error(err) {
+      alert("AN ERROR OCCURRED ", err);
+    }
   }
 };
 </script>
