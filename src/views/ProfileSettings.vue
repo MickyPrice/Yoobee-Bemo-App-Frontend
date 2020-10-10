@@ -53,13 +53,23 @@
           </form>
           <h2 class="settings__name text__lg">{{ user.data.fullname }}</h2>
           <p class="settings__username text__sm">@{{ user.data.username }}</p>
-          <Btn text="Reset Pin" v-if="user.data.pinCode" class="settings__pinbtn text__base" />
+          <Btn
+            text="Reset Pin"
+            v-if="user.data.pinCode"
+            class="settings__pinbtn text__base"
+          />
           <!-- <Btn text="Setup Pin" @click="setupPinModal = true" v-else class="settings__pinbtn text__base" /> -->
+          <Btn
+            text="Logout"
+            @click="logoutUser();$router.go(0)"
+            v-else
+            class="settings__pinbtn text__base"
+          />
 
           <!-- Form -->
           <label for="profileTag" class="settings__label">Profile Tag</label>
           <TextInput
-          disabled
+            disabled
             v-model="this.user.data.username"
             class="settings__input"
             id="profileTag"
@@ -67,7 +77,7 @@
 
           <label for="fullName" class="settings__label">Full Name</label>
           <TextInput
-          disabled
+            disabled
             v-model="this.user.data.fullname"
             class="settings__input"
             id="fullName"
@@ -91,12 +101,13 @@ import Modal from "@/components/modals/Modal.vue";
 
 import { uploadPhoto } from "@/services/api/profilePic.js";
 import { mapState } from "vuex";
+import { logout } from "@/services/api/auth.js";
 
 export default {
-  data: function() {
+  data: function () {
     return {
-      setupPinModal: false
-    }
+      setupPinModal: false,
+    };
   },
   components: {
     Navigation,
@@ -123,9 +134,12 @@ export default {
           alert(`Can't upload that photo. Sorry\n(${err})`);
         });
     },
-    openSetupPin: function() {
+    openSetupPin: function () {
       this.setupPinModal = true;
-    }
+    },
+    logoutUser() {
+      logout();
+    },
   },
 };
 </script>
