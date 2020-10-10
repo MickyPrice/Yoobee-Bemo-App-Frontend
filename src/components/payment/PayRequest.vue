@@ -84,7 +84,6 @@ export default {
         this.amount = e.target.innerText
           ? parseInt(e.target.innerText * 100)
           : 0;
-          console.log(this.amount);
       } else {
         e.target.innerText = "";
         this.amount = 0;

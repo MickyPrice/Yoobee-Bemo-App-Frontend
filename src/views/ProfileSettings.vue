@@ -54,11 +54,12 @@
           <h2 class="settings__name text__lg">{{ user.data.fullname }}</h2>
           <p class="settings__username text__sm">@{{ user.data.username }}</p>
           <Btn text="Reset Pin" v-if="user.data.pinCode" class="settings__pinbtn text__base" />
-          <Btn text="Setup Pin" @click="setupPinModal = true" v-else class="settings__pinbtn text__base" />
+          <!-- <Btn text="Setup Pin" @click="setupPinModal = true" v-else class="settings__pinbtn text__base" /> -->
 
           <!-- Form -->
           <label for="profileTag" class="settings__label">Profile Tag</label>
           <TextInput
+          disabled
             v-model="this.user.data.username"
             class="settings__input"
             id="profileTag"
@@ -66,6 +67,7 @@
 
           <label for="fullName" class="settings__label">Full Name</label>
           <TextInput
+          disabled
             v-model="this.user.data.fullname"
             class="settings__input"
             id="fullName"
