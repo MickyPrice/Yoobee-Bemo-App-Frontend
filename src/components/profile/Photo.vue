@@ -1,12 +1,17 @@
 <template>
   <div>
     <div v-if="source" class="profile">
-      <img :src="source" class="profile__img">
+      <img :src="source" class="profile__img" />
     </div>
     <div v-else class="profile profile--empty">
-      <svg width="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="24"
+        height="24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
-          d="M16 7v3-3zm0 3v3-3zm0 0h3-3zm0 0h-3 3zm-5-5a4 4 0 11-8 0 4 4 0 018 0v0zM1 18a6 6 0 1112 0v1H1v-1z"
+          d="M18 9v3-3zm0 3v3-3zm0 0h3-3zm0 0h-3 3zm-5-5a4 4 0 11-8 0 4 4 0 018 0v0zM3 20a6 6 0 1112 0v1H3v-1z"
           stroke="#E7E7E7"
           stroke-width="2"
           stroke-linecap="round"
@@ -21,7 +26,7 @@
 export default {
   props: {
     source: String,
-    clickable: Boolean
+    clickable: Boolean,
   },
 };
 </script>

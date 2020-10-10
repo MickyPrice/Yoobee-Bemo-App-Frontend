@@ -1,7 +1,7 @@
 <template>
   <div class="payments" v-if="user.status == 1">
     <Layout>
-      <BackButton>
+      <BackButton @clicked="$router.go(-1)">
         <slot slot="icon">
           <svg
             width="21"
@@ -61,10 +61,20 @@
         v-on:submit="paymentSubmit"
         v-on:update:cash="amount = $event"
       />
-      <OnlineUsers @select-user="otherUser = $event; display = 'PAYREQUEST'" v-if="display == 'ONLINE'" />
+      <OnlineUsers
+        @select-user="
+          otherUser = $event;
+          display = 'PAYREQUEST';
+        "
+        v-if="display == 'ONLINE'"
+      />
     </PushCard>
 
-    <QRCode v-if="qrcodeOpened" @close-qr="qrcodeOpened = false" :amount="cashAmount" />
+    <QRCode
+      v-if="qrcodeOpened"
+      @close-qr="qrcodeOpened = false"
+      :amount="cashAmount"
+    />
   </div>
 </template>
 
@@ -88,7 +98,7 @@ export default {
     Direction,
     PayRequest,
     OnlineUsers,
-    QRCode
+    QRCode,
   },
   data: function () {
     return {
@@ -108,36 +118,37 @@ export default {
       amount: 0,
       display: "PAYREQUEST", // PAYREQUEST, ONLINE
       otherUser: null,
-      imgUrlStart: `${process.env.VUE_APP_API_URL}/user/profile/`
+      imgUrlStart: `${process.env.VUE_APP_API_URL}/user/profile/`,
     };
   },
   computed: {
     ...mapState(["user"]),
     destination() {
-      if(this.otherUser != {}) {
+      if (this.otherUser != {}) {
         return this.otherUser;
       }
       return undefined;
     },
     cashAmount() {
-      if(!isNaN(this.amount)) {
+      if (!isNaN(this.amount)) {
         return this.amount;
       } else {
         return 0;
       }
-    }
+    },
   },
   methods: {
     setPaymentType(type) {
       this.mode = type.toUpperCase();
     },
     sendPayment() {
+      // Send money to someone
       try {
         if (!this.cashAmount > 0) {
-          throw("You must send more than $1.00");
+          throw "You must send more than $1.00";
         }
         if (!this.destination) {
-          throw("You're missing a destination user");
+          throw "You're missing a destination user";
         }
         this.$socket.client.emit("instantPayment", {
           mode: "SEND",
@@ -147,30 +158,38 @@ export default {
       } catch (e) {
         alert(e);
       }
-
+    },
+    sendPaymentRequest() {
+      // Request money from someone
+      this.$socket.client.emit("payment", {
+        mode: "REQUEST",
+        actor: this.destination._id,
+        amount: this.cashAmount,
+      });
     },
     paymentSubmit(e) {
-      if(!e.ignored) {
-        if(e.event == "GENERATEQR") {
-         this.qrcodeOpened = true;
+      // When the SEND PAYMENT, REQUEST or QR CODE button is pressed
+      if (!e.ignored) {
+        if (e.event == "GENERATEQR") {
+          this.qrcodeOpened = true;
         }
-        if(e.event == "SEND"  ) {
+        if (e.event == "SEND") {
           this.sendPayment();
         }
+        if (e.event == "REQUEST") {
+          this.sendPaymentRequest();
+        }
       }
-    }
+    },
   },
   sockets: {
     paymentResponse(data) {
       console.log(data);
-
-      this.sendFufill(data);
+      // TODO: Something...
     },
-    paymentFufilled(data) {
-      this.$router.push(`/chat/${data.callback}`);
-      console.log(data.callback);
-      
-    }
+    redirectToChat(data) {
+      this.$router.push(`/chat/${data.channel}`);
+    },
   },
 };
 </script>

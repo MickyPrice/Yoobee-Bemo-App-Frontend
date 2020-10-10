@@ -12,8 +12,9 @@ export default {
     connect() {
       console.log("socket connected");
     },
-    error(err) {
-      alert("AN ERROR OCCURRED ", err);
+    bemoerror(err) {
+      alert("ERROR: " + err);
+      console.error(err);
     }
   }
 };

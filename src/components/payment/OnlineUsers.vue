@@ -42,9 +42,8 @@ export default {
   sockets: {
     userSearchResponse(data) {
       this.users = data;
-      console.log(data);
     },
-  },
+  }
 };
 </script>
 
