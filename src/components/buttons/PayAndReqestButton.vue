@@ -37,7 +37,8 @@ export default {
   margin-top: $margin-20;
   position: absolute;
   bottom: 0;
-
+  background-color: $green-300;
+  border-radius: 11px;
   display: flex;
   display: grid;
   grid-template-columns: 1fr auto 1fr;

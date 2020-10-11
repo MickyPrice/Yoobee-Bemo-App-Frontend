@@ -4,8 +4,8 @@
       <slot name="top-text"></slot>
     </label>
     <input-mask
-      class="text__base--heavy"
-      placeholder="Please Enter Cellphone Number"
+      class="text__sm col-black-300"
+      placeholder="Cellphone Number"
       v-model="value"
       mask="+64 \ 999 999 9999"
       maskChar=""
@@ -35,13 +35,13 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 div {
-  margin: 5% 0;
+  margin: 1% 0;
+
   label {
     color: $purple-100;
   }
   input {
     width: 100%;
-    margin-top: $margin-5;
     height: $height-srch;
     background-color: $white-300;
     border-radius: $corners-10;
