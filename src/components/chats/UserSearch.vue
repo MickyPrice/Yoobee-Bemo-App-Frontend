@@ -1,43 +1,47 @@
 <template>
-  <div class="online">
-    <div class="online__search">
-      <label for="search" class="online__searchlabel">Search</label>
-      <Search
-        id="search"
-        class="online__searchbar"
-        type="search"
-        placeholder="Search by username"
-        @input-keyup="searchForUser"
-      />
-    </div>
-    <h2 class="online__favtitle">Users</h2>
-    <div class="online__list">
+  <div class="users">
+    <h2 class="users__favtitle">Users</h2>
+    <div class="users__list">
       <p v-if="!users.length">No users found :(</p>
-      <button @click="$emit('select-user', user)" class="online__user" v-for="(user, index) in users" :key="index">
-        <img class="online__userImg" :src="imgUrlStart + user._id" />
-        <p class="online__username">{{ user.username }}</p>
+      <button
+        @click="loadDirectChannel(user)"
+        class="users__user"
+        v-for="(user, index) in users"
+        :key="index"
+      >
+        <img class="users__userImg" :src="imgUrlStart + user._id" />
+        <p class="users__username">{{ user.username }}</p>
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import Search from "@/components/form/FormInput";
-
 export default {
-  components: {
-    Search,
+  props: {
+    search: {
+      type: String,
+    },
+  },
+  watch: {
+    search: {
+      immediate: true,
+      handler(val) {
+        this.$socket.client.emit("searchUser", val);
+      },
+    },
   },
   data: function () {
     return {
-      users: "", // Get list of users from backend
+      users: [], // Get list of users from backend
       imgUrlStart: `${process.env.VUE_APP_API_URL}/user/profile/`,
     };
   },
   methods: {
-    searchForUser(e) {
-      this.$socket.client.emit("searchUser", e.target.value);
-    },
+    loadDirectChannel(user) {
+        // console.log("HELLO");
+      this.$socket.client.emit("getDirectChannel", user._id);
+    }, 
   },
   sockets: {
     userSearchResponse(data) {
@@ -50,17 +54,12 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/_variables";
 
-.online {
-  margin-bottom: 50px;
-  &__searchbar {
-    margin: 10px 0 30px 0;
-    padding: 30px;
-  }
-  &__searchlabel {
-    color: desaturate($purple-500, 60%);
-    font-family: $font-aileron;
-    font-weight: 600;
-  }
+.users {
+  padding: 20px 0 100px 0;
+  margin-top: 140px;
+  overflow-x: hidden;
+  width: 100%;
+  border-top: 0.7px solid $white-300;
 
   // LIST
   &__favtitle {
@@ -77,7 +76,7 @@ export default {
   &__user {
     background: none;
     border: none;
-    // margin: 10px;
+    cursor: pointer;
     margin-bottom: 10px;
     text-align: center;
     width: 25%;

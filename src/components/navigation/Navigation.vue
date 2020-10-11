@@ -50,7 +50,7 @@
     <router-link
       :class="{ 'nav__link--large--light': !darkTheme }"
       class="nav__link nav__link--large"
-      to="/"
+      to="/home"
     >
       <svg
         class="nav__svg nav__svg--large"
@@ -72,7 +72,7 @@
       active-class="nav__link--active"
       :class="{ 'nav__link--light': !darkTheme }"
       class="nav__link"
-      to="/wallet"
+      to="/payment"
     >
       <svg
         class="nav__svg"
@@ -178,7 +178,7 @@ export default {
       padding: 16px 20px;
       // Light large button
       &--light {
-        background-color: $purple-500;
+        background-color: $black-300;
       }
       &--active {
         background-color: $purple-500;

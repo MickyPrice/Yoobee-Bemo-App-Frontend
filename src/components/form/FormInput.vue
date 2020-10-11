@@ -1,5 +1,5 @@
 <template>
-  <input :type="type" :name="name" :placeholder="placeholder" @keydown="$emit('input-keydown', $event)" @keyup="$emit('input-keyup', $event)"/>
+  <input :type="type" :name="name" :placeholder="placeholder" @blur="$emit('input-blur', $event)" @focus="$emit('input-focus', $event)"  @keydown="$emit('input-keydown', $event)" @keyup="$emit('input-keyup', $event)"/>
 </template>
 
 <script>

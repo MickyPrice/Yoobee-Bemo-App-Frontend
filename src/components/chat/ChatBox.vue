@@ -1,6 +1,6 @@
 <template>
   <div class="chat-box">
-    <button class="btn" v-if="isHidden">
+    <button class="btn" v-if="isHidden" @click="paymentRedirect">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -29,7 +29,13 @@
         ></path>
       </svg>
     </button>
-    <button v-show="isHidden" class="text__base--heavy btn gif">GIF</button>
+    <button
+      v-show="isHidden"
+      class="text__base--heavy btn gif"
+      @click="comingSoon"
+    >
+      GIF
+    </button>
     <form
       :style="isHidden ? { 'grid-column': '3/4' } : { 'grid-column': '2/4' }"
       @submit.prevent="checkForm"
@@ -47,7 +53,12 @@
           autocorrect="off"
           spellcheck="true"
           role="textbox"
-          style="outline: none; white-space: pre-wrap; overflow-wrap: break-word; -webkit-user-modify: read-write-plaintext-only;"
+          style="
+            outline: none;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            -webkit-user-modify: read-write-plaintext-only;
+          "
           @input="typing"
           @keydown="keyPress"
         ></div>
@@ -72,7 +83,8 @@
 </template>
 
 <script>
-import { isMobile } from 'mobile-device-detect';
+import { isMobile } from "mobile-device-detect";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -80,6 +92,9 @@ export default {
       string: "",
       isHidden: true,
     };
+  },
+  computed: {
+    ...mapState(["chats", "user"]),
   },
   methods: {
     typing(e) {
@@ -92,13 +107,22 @@ export default {
       }
     },
     keyPress(event) {
-      if(event.key == "Enter" && !isMobile) {
-        if(!event.shiftKey){
+      if (event.key == "Enter" && !isMobile) {
+        if (!event.shiftKey) {
           event.preventDefault();
           this.checkForm();
         }
       }
-    }
+    },
+    paymentRedirect() {
+      const channelId = this.$route.params.channelId;
+      let members = this.chats.channels[channelId].members;
+      delete members[this.user.data._id];
+      this.$router.push(`/payment/${Object.keys(members)[0]}`);
+    },
+    comingSoon() {
+      alert("Coming Soon");
+    },
   },
 };
 </script>

@@ -9,6 +9,7 @@ module.exports = {
   mutations: {
     UPDATE_CHANNEL(state, channel) {
       // state.channels[channel.id] = channel.data
+      console.log(channel)
       Vue.set(state.channels, channel.id, channel.data);
     },
     INIT_CHANNELS(state, channels) {

@@ -8,6 +8,7 @@ export default new Vuex.Store({
     user: require("./modules/user"),
     chats: require("./modules/chats"),
     chat: require("./modules/chat"),
-    users: require("./modules/users")
+    users: require("./modules/users"),
+    payments: require("./modules/payments")
   }
 });

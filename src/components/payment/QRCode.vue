@@ -21,7 +21,7 @@
           </slot>
         </BackButton>
       </div>
-      <h1 class="qrcode__title heading__base">Your Code</h1>
+      <h1 class="qrcode__title heading__base">Your Code <br><span class="text__sm">(Coming Soon!)</span></h1>
       <div class="qrcode__main" v-if="user.status == 1">
         <h2 class="qrcode__amount heading__base">
           ${{ cashAmount.toFixed(2) }}
