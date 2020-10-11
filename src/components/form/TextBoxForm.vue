@@ -26,16 +26,20 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
-  margin-top: 10px;
+  margin: 1% 0;
   background-color: $white-300;
   border-radius: $corners-10;
   border: none;
   outline: none;
+  color: $black;
+
   &[type="text"] {
     padding-left: $padding-20;
+    font-size: 0.75em;
+    color: $black;
   }
   &:active {
-    border: 2px solid $purple-100;
+    outline: 2px solid $purple-100;
   }
 }
 </style>
