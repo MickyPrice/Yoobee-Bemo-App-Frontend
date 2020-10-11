@@ -14,6 +14,8 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
+    margin: 2% 0;
+
   border-radius: $corners-40;
   background-color: $purple-500;
   color: $white-300;

@@ -7,9 +7,6 @@
 </template>
 
 <script>
-// <BtnFull class="bk-green-300">
-//   <slot slot="btn-title">Green</slot>
-// </BtnFull>
 export default {
   props: ["location"],
   methods: {
@@ -25,6 +22,7 @@ export default {
 
 .btn-full {
   width: 100%;
+
   height: $height-btn;
 
   margin-top: $margin-20;
