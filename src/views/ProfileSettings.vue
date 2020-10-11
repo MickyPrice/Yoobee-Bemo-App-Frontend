@@ -6,6 +6,7 @@
 
     <header class="settings__header">
       <Layout>
+        <router-link to="/home">
         <BiButton class="settings__back_btn">
           <slot slot="icon" class>
             <svg
@@ -24,6 +25,7 @@
             </svg>
           </slot>
         </BiButton>
+        </router-link>
         <h1 class="settings__heading heading__sm">Your Profile</h1>
       </Layout>
     </header>
