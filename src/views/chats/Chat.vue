@@ -1,6 +1,7 @@
 <template>
   <div class="chat">
     <div class="chat__top">
+      <!-- Back button -->
       <router-link to="/chat">
         <Bibutton class="bk-purple-500">
           <slot slot="icon" class>
@@ -21,6 +22,7 @@
           </slot>
         </Bibutton>
       </router-link>
+      <!--  -->
       <div class="chat__users">
         <ChatPic
           v-for="(user, userId, num) in users"
