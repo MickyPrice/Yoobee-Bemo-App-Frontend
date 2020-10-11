@@ -1,22 +1,22 @@
 <template>
   <div class="pay-and-request-button">
-    <button
-      @click="goTo('SendPayment')"
-      class="pay-and-request-button__pay text__base--heavy"
+    <div
+      @click="goTo('payment')"
+      class="pay-and-request-button__pay btn text__base--heavy"
     >
       Pay
-    </button>
+    </div>
 
     <div class="pay-and-request-button__wedge">
       <div></div>
     </div>
 
-    <button
-      @click="goTo('RequestPayment')"
-      class="pay-and-request-button__request text__base--heavy"
+    <div
+      @click="goTo('payment')"
+      class="pay-and-request-button__request btn text__base--heavy"
     >
       Request
-    </button>
+    </div>
   </div>
 </template>
 
@@ -37,21 +37,21 @@ export default {
   margin-top: $margin-20;
   position: absolute;
   bottom: 0;
+
   display: flex;
-  button {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+
+  .btn {
     font-family: $font-noto;
-    width: 48%;
-    height: $height-btn;
-    border: none;
-    outline: none;
     cursor: pointer;
     background-color: $green-300;
     color: $white-100;
+    text-align: center;
+    padding: 10px;
   }
 
   &__wedge {
-    width: 4%;
-    height: $height-btn;
     background-color: $green-300;
     display: flex;
     justify-content: center;
