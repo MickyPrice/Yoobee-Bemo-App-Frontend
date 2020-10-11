@@ -49,7 +49,7 @@ import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "../../components/form/SubmitButton.vue";
 import Bibutton from "../../components/buttons/BiButton.vue";
 
-import { login } from "@/services/api/auth.js";
+import { login, googleLogin } from "@/services/api/auth.js";
 
 export default {
   data: function () {
@@ -74,6 +74,11 @@ export default {
         });
       });
     },
+    googleAuth() {
+      googleLogin().then((res) => {
+        console.log(res)
+      })
+    }
   },
 };
 </script>

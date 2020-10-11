@@ -49,6 +49,7 @@
           role="textbox"
           style="outline: none; white-space: pre-wrap; overflow-wrap: break-word; -webkit-user-modify: read-write-plaintext-only;"
           @input="typing"
+          @keydown="keyPress"
         ></div>
       </div>
       <button class="submit" :disabled="string == ''">
@@ -71,6 +72,8 @@
 </template>
 
 <script>
+import { isMobile } from 'mobile-device-detect';
+
 export default {
   data() {
     return {
@@ -84,10 +87,18 @@ export default {
     },
     checkForm() {
       if (this.string != "") {
-        this.$emit("newPost", this.string);
+        this.$emit("newPost", this.string.trim());
         this.$refs.textbox.innerText = "";
       }
     },
+    keyPress(event) {
+      if(event.key == "Enter" && !isMobile) {
+        if(!event.shiftKey){
+          event.preventDefault();
+          this.checkForm();
+        }
+      }
+    }
   },
 };
 </script>
@@ -114,8 +125,8 @@ export default {
       padding: 15px 15px 15px 20px;
       border: none;
       outline: none;
-      border-radius: 50px 0 0 50px;
-      max-height: 200px;
+      border-radius: 22px 0 0 22px;
+      max-height: 150px;
       overflow-y: scroll;
       background-color: $white-300;
     }
@@ -131,7 +142,7 @@ export default {
       height: auto;
       width: 20%;
       background-color: $white-300;
-      border-radius: 0 50px 50px 0;
+      border-radius: 0 22px 22px 0;
       border: none;
       outline: none;
       svg {
