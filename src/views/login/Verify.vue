@@ -11,9 +11,16 @@
 
       <h1 class="verify__top--titile">Enter your code</h1>
       <h5 class="verify__top--sub">The code was sent to +64 021 783 374</h5>
-      <Passcode :verifyCode="form.code"></Passcode>
+      <input
+        class="heading__lg--balance input__passcode"
+        type="text"
+        pattern="\d*"
+        placeholder="******"
+        v-model="form.code"
+        maxlength="6"
+        autocomplete="one-time-code"
+      />
     </div>
-    {{ $route.params.phone }}
     <NumberPad
       v-on:add-number="updateCode($event)"
       v-on:clear="clear()"
@@ -31,7 +38,6 @@
 
 <script>
 import Bibutton from "../../components/buttons/BiButton.vue";
-import Passcode from "../../components/form/Passcode.vue";
 import NumberPad from "../../components/layout/NumberPad.vue";
 import BtnFull from "../../components/buttons/BtnFull.vue";
 
@@ -41,7 +47,6 @@ export default {
   components: {
     Bibutton,
     NumberPad,
-    Passcode,
     BtnFull,
   },
   data() {
@@ -60,7 +65,6 @@ export default {
       this.form.code = "";
     },
     updateCode(updatedCode) {
-      console.log(updatedCode);
       if (this.form.code.length <= 7) {
         this.form.code += updatedCode;
         return;
@@ -101,6 +105,17 @@ export default {
   &__bot {
     text-align: center;
     margin: $margin-10 0;
+  }
+}
+.input__passcode {
+  width: 100%;
+  margin-top: 30px;
+  background-color: $white-100;
+  border-radius: $corners-10;
+  border: none;
+  outline: none;
+  &[type="text"] {
+    text-align: center;
   }
 }
 </style>
