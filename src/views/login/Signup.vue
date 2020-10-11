@@ -32,7 +32,7 @@
       <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
       <template slot="SlotComponents" class="template">
         <p class="errorHandler text__sm">{{ error }}</p>
-        <form @submit.prevent="checkSignup" >
+        <form @submit.prevent="checkSignup">
           <TextBoxForm
             placeholder="Full Name"
             v-model="signupObject.fullname"
@@ -41,10 +41,7 @@
             placeholder="User Name"
             v-model="signupObject.username"
           />
-          <EmailBoxForm 
-            v-model="signupObject.email"
-          > 
-          </EmailBoxForm>
+          <EmailBoxForm v-model="signupObject.email"> </EmailBoxForm>
           <PhoneNumberBoxForm v-model="signupObject.phone">
             <slot slot="top-text">Only In New Zealand</slot>
           </PhoneNumberBoxForm>
@@ -105,7 +102,7 @@ export default {
           throw "Username error, Only A-Z 0-9";
         }
         //Email
-        else if(this.signupObject.email === ""){
+        else if (this.signupObject.email === "") {
           throw "Missing Email";
         }
         //Phone number
@@ -134,9 +131,8 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 .signup {
- 
   &__top {
-    padding: $pad-bor;
+    padding: $margin-40;
   }
   .head {
     &__titile {

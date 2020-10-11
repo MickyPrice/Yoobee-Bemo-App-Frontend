@@ -4,7 +4,7 @@
     type="email"
     :value="value"
     name="fname"
-    placeholder="Please Enter Eamil"
+    placeholder="Email"
     @input="updateDate($event.target.value)"
   />
 </template>
@@ -25,7 +25,7 @@ export default {
 input {
   width: 100%;
   height: $height-btn;
-  margin: 2% 0;
+  margin: 1% 0;
 
   background-color: $white-300;
   border-radius: $corners-10;
@@ -33,6 +33,8 @@ input {
   outline: none;
   &[type="email"] {
     padding-left: $padding-20;
+    font-size: 0.75em;
+    color: $black;
   }
   &:active {
     border: 2px solid $purple-100;

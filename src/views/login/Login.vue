@@ -3,8 +3,21 @@
     <div class="login__top">
       <router-link :to="{ name: 'landing' }">
         <Bibutton>
-          <slot slot="icon" class>
-            <i class="fas fa-angle-left col-purple-500"></i>
+          <slot slot="icon">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
           </slot>
         </Bibutton>
       </router-link>
@@ -67,9 +80,14 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/_variables";
+svg {
+  height: 24px;
+  width: 24px;
+  color: $purple-500;
+}
 .login {
   &__top {
-    padding: $pad-bor;
+    padding: $margin-40;
   }
 }
 .head {

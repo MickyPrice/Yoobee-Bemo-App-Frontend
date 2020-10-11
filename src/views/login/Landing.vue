@@ -1,28 +1,34 @@
 <template>
   <div class="landing">
-    <div class="head">
-      <h1 class="head__titile heading__lg--balance">Bemo</h1>
-      <p class="head__sub-title heading__sm">Be More</p>
+    <div class="toplayer">
+      <div class="toplayer__head">
+        <h1 class="toplayer__head--titile heading__lg--balance">Bemo</h1>
+        <p class="toplayer__head--sub-title heading__sm">Be More</p>
+      </div>
+
+      <div class="toplayer__btns">
+        <div class="toplayer__btns--box">
+          <router-link :to="{ name: 'signup' }">
+            <BtnFull class="bk-green-300">
+              <slot slot="btn-title">Get Started</slot>
+            </BtnFull>
+          </router-link>
+        </div>
+        <div class="toplayer__btns--box">
+          <router-link :to="{ name: 'login' }">
+            <BtnFull class="bk-purple-300">
+              <slot slot="btn-title">Login</slot>
+            </BtnFull>
+          </router-link>
+        </div>
+      </div>
     </div>
-    <div class="landing__img-container">
+    <div class="image-container">
       <img
         src="@/assets/images/devils-respect.png"
         alt="devils-respect"
         class="landing__img-container--hand"
       />
-    </div>
-
-    <div class="landing__btns">
-      <router-link :to="{ name: 'signup' }">
-        <BtnFull class="bk-green-300">
-          <slot slot="btn-title">Get Started</slot>
-        </BtnFull>
-      </router-link>
-      <router-link :to="{ name: 'login' }">
-        <BtnFull class="bk-purple-300">
-          <slot slot="btn-title">Login</slot>
-        </BtnFull>
-      </router-link>
     </div>
   </div>
 </template>
@@ -39,39 +45,60 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 .landing {
-  .head {
+  width: 100vw;
+  height: 100vh;
+  .toplayer {
     width: 100%;
-    position: absolute;
-    top: 100px;
+    height: 100%;
 
-    &__titile {
-      color: $white-300;
-      text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    &__head {
+      padding: $margin-40;
+      &--titile {
+        color: $white-300;
+        text-align: center;
+      }
+      &--sub-title {
+        color: $white-300;
+        opacity: 70%;
+        text-align: center;
+        margin-top: -10px;
+      }
     }
-    &__sub-title {
-      color: $white-300;
-      opacity: 70%;
-      text-align: center;
-      margin-top: -10px;
-    }
-  }
-  &__img-container {
-    z-index: -1;
-    widows: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    &--hand {
+
+    &__btns {
       width: 100%;
-      margin-top: 200px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 500px;
+      margin-bottom: 40px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &--box {
+        padding: 0 $padding-40;
+        width: 100%;
+      }
     }
   }
-  &__btns {
+  .image-container {
     width: 100%;
-    padding: $padding-40;
+    height: 100%;
     position: absolute;
-    bottom: 0px;
+    top: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    img {
+      position: absolute;
+      bottom: -20px;
+      height: 70%;
+    }
   }
 }
 </style>
