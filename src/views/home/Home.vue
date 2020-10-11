@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__center">
       <h1 class="home__center--balance heading__lg">
-        ${{ user.data.balance }}{{ null }}
+        ${{ user.data.balance / 100 }}{{ null }}
       </h1>
       <h4 class="home__center--sub-heading text__base--heavy">Bemo Balance</h4>
       <PayAndRequestButton />
