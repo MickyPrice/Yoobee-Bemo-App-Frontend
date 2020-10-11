@@ -11,6 +11,11 @@ export default {
   data() {
     return {};
   },
+  created() {
+    if(localStorage.getItem("authenticated")){
+      this.$router.push("home");
+    }
+  }
 };
 </script>
 

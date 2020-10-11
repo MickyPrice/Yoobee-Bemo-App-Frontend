@@ -8,6 +8,12 @@ module.exports = {
 
   }),
   mutations: {
+    /**
+     * Update the user object
+     * 
+     * @param { Object } state - user store state 
+     * @param { Object } user 
+     */
     UPDATE_USER(state, user) {
       state.data = user;
       state.data.profilePic = `${process.env.VUE_APP_API_URL}/user/profile/${user._id}`;
@@ -15,6 +21,11 @@ module.exports = {
     },
   },
   actions: {
+    /**
+     * Init the user upon login / auth
+     * 
+     * @param { Function } commit 
+     */
     socket_initUser({ commit }) {
       getUser().then((user) => {
         commit("UPDATE_USER", user.data);

@@ -68,7 +68,6 @@ export default {
         if (this.chats.channels[this.channelId]) {
           let members = this.chats.channels[this.channelId].members;
           delete members[this.user.data._id];
-
           let users = Object.keys(members);
           return users
             .map((id) => {

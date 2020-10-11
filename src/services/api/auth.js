@@ -1,18 +1,32 @@
-import repository from './repository';
+import repository from "./repository";
 
-const END_POINT = '/auth';
+const END_POINT = "/auth";
 
-const login = ( request ) => repository.post(END_POINT + '/login', request);
+/**
+ * Send a login request
+ * 
+ * @param { Object } request
+ * @typedef { phone: String }
+ */
+const login = (request) => repository.post(END_POINT + "/login", request);
 
-const googleLogin = () => repository.get(END_POINT + '/google');
+/**
+ * Login via google (Backend Work In Process)
+ */
+const googleLogin = () => repository.get(END_POINT + "/google");
 
-const logout = () => repository.get(END_POINT + '/logout');
+/**
+ * Send a logout request
+ */
+const logout = () => repository.get(END_POINT + "/logout");
 
-const verify = ( request ) => repository.post(END_POINT + '/login/verify', request);
+/**
+ * Verify a login
+ * 
+ * @param {Object} request
+ * @typedef { phone: String, code: String } 
+ */
+const verify = (request) =>
+  repository.post(END_POINT + "/login/verify", request);
 
-export {
-    login,
-    verify,
-    logout,
-    googleLogin
-}
+export { login, verify, logout, googleLogin };

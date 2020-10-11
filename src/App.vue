@@ -5,18 +5,16 @@
 </template>
 
 <script>
-
-
 export default {
   sockets: {
     connect() {
       console.log("socket connected");
     },
-    bemoerror(err) {
-      alert("ERROR: " + err);
-      console.error(err);
-    }
-  }
+  },
+  bemoerror(err) {
+    alert("ERROR: " + err);
+    console.error(err);
+  },
 };
 </script>
 
