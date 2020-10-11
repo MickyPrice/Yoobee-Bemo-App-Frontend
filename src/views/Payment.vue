@@ -88,6 +88,7 @@ import PayRequest from "@/components/payment/PayRequest";
 import OnlineUsers from "@/components/payment/OnlineUsers";
 import QRCode from "@/components/payment/QRCode";
 import { mapState } from "vuex";
+import { getUserById } from "@/services/api/user"
 
 export default {
   components: {
@@ -99,6 +100,17 @@ export default {
     PayRequest,
     OnlineUsers,
     QRCode,
+  },
+  mounted() {
+    if(this.$route.params.userId) {
+      getUserById(this.$route.params.userId)
+      .then((data) => {
+        this.otherUser = data.data;
+      })
+      .catch(function(e) {
+        alert(e)
+      })
+    }
   },
   data: function () {
     return {

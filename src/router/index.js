@@ -82,7 +82,7 @@ const routes = [
     component: () => import("../views/ProfileSettings.vue"),
   },
   {
-    path: "/payment",
+    path: "/payment/:userId?",
     name: "Payment",
     component: () => import("../views/Payment.vue"),
   },
