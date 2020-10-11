@@ -34,6 +34,9 @@ const routes = [
   {
     path: "/chat",
     name: "chatIndex",
+    meta: {
+      requiresAuth: true
+    },
     component: () => import("../views/chats/"),
     children: [
       {
@@ -51,12 +54,18 @@ const routes = [
   {
     path: "/about",
     name: "About",
+    meta: {
+      requiresAuth: true
+    },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/home",
     name: "Home",
+    meta: {
+      requiresAuth: true
+    },
     component: () =>
     import("../views/home/Home.vue"),
   },
@@ -87,6 +96,18 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (localStorage.getItem("authenticated")) {
+      next()
+      return
+    }
+    next('/login')
+  } else {
+    next()
+  }
 });
 
 export default router;
