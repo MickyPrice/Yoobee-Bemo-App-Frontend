@@ -11,7 +11,7 @@ Vue.component('input-mask', InputMask)
 
 Vue.config.productionTip = false
 
-var socket = io("http://localhost:3000");
+var socket = io(process.env.VUE_APP_API_URL);
 Vue.use(VueSocketIOExt, socket, { store });
 
 new Vue({

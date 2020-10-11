@@ -1,12 +1,14 @@
-import repository from './repository';
+import repository from "./repository";
+const END_POINT = "/user";
 
-// End point 
-const END_POINT = '/user';
-
-// Get label by id
+/**
+ * Get the current user
+ */
 const getUser = () => repository.get(END_POINT);
+const getUserById = (userId) => repository.get(END_POINT + "/" + userId);
 
 // Export label api functions
 export {
-    getUser
+    getUser,
+    getUserById
 }

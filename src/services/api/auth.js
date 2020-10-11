@@ -14,3 +14,4 @@ const logout = () => repository.get(END_POINT + "/logout");
 const googleLogin = () => repository.get(END_POINT + "/google");
 
 export { login, signup, verify, logout, googleLogin };
+

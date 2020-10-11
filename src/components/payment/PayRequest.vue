@@ -32,7 +32,8 @@
       tabindex="0"
       @keyup="paymentInput"
     ></div>
-    <FormInput type="text" name="message" placeholder="💬 Message..." />
+    <!-- Hidden for sake of MVP -->
+    <!-- <FormInput :v-if="false" type="text" name="message" placeholder="💬 Message..." /> -->
 
     <BtnFull
       v-if="mode == 'SEND'"
@@ -63,12 +64,12 @@
 
 <script>
 import BtnFull from "@/components/buttons/BtnFull";
-import FormInput from "@/components/form/FormInput";
+// import FormInput from "@/components/form/FormInput";
 
 export default {
   components: {
     BtnFull,
-    FormInput,
+    // FormInput,
   },
   data: function () {
     return { amount: 0.0 };
@@ -84,7 +85,6 @@ export default {
         this.amount = e.target.innerText
           ? parseInt(e.target.innerText * 100)
           : 0;
-          console.log(this.amount);
       } else {
         e.target.innerText = "";
         this.amount = 0;

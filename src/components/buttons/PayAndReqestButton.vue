@@ -1,7 +1,7 @@
 <template>
   <div class="pay-and-request-button">
     <div
-      @click="goTo('SendPayment')"
+      @click="goTo('payment')"
       class="pay-and-request-button__pay btn text__base--heavy"
     >
       Pay
@@ -12,7 +12,7 @@
     </div>
 
     <div
-      @click="goTo('RequestPayment')"
+      @click="goTo('payment')"
       class="pay-and-request-button__request btn text__base--heavy"
     >
       Request

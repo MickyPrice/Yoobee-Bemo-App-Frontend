@@ -10,7 +10,11 @@ export default {
     connect() {
       console.log("socket connected");
     },
-  }
+  },
+  bemoerror(err) {
+    alert("ERROR: " + err);
+    console.error(err);
+  },
 };
 </script>
 
