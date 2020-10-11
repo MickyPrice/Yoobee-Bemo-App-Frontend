@@ -1,13 +1,13 @@
 <template>
   <div class="sendPayment">
     <div class="sendPayment__top">
-                  <router-link :to="{ name: 'Home' }">
-      <Bibutton>
-        <slot slot="icon" class>
-          <i class="fas fa-angle-left col-purple-500"></i>
-        </slot>
-      </Bibutton>
-                  </router-link>
+      <router-link :to="{ name: 'Home' }">
+        <Bibutton>
+          <slot slot="icon" class>
+            <i class="fas fa-angle-left col-purple-500"></i>
+          </slot>
+        </Bibutton>
+      </router-link>
 
       <h1 class="sendPayment__top--title text__lg">Send Payment</h1>
     </div>
