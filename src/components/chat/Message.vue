@@ -1,6 +1,6 @@
 <template>
   <div
-  v-if="payment"
+    v-if="payment"
     :class="
       currentUser
         ? 'msg-container__stack--clear'
@@ -17,11 +17,19 @@
     >
       <span class="text-sm">PAYMENT::: {{ payment }}</span>
     </button>
+  </div>
+  <div
+    v-else
+    :class="
+      currentUser
+        ? 'msg-container__stack--clear'
+        : 'msg-container__stack-other--clear'
+    "
+  >
     <!-- Message (Default) -->
     <div
       class="msg-box"
       :class="currentUser ? 'bk-purple-500 col-white-100' : 'bk-white-300'"
-      v-else
     >
       <span class="text-sm">{{ content }}</span>
     </div>
@@ -36,9 +44,16 @@ export default {
     ...mapState(["chats", "chat", "user", "payments"]),
     payment() {
       if (this.payments.status == 1) {
+        console.log(this.payments);
         return this.payments.data[this.content];
       }
       return null;
+    },
+    contents() {
+      if (this.content) {
+        return this.content;
+      }
+      return "";
     },
   },
   props: {
@@ -51,14 +66,16 @@ export default {
   },
   methods: {
     fufillPayment() {
-      if (!this.currentUser && this.payment.status === 'PENDING') {
+      if (!this.currentUser && this.payment.status === "PENDING") {
         // Payment can be fufilled.
-        if(confirm("Are you sure you want to send $" + this.payment.amount / 100 )) {
-          this.$socket.client.emit("fufillRequest", this.payment._id)
+        if (
+          confirm("Are you sure you want to send $" + this.payment.amount / 100)
+        ) {
+          this.$socket.client.emit("fufillRequest", this.payment._id);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
