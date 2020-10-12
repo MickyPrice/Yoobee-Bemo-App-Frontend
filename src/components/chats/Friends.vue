@@ -60,14 +60,7 @@ export default {
     loadDirectChannel(user) {
       this.$socket.client.emit("getDirectChannel", user._id);
     },
-  },
-  sockets: {
-    openChannel(channel) {
-      this.$router.push({
-        path: `/chat/${channel}`,
-      });
-    },
-  },
+  }
 };
 </script>
 

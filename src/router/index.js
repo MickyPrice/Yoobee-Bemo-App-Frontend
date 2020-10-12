@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+// Application rotues
 const routes = [
   {
     path: "/",
@@ -34,6 +35,9 @@ const routes = [
   {
     path: "/chat",
     name: "chatIndex",
+    meta: {
+      requiresAuth: true,
+    },
     component: () => import("../views/chats/"),
     children: [
       {
@@ -49,44 +53,48 @@ const routes = [
     ],
   },
   {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
     path: "/home",
-    name: "Home",
-    component: () =>
-    import("../views/home/Home.vue"),
-  },
-  {
-    path: "/logout",
-    name: "logout",
-    component: () =>
-    import("../views/Logout.vue"),
-  },
-  {
-    path: "/sendPayment",
-    name: "SendPayment",
-    component: () => import("../views/SendPayment.vue"),
-  },
-  {
-    path: "/requestPayment",
-    name: "RequestPayment",
-    component: () => import("../views/RequestPayment.vue"),
+    name: "home",
+    meta: {
+      requiresAuth: true,
+    },
+    component: () => import("../views/home/Home.vue"),
   },
   {
     path: "/settings",
-    name: "Settings",
+    name: "settings",
+    meta: {
+      requiresAuth: true,
+    },
     component: () => import("../views/ProfileSettings.vue"),
+  },
+  {
+    path: "/payment/:userId?",
+    name: "Payment",
+    component: () => import("../views/Payment.vue"),
   },
 ];
 
+// Setup a new router instance using our routes
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+// Check if they are trynig to acess a protected page
+// If so then check they are authenticated
+// Else redirect to login
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem("authenticated")) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;
