@@ -68,6 +68,11 @@ const routes = [
     },
     component: () => import("../views/ProfileSettings.vue"),
   },
+  {
+    path: "/payment/:userId?",
+    name: "Payment",
+    component: () => import("../views/Payment.vue"),
+  },
 ];
 
 // Setup a new router instance using our routes

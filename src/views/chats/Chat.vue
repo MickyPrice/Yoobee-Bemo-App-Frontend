@@ -61,14 +61,13 @@ export default {
   },
   computed: {
     // Get the state for chats and user
-    ...mapState(["chats", "user"]),
+    ...mapState(["chats", "user", "chat"]),
     // Reactivly generate a chat name
     name() {
-      if (this.user.status == 1) {
-        let members = this.chats.channels[this.channelId].members;
-        // If theres one user use thier full name, else only use thier first
-        // Seperate multiple names by commas
-        if (members) {
+      if (this.chats.channels) {
+        if (this.chats.channels[this.channelId]) {
+          let members = this.chats.channels[this.channelId].members;
+          delete members[this.user.data._id];
           let users = Object.keys(members);
           return users
             .map((id) => {
@@ -79,23 +78,51 @@ export default {
               }
             })
             .join(", ");
-        } else {
-          // If just you then say so
-          ("Just You");
         }
       }
       return "Loading...";
+
+      // if (this.chats.status == 1) {
+      //   if (!this.chats.channels[this.channelId]) {
+      //     return "";
+      //   }
+      //   let members = this.chats.channels[this.channelId].members;
+      //   // If theres one user use thier full name, else only use thier first
+      //   // Seperate multiple names by commas
+      //   if (members) {
+      //     let users = Object.keys(members);
+      //     return users
+      //       .map((id) => {
+      //         if (users > 1) {
+      //           return members[id].fullname.split(" ")[0];
+      //         } else {
+      //           return members[id].fullname;
+      //         }
+      //       })
+      //       .join(", ");
+      //   } else {
+      //     // If just you then say so
+      //     ("Just You");
+      //   }
+      // }
     },
     // Reactivly get the users in the current channel
     users() {
-      if (this.chats.status == 1 && this.user.status == 1) {
-        const members = this.chats.channels[this.channelId].members;
-        delete members[this.user.data._id];
-        if (this.chats.status == 1) {
+      if (this.chats.channels) {
+        if (this.chats.channels[this.channelId]) {
+
+          let members = this.chats.channels[this.channelId].members;
+          delete members[this.user.data._id];
+
           return members;
         }
       }
-      return null;
+      // if (this.chats.status == 1 && this.user.status == 1) {
+      //   const members = this.chats.channels[this.channelId].members;
+      //   delete members[this.user.data._id];
+      //   return members;
+      // }
+      return [];
     },
   },
   methods: {

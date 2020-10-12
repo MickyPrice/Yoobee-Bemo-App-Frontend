@@ -1,6 +1,6 @@
 <template>
   <div class="direction heading__sm--bold">
-    <slot name="icon"></slot>
+    <slot></slot>
   </div>
 </template>
 
@@ -12,9 +12,9 @@ export default {};
 @import "@/scss/_variables";
 .direction {
   background-color: $white-100;
-  border-radius: 50px;
-  i {
-    margin: 5px;
-  }
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

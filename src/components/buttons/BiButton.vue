@@ -1,5 +1,5 @@
 <template>
-  <button class="biButton text__lg">
+  <button class="biButton text__lg" @click="$emit('clicked')">
     <slot class="text__lg" name="icon"></slot>
   </button>
 </template>
