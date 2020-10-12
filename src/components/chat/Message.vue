@@ -44,7 +44,6 @@ export default {
     ...mapState(["chats", "chat", "user", "payments"]),
     payment() {
       if (this.payments.status == 1) {
-        console.log(this.payments);
         return this.payments.data[this.content];
       }
       return null;

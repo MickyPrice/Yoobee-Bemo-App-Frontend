@@ -55,6 +55,7 @@ export default {
   },
   data: function() {
     return {
+      channel: {},
       api: process.env,
       channelId: this.$route.params.channelId,
     };
@@ -63,66 +64,51 @@ export default {
     // Get the state for chats and user
     ...mapState(["chats", "user", "chat"]),
     // Reactivly generate a chat name
+    channels() {
+      if (this.chats) {
+        return this.chats.channels;
+      }
+      return {};
+    },
     name() {
-      if (this.chats.channels) {
-        if (this.chats.channels[this.channelId]) {
-          let members = this.chats.channels[this.channelId].members;
+      if (this.channel.members) {
+        let members = this.channel.members;
+        if (this.user.data != null) {
           delete members[this.user.data._id];
-          let users = Object.keys(members);
-          return users
-            .map((id) => {
-              if (users > 1) {
-                return members[id].fullname.split(" ")[0];
-              } else {
-                return members[id].fullname;
-              }
-            })
-            .join(", ");
         }
+        let users = Object.keys(members);
+        return users
+          .map((id) => {
+            if (users > 1) {
+              return members[id].fullname.split(" ")[0];
+            } else {
+              return members[id].fullname;
+            }
+          })
+          .join(", ");
       }
       return "Loading...";
-
-      // if (this.chats.status == 1) {
-      //   if (!this.chats.channels[this.channelId]) {
-      //     return "";
-      //   }
-      //   let members = this.chats.channels[this.channelId].members;
-      //   // If theres one user use thier full name, else only use thier first
-      //   // Seperate multiple names by commas
-      //   if (members) {
-      //     let users = Object.keys(members);
-      //     return users
-      //       .map((id) => {
-      //         if (users > 1) {
-      //           return members[id].fullname.split(" ")[0];
-      //         } else {
-      //           return members[id].fullname;
-      //         }
-      //       })
-      //       .join(", ");
-      //   } else {
-      //     // If just you then say so
-      //     ("Just You");
-      //   }
-      // }
     },
     // Reactivly get the users in the current channel
     users() {
-      if (this.chats.channels) {
-        if (this.chats.channels[this.channelId]) {
-
-          let members = this.chats.channels[this.channelId].members;
+      if (this.channel.members) {
+        let members = this.channel.members;
+        if (this.user.data != null) {
           delete members[this.user.data._id];
-
-          return members;
         }
+        return members;
       }
-      // if (this.chats.status == 1 && this.user.status == 1) {
-      //   const members = this.chats.channels[this.channelId].members;
-      //   delete members[this.user.data._id];
-      //   return members;
-      // }
       return [];
+    },
+  },
+  watch: {
+    channels: {
+      immediate: true,
+      handler(val) {
+        if (val[this.channelId]) {
+          this.channel = val[this.channelId];
+        }
+      },
     },
   },
   methods: {
@@ -130,6 +116,9 @@ export default {
   },
   // On creation join the socket room by ID
   created() {
+    if(!this.channel[this.channelId]){
+      this.$socket.client.emit("getChannel", this.channelId);
+    }
     this.joinChannel(this.channelId);
   },
   // On destroy leave the socket room

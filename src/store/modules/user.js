@@ -3,7 +3,6 @@ const { getUser } = require("../../services/api/user");
 module.exports = {
   state: () => ({
     data: null,
-
     status: 0 // 0 = unloaded, 1 = loaded, 2 = error
 
   }),
@@ -31,5 +30,8 @@ module.exports = {
         commit("UPDATE_USER", user.data);
       });
     },
+    socket_updateUser({ commit }, userData) {
+      commit("UPDATE_USER", userData);
+    }
   }
 };
