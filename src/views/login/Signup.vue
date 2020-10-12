@@ -22,7 +22,7 @@
           <TextBoxForm></TextBoxForm>
           <EmailBoxForm></EmailBoxForm>
           <PhoneNumberBoxForm>
-            <slot slot="top-text">Only In New Zealand</slot>
+            <slot slot="top-text">NZ Phone Number</slot>
           </PhoneNumberBoxForm>
           <SubmitButton></SubmitButton>
         </form>
