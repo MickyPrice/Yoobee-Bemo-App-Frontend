@@ -71,6 +71,7 @@ export default {
       }
     },
     verifyUser() {
+
       verify(this.form).then((res) => {
         if (res.data.success == true) {
           localStorage.setItem("authenticated", true);

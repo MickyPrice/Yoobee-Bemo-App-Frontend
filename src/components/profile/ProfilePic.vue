@@ -24,8 +24,8 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables";
 .profile {
-  height: 25vw;
   width: 25vw;
+  height: 25vw;
 
   border-radius: 100px;
   border: 3px solid $white-100;

@@ -1,15 +1,19 @@
 <template>
   <div class="push-card">
-    <p class="push-card__title heading__sm--bold">
-      <slot name="PushCardTitle"></slot>
-    </p>
-    <p class="push-card__sub-title text__sm">
-      <slot name="PushCardSubTitle"></slot>
-    </p>
-    <slot name="SlotComponents"></slot>
-    <h5 class="push-card__bottom-text">
-      <slot name="PushCardBottomText"></slot>
-    </h5>
+    <div class="push-card__top">
+      <p class="push-card__top--title heading__sm--bold">
+        <slot name="PushCardTitle"></slot>
+      </p>
+      <p class="push-card__top--sub-title text__sm">
+        <slot name="PushCardSubTitle"></slot>
+      </p>
+    </div>
+    <div class="form">
+      <slot name="SlotComponents"></slot>
+      <h5 class="bottom-text">
+        <slot name="PushCardBottomText"></slot>
+      </h5>
+    </div>
   </div>
 </template>
 
@@ -25,20 +29,27 @@ export default {
 
 .push-card {
   width: 100%;
-  max-height: 75%;
+  min-height: 200px;
+  max-height: 67%;
   background-color: $white-100;
   border-radius: $corners-top;
-  padding: 20px $pad-bor 0 $pad-bor;
+  padding: 20px $padding-40 0 $padding-40;
   position: absolute;
   bottom: 0;
 
-  &__sub-title {
-    color: $purple-300;
-    margin-top: $margin-5;
+  &__top {
+    &--sub-title {
+      color: $purple-300;
+      margin-top: $margin-5;
+    }
   }
-  &__bottom-text {
+  .form {
+    width: 100%;
+  }
+
+  .bottom-text {
     text-align: center;
-    margin: 4%;
+    margin: 10px;
     color: $purple-300;
   }
 }
