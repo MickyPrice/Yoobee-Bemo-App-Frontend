@@ -6,26 +6,6 @@
 
     <header class="settings__header">
       <Layout>
-        <router-link to="/home">
-        <BiButton class="settings__back_btn">
-          <slot slot="icon" class>
-            <svg
-              width="21"
-              height="21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.125 16.625L7 10.5l6.125-6.125"
-                stroke="#8B55FF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </slot>
-        </BiButton>
-        </router-link>
         <h1 class="settings__heading heading__sm">Your Profile</h1>
       </Layout>
     </header>
@@ -63,7 +43,7 @@
           <!-- <Btn text="Setup Pin" @click="setupPinModal = true" v-else class="settings__pinbtn text__base" /> -->
           <Btn
             text="Logout"
-            @click="logoutUser();$router.go(0)"
+            @click="logoutUser();"
             v-else
             class="settings__pinbtn text__base"
           />
@@ -93,7 +73,6 @@
 
 <script>
 import Navigation from "@/components/navigation/Navigation.vue";
-import BiButton from "@/components/buttons/BiButton.vue";
 import Layout from "@/components/layout/Layout.vue";
 import PushCard from "@/components/layout/PushCard.vue";
 import ProfilePic from "@/components/profile/EditableProfilePic.vue";
@@ -113,7 +92,6 @@ export default {
   },
   components: {
     Navigation,
-    BiButton,
     Layout,
     PushCard,
     ProfilePic,
@@ -140,6 +118,7 @@ export default {
       this.setupPinModal = true;
     },
     logoutUser() {
+      localStorage.removeItem('authenticated');
       logout();
     },
   },

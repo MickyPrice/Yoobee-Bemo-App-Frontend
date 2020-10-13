@@ -43,7 +43,7 @@
           />
           <EmailBoxForm v-model="signupObject.email"> </EmailBoxForm>
           <PhoneNumberBoxForm v-model="signupObject.phone">
-            <slot slot="top-text">Only In New Zealand</slot>
+            <slot slot="top-text">Nz Phone Number</slot>
           </PhoneNumberBoxForm>
           <SubmitButton />
         </form>
