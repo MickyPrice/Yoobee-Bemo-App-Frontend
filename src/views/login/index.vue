@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { getUser } from "../../services/api/user.js"
+
 export default {
   name: "index",
   components: {},
@@ -12,9 +14,11 @@ export default {
     return {};
   },
   created() {
-    if(localStorage.getItem("authenticated")){
-      this.$router.push("home");
-    }
+    getUser().then(user => {
+      if(user.data != "") {
+        this.$router.push("home");
+      } 
+    });
   }
 };
 </script>

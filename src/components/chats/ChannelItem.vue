@@ -1,5 +1,6 @@
 <template>
   <router-link
+    v-if="message"
     class="channel"
     :class="{ 'channel--unread': unread }"
     :to="`/chat/${channelId}`"
@@ -50,11 +51,12 @@ export default {
       return this.channelKey;
     },
     message() {
-      if (this.channel.latestMsg.content) {
-        return this.channel.latestMsg.content;
-      } else {
-        return "Error";
+      if (this.channel.latestMsg) {
+        if (this.channel.latestMsg.content) {
+          return this.channel.latestMsg.content;
+        }
       }
+      return false;
     },
     lastUpdated() {
       return moment(this.channel.updatedAt).fromNow();

@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__center">
       <h1 class="home__center--balance heading__lg">
-        ${{ user.data.balance / 100 }}{{ null }}
+        ${{ balance }}
       </h1>
       <h4 class="home__center--sub-heading text__base--heavy">Bemo Balance</h4>
       <PayAndRequestButton />
@@ -28,6 +28,12 @@ export default {
   },
   computed: {
     ...mapState(["user"]),
+    balance() {
+      if( this.user.status == 1){
+        return this.user.data.balance / 100;
+      }
+      return 0;
+    }
   },
 };
 </script>

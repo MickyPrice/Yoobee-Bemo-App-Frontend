@@ -29,9 +29,11 @@ export default {
 @import "@/scss/_variables";
 .chat-push-card {
   width: 100%;
-  height: 100%;
+  height: 100px;
+  flex-grow: 1;
   background-color: $white-100;
   border-radius: $corners-top;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background-color: $white-100;
