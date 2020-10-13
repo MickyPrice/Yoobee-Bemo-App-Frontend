@@ -31,3 +31,6 @@ An example of this is:
 ```
 VUE_APP_API_URL=http://localhost:3000
 ```
+
+You will also need to add a GIPHY API token to the .env to enable GIFs in the chats.
+To do this, you'll need to add a variable named "VUE_APP_GIPHY_API_KEY" which will equal your GIPHY API access token
