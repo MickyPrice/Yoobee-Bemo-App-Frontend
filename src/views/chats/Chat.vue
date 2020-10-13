@@ -35,9 +35,9 @@
         </div>
       </div>
     </div>
-    <div class="chat__bottom">
+    <!-- <div class="chat__bottom"> -->
       <Room></Room>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -135,8 +135,10 @@ export default {
   background-color: $white-300;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   &__top {
-    height: 20%;
+    padding-bottom: 10px;
     margin: 0 40px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
