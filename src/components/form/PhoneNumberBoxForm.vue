@@ -1,7 +1,7 @@
 <template>
   <div>
     <label for="fname" class="text__sm">
-      <slot name="top-text"></slot>
+      <slot></slot>
     </label>
     <input-mask
       class="text__sm col-black-300"
@@ -45,11 +45,11 @@ div {
     height: $height-srch;
     background-color: $white-300;
     border-radius: $corners-10;
-    border: none;
+    border: 2px solid transparent;
     outline: none;
     padding-left: $padding-20;
 
-    &:active {
+    &:focus {
       border: 2px solid $purple-100;
     }
   }

@@ -22,29 +22,112 @@
         </Bibutton>
       </router-link>
 
-      <div class="head">
-        <h1 class="head__titile heading__lg--balance">Bemo</h1>
-        <p class="head__sub-title heading__sm">Be More</p>
+      <div class="login__heading">
+        <h1 class="login__main-title heading__lg">Bemo</h1>
+        <p class="login__sub-title heading__sm">Be More</p>
       </div>
     </div>
-    <PushCard>
-      <slot slot="PushCardTitle">Welcome Back</slot>
-      <slot slot="PushCardSubTitle">Enter your phone number to login</slot>
-      <template slot="SlotComponents">
-        <form @submit.prevent="loginUser">
-          <PhoneNumberBoxForm v-model="form.phone">
-            <slot slot="top-text">Only In New Zealand</slot>
-          </PhoneNumberBoxForm>
-          <SubmitButton />
-        </form>
-      </template>
-      <slot slot="PushCardBottomText">New? Get Started</slot>
-    </PushCard>
+    <div class="login__hands">
+      <img src="@/assets/images/bemo_hands.png" alt="">
+    </div>
+    <Card class="login__main">
+      <h2 class="login__title">Welcome Back</h2>
+      <p class="login__subtitle">Enter your phone number to login</p>
+      <form @submit.prevent="loginUser">
+        <PhoneNumberBoxForm v-model="form.phone">
+          <p class="login__formtooltip">Only In New Zealand</p>
+        </PhoneNumberBoxForm>
+        <SubmitButton class="login__submit" />
+      </form>
+      <p class="login__bottomText">
+        New? <router-link to="/signup">Get Started</router-link>
+      </p>
+    </Card>
   </div>
 </template>
 
+<style scoped lang="scss">
+@import "@/scss/_variables";
+svg {
+  height: 24px;
+  width: 24px;
+  color: $purple-500;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100vw;
+  &__title {
+    font-size: 32px;
+  }
+  &__subtitle {
+    font-size: 14px;
+    color: desaturate($purple-500, 60%);
+    padding-bottom: 40px;
+  }
+  &__top {
+    padding: $margin-40;
+    max-height: 400px;
+  }
+  &__main {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    flex-grow: 1;
+    height: auto;
+    position: relative;
+  }
+  &__submit {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  &__formtooltip {
+    margin-top: 20px;
+  }
+  &__bottomText {
+    color: desaturate($purple-500, 60%);
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 0;right:0;
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: $purple-500;
+    }
+  }
+  &__hands {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -30px;
+    img {
+      height: 100%;
+    }
+  }
+  &__heading {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+  &__main-title {
+    color: $white-300;
+    text-align: center;
+  }
+  &__sub-title {
+    color: $white-300;
+    opacity: 70%;
+    text-align: center;
+    margin-top: -10px;
+  }
+}
+</style>
+
 <script>
-import PushCard from "../../components/layout/PushCard.vue";
+import Card from "../../components/layout/ResponsiveCard.vue";
 import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
 import SubmitButton from "../../components/form/SubmitButton.vue";
 import Bibutton from "../../components/buttons/BiButton.vue";
@@ -52,7 +135,7 @@ import Bibutton from "../../components/buttons/BiButton.vue";
 import { login, googleLogin } from "@/services/api/auth.js";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       form: {
         phone: "",
@@ -60,7 +143,7 @@ export default {
     };
   },
   components: {
-    PushCard,
+    Card,
     PhoneNumberBoxForm,
     SubmitButton,
     Bibutton,
@@ -76,36 +159,9 @@ export default {
     },
     googleAuth() {
       googleLogin().then((res) => {
-        console.log(res)
-      })
-    }
+        console.log(res);
+      });
+    },
   },
 };
 </script>
-
-<style scoped lang="scss">
-@import "@/scss/_variables";
-svg {
-  height: 24px;
-  width: 24px;
-  color: $purple-500;
-}
-.login {
-  &__top {
-    padding: $margin-40;
-  }
-}
-.head {
-  padding-top: 5%;
-  &__titile {
-    color: $white-300;
-    text-align: center;
-  }
-  &__sub-title {
-    color: $white-300;
-    opacity: 70%;
-    text-align: center;
-    margin-top: -10px;
-  }
-}
-</style>
