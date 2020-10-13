@@ -23,38 +23,106 @@
       </router-link>
 
       <div class="head">
-        <h1 class="head__titile heading__lg--balance">Bemo</h1>
+        <h1 class="head__title heading__lg">Bemo</h1>
         <p class="head__sub-title heading__sm">Be More</p>
       </div>
     </div>
-    <PushCard>
-      <slot slot="PushCardTitle">Get Started</slot>
-      <slot slot="PushCardSubTitle">Welcome, lets get you setup</slot>
-      <template slot="SlotComponents" class="template">
-        <p class="errorHandler text__sm">{{ error }}</p>
-        <form @submit.prevent="checkSignup">
-          <TextBoxForm
-            placeholder="Full Name"
-            v-model="signupObject.fullname"
-          />
-          <TextBoxForm
-            placeholder="User Name"
-            v-model="signupObject.username"
-          />
-          <EmailBoxForm v-model="signupObject.email"> </EmailBoxForm>
-          <PhoneNumberBoxForm v-model="signupObject.phone">
-            <slot slot="top-text">Only In New Zealand</slot>
-          </PhoneNumberBoxForm>
-          <SubmitButton />
-        </form>
-      </template>
-      <slot slot="PushCardBottomText">Already with Us? Login</slot>
-    </PushCard>
+    <Card class="signup__main">
+      <h2 class="signup__title">Get Started</h2>
+      <p class="signup__subtitle">Welcome, lets get you setup</p>
+      <p class="errorHandler text__sm">{{ error }}</p>
+      <form @submit.prevent="checkSignup" class="signup__form">
+        <TextBoxForm placeholder="Full Name" v-model="signupObject.fullname" />
+        <TextBoxForm placeholder="User Name" v-model="signupObject.username" />
+        <EmailBoxForm v-model="signupObject.email"> </EmailBoxForm>
+        <PhoneNumberBoxForm v-model="signupObject.phone">
+          <slot slot="top-text">Only In New Zealand</slot>
+        </PhoneNumberBoxForm>
+        <SubmitButton class="signup__submit" />
+      </form>
+      <p class="signup__login">
+        Already with Us? <router-link to="/login">Login</router-link>
+      </p>
+    </Card>
   </div>
 </template>
 
+<style scoped lang="scss">
+@import "@/scss/_variables";
+.signup {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 100vw;
+  &__main {
+    padding: 40px;
+    position: relative;
+  }
+  &__title {
+    font-size: 32px;
+  }
+  &__subtitle {
+    font-size: 14px;
+    color: desaturate($purple-500, 60%);
+    padding-bottom: 40px;
+  }
+  &__login {
+    color: desaturate($purple-500, 60%);
+    text-align: center;
+    position: absolute;
+    margin-top: 20px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: $purple-500;
+    }
+  }
+  &__top {
+    padding: $margin-40;
+  }
+  &__form input {
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  &__submit {
+    margin-top: 20px;
+  }
+
+  svg {
+    height: 24px;
+    width: 24px;
+    color: $purple-500;
+  }
+
+  .errorHandler {
+    color: $red-300;
+    margin-top: 15px;
+  }
+}
+.head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    color: $white-300;
+    text-align: center;
+  }
+  &__sub-title {
+    color: $white-300;
+    opacity: 70%;
+    text-align: center;
+    margin-top: -10px;
+  }
+}
+</style>
+
 <script>
-import PushCard from "@/components/layout/PushCard.vue";
+import Card from "@/components/layout/ResponsiveCard.vue";
 import TextBoxForm from "@/components/form/TextBoxForm.vue";
 import EmailBoxForm from "@/components/form/EmailBoxForm.vue";
 import PhoneNumberBoxForm from "@/components/form/PhoneNumberBoxForm.vue";
@@ -65,14 +133,14 @@ import { signup } from "@/services/api/auth.js";
 
 export default {
   components: {
-    PushCard,
+    Card,
     TextBoxForm,
     EmailBoxForm,
     PhoneNumberBoxForm,
     SubmitButton,
     Bibutton,
   },
-  data: function () {
+  data: function() {
     return {
       error: "",
 
@@ -127,35 +195,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-@import "@/scss/_variables";
-.signup {
-  &__top {
-    padding: $margin-40;
-  }
-  .head {
-    &__titile {
-      color: $white-300;
-      text-align: center;
-    }
-    &__sub-title {
-      color: $white-300;
-      opacity: 70%;
-      text-align: center;
-      margin-top: -10px;
-    }
-  }
-
-  svg {
-    height: 24px;
-    width: 24px;
-    color: $purple-500;
-  }
-
-  .errorHandler {
-    color: $red-300;
-    margin-top: 15px;
-  }
-}
-</style>
