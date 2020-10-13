@@ -5,12 +5,21 @@
 </template>
 
 <script>
+import { getUser } from "../../services/api/user.js"
+
 export default {
   name: "index",
   components: {},
   data() {
     return {};
   },
+  created() {
+    getUser().then(user => {
+      if(user.data != "") {
+        this.$router.push("home");
+      } 
+    });
+  }
 };
 </script>
 

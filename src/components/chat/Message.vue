@@ -1,5 +1,32 @@
 <template>
-  <div :class="currentUser ? 'msg-container__stack--clear' : 'msg-container__stack-other--clear'">
+  <div
+    v-if="payment"
+    :class="
+      currentUser
+        ? 'msg-container__stack--clear'
+        : 'msg-container__stack-other--clear'
+    "
+  >
+    <!-- Sent Payment -->
+    <button
+      class="msg-box"
+      :class="currentUser ? 'bk-purple-500 col-white-100' : 'bk-white-300'"
+      v-if="contentType == 'PAYMENT' && payments.status == 1"
+      :disabled="currentUser || payment.status !== 'PENDING'"
+      @click="fufillPayment"
+    >
+      <span class="text-sm">PAYMENT::: {{ payment }}</span>
+    </button>
+  </div>
+  <div
+    v-else
+    :class="
+      currentUser
+        ? 'msg-container__stack--clear'
+        : 'msg-container__stack-other--clear'
+    "
+  >
+    <!-- Message (Default) -->
     <div
       class="msg-box"
       :class="currentUser ? 'bk-purple-500 col-white-100' : 'bk-white-300'"
@@ -14,7 +41,19 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["chats", "chat", "user"]),
+    ...mapState(["chats", "chat", "user", "payments"]),
+    payment() {
+      if (this.payments.status == 1) {
+        return this.payments.data[this.content];
+      }
+      return null;
+    },
+    contents() {
+      if (this.content) {
+        return this.content;
+      }
+      return "";
+    },
   },
   props: {
     content: {
@@ -23,6 +62,18 @@ export default {
     },
     contentType: String,
     currentUser: Boolean,
+  },
+  methods: {
+    fufillPayment() {
+      if (!this.currentUser && this.payment.status === "PENDING") {
+        // Payment can be fufilled.
+        if (
+          confirm("Are you sure you want to send $" + this.payment.amount / 100)
+        ) {
+          this.$socket.client.emit("fufillRequest", this.payment._id);
+        }
+      }
+    },
   },
 };
 </script>
@@ -47,5 +98,9 @@ export default {
   width: 7vw;
   height: 7vw;
   border: none;
+}
+// Dull disabled payment buttons
+.msg-box[disabled] {
+  opacity: 0.8;
 }
 </style>

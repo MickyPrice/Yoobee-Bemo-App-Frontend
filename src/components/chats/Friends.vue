@@ -20,13 +20,17 @@
       <span class="friends__name">Create Chat</span>
     </button>
     <button
-      v-for="(user, index) in users.active"
+      v-for="(user, index) in friends"
       :key="index"
       class="friends__item"
-      @click="loadDM(user)"
+      @click="loadDirectChannel(user)"
     >
-      <img class="friends__image" :src="user.img" aria-hidden="true" />
-      <span class="friends__name">{{ user.username }}</span>
+      <img
+        class="friends__image"
+        :src="api.VUE_APP_API_URL + '/user/profile/' + user._id"
+        aria-hidden="true"
+      />
+      <span class="friends__name">@{{ user.username }}</span>
     </button>
   </section>
 </template>
@@ -36,12 +40,26 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["users"]),
+    ...mapState(["users", "user"]),
+    friends() {
+      if (this.user.status == 1) {
+        let activeUsers = this.users.active;
+        delete activeUsers[this.user.data._id];
+        return activeUsers;
+      } else {
+        return []
+      }
+    },
+  },
+  data: function() {
+    return {
+      api: process.env,
+    };
   },
   methods: {
-    loadDM(user){
-      this.$router.push({ path: `/chat/${user._id}`, query: { type: 'direct' } })
-    }
+    loadDirectChannel(user) {
+      this.$socket.client.emit("getDirectChannel", user._id);
+    },
   }
 };
 </script>

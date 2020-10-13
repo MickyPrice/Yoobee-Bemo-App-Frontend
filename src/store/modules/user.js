@@ -3,21 +3,35 @@ const { getUser } = require("../../services/api/user");
 module.exports = {
   state: () => ({
     data: null,
-    status: 0
+    status: 0 // 0 = unloaded, 1 = loaded, 2 = error
+
   }),
   mutations: {
+    /**
+     * Update the user object
+     * 
+     * @param { Object } state - user store state 
+     * @param { Object } user 
+     */
     UPDATE_USER(state, user) {
       state.data = user;
-      state.status = 1
+      state.data.profilePic = `${process.env.VUE_APP_API_URL}/user/profile/${user._id}`;
+      state.status = 1;
     },
   },
   actions: {
+    /**
+     * Init the user upon login / auth
+     * 
+     * @param { Function } commit 
+     */
     socket_initUser({ commit }) {
-      console.log("yea?")
       getUser().then((user) => {
-        console.log(user)
         commit("UPDATE_USER", user.data);
       });
     },
-  },
+    socket_updateUser({ commit }, userData) {
+      commit("UPDATE_USER", userData);
+    }
+  }
 };

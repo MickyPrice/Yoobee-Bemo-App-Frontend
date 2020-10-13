@@ -1,13 +1,14 @@
 const axios = require('axios');
 
+// Api Builder
+// Builds and sends requests
 const repository = axios.create({
-    baseURL: 'http://45.76.121.221',
+    baseURL: process.env.VUE_APP_API_URL,
     withCredentials: true,
     crossorigin: true,
     timeout: 10000, // 10 second
     headers: {
         "Content-Type": "application/json",
-        // "Access-Control-Allow-Origin": "http://localhost:8080/"
     }
 });
 

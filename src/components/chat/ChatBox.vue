@@ -1,6 +1,6 @@
 <template>
   <div class="chat-box">
-    <button class="btn" v-if="isHidden">
+    <button class="btn" v-if="isHidden" @click="paymentRedirect">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -29,7 +29,13 @@
         ></path>
       </svg>
     </button>
-    <button v-show="isHidden" class="text__base--heavy btn gif">GIF</button>
+    <button
+      v-show="isHidden"
+      class="text__base--heavy btn gif"
+      @click="comingSoon"
+    >
+      GIF
+    </button>
     <form
       :style="isHidden ? { 'grid-column': '3/4' } : { 'grid-column': '2/4' }"
       @submit.prevent="checkForm"
@@ -47,8 +53,14 @@
           autocorrect="off"
           spellcheck="true"
           role="textbox"
-          style="outline: none; white-space: pre-wrap; overflow-wrap: break-word; -webkit-user-modify: read-write-plaintext-only;"
+          style="
+            outline: none;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            -webkit-user-modify: read-write-plaintext-only;
+          "
           @input="typing"
+          @keydown="keyPress"
         ></div>
       </div>
       <button class="submit" :disabled="string == ''">
@@ -71,6 +83,9 @@
 </template>
 
 <script>
+import { isMobile } from "mobile-device-detect";
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -78,15 +93,35 @@ export default {
       isHidden: true,
     };
   },
+  computed: {
+    ...mapState(["chats", "user"]),
+  },
   methods: {
     typing(e) {
       this.string = e.target.innerText;
     },
     checkForm() {
       if (this.string != "") {
-        this.$emit("newPost", this.string);
+        this.$emit("newPost", this.string.trim());
         this.$refs.textbox.innerText = "";
       }
+    },
+    keyPress(event) {
+      if (event.key == "Enter" && !isMobile) {
+        if (!event.shiftKey) {
+          event.preventDefault();
+          this.checkForm();
+        }
+      }
+    },
+    paymentRedirect() {
+      const channelId = this.$route.params.channelId;
+      let members = this.chats.channels[channelId].members;
+      delete members[this.user.data._id];
+      this.$router.push(`/payment/${Object.keys(members)[0]}`);
+    },
+    comingSoon() {
+      alert("Coming Soon");
     },
   },
 };
@@ -114,8 +149,8 @@ export default {
       padding: 15px 15px 15px 20px;
       border: none;
       outline: none;
-      border-radius: 50px 0 0 50px;
-      max-height: 200px;
+      border-radius: 22px 0 0 22px;
+      max-height: 150px;
       overflow-y: scroll;
       background-color: $white-300;
     }
@@ -131,7 +166,7 @@ export default {
       height: auto;
       width: 20%;
       background-color: $white-300;
-      border-radius: 0 50px 50px 0;
+      border-radius: 0 22px 22px 0;
       border: none;
       outline: none;
       svg {
