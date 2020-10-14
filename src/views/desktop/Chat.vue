@@ -1,12 +1,14 @@
 <template>
   <div class="chat">
-      <Room />
+    {{channel}}
+    {{channelId}}
+    <Room />
   </div>
 </template>
 
 <script>
 import Room from "@/components/chat/Room.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -19,68 +21,16 @@ export default {
       channelId: this.$route.params.channelId,
     };
   },
-  computed: {
-    // Get the state for chats and user
-    ...mapState(["chats", "user", "chat"]),
-    // Reactivly generate a chat name
-    channels() {
-      if (this.chats) {
-        return this.chats.channels;
-      }
-      return {};
-    },
-    name() {
-      if (this.channel.members) {
-        let members = this.channel.members;
-        if (this.user.data != null) {
-          delete members[this.user.data._id];
-        }
-        let users = Object.keys(members);
-        return users
-          .map((id) => {
-            if (users > 1) {
-              return members[id].fullname.split(" ")[0];
-            } else {
-              return members[id].fullname;
-            }
-          })
-          .join(", ");
-      }
-      return "Loading...";
-    },
-    // Reactivly get the users in the current channel
-    users() {
-      if (this.channel.members) {
-        let members = this.channel.members;
-        if (this.user.data != null) {
-          delete members[this.user.data._id];
-        }
-        return members;
-      }
-      return [];
-    },
-  },
-  watch: {
-    channels: {
-      immediate: true,
-      handler(val) {
-        if (val[this.channelId]) {
-          this.channel = val[this.channelId];
-        }
-      },
-    },
+  beforeRouteUpdate(to, from, next) {
+    this.channel = {}
+    this.channelId = to.params.channelId
+    this.leaveChannel(from.params.channelId);
+    this.joinChannel(to.params.channelId);
+    next();
   },
   methods: {
     ...mapActions(["joinChannel", "leaveChannel"]),
   },
-  // On creation join the socket room by ID
-  created() {
-    if(!this.channel[this.channelId]){
-      this.$socket.client.emit("getChannel", this.channelId);
-    }
-    this.joinChannel(this.channelId);
-  },
-  // On destroy leave the socket room
   destroyed() {
     this.leaveChannel(this.channelId);
   },
