@@ -76,7 +76,7 @@ const routes = [
   {
     path: "/landing",
     name: "Landing",
-    component: () => import("../views/desktop/Home.vue"),
+    component: () => import("../views/desktop/Landing.vue"),
   },
 ];
 
