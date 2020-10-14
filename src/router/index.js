@@ -73,6 +73,11 @@ const routes = [
     name: "Payment",
     component: () => import("../views/Payment.vue"),
   },
+  {
+    path: "/landing",
+    name: "Landing",
+    component: () => import("../views/desktop/Landing.vue"),
+  },
 ];
 
 // Setup a new router instance using our routes
