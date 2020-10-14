@@ -130,7 +130,7 @@ export default {
 
 .settings {
   background-color: $purple-500;
-  height: 100vh;
+  height: 100%;
 
   // HEADER
   &__header {

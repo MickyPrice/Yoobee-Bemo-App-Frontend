@@ -1,7 +1,5 @@
 <template>
-  <div class="chats">
     <router-view></router-view>
-  </div>
 </template>
 
 <script>

@@ -134,8 +134,9 @@ export default {
 .chat {
   background-color: $white-300;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   &__top {
     padding-bottom: 10px;
@@ -155,6 +156,7 @@ export default {
   }
   &__users {
     display: flex;
+    display: -webkit-flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -164,6 +166,11 @@ export default {
     padding-top: 5px;
     width: 100%;
     text-align: center;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    overflow: hidden;
+    max-height: 45px;
+    -webkit-line-clamp: 1;
   }
 }
 </style>

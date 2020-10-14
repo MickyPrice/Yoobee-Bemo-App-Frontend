@@ -109,11 +109,14 @@ export default {
   &--media {
     padding: unset;
     overflow: hidden;
+    max-width: 300px;
   }
 
   &__img {
-    width: 100%;
     vertical-align: top;
+    width: 100%;
+    min-height: 165px;
+    object-fit: cover;
   }
 
   &--payment {

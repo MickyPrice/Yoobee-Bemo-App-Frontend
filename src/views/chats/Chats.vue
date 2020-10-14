@@ -62,6 +62,7 @@ export default {
 @import "@/scss/_variables";
 
 .chats {
+  height: 100%;
   padding-top: $padding-40;
   &__heading {
     color: $purple-500;
