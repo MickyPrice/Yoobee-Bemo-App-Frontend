@@ -29,6 +29,6 @@ export default {
 .index {
   background: $purple-500;
   width: 100vw;
-  min-height: 100vh;
+  height: 100%;
 }
 </style>

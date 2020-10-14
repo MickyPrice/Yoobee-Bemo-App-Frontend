@@ -89,7 +89,7 @@ export default {
 .verify {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   background-color: $white-100;
   width: 100vw;

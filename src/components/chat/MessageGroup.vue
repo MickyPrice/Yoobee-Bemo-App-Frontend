@@ -67,7 +67,7 @@ export default {
     position: relative;
   }
   &__stack {
-    margin-left: 10%;
+    margin-left: 35px;
     margin-bottom: 10px;
 
     min-width: calc(100% - 20%);
@@ -127,8 +127,8 @@ export default {
     }
   }
   .small {
-    width: 7vw;
-    height: 7vw;
+    width: 24px;
+    height: 24px;
     border: none;
   }
 }

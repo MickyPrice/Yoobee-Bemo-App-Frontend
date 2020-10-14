@@ -43,7 +43,7 @@ export default {
 .home {
   background: $purple-500;
   width: 100vw;
-  min-height: 100vh;
+  height: 100%;
   font-family: $font-noto;
   display: flex;
   flex-direction: column;
