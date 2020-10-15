@@ -1,5 +1,6 @@
 <template>
   <div class="chat-box">
+    <GifSearch v-if="showgifs" @close="showgifs=false"/>
     <button class="btn" v-if="isHidden" @click="paymentRedirect">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +33,7 @@
     <button
       v-show="isHidden"
       class="text__base--heavy btn gif"
-      @click="comingSoon"
+      @click="showgifs=!showgifs"
     >
       GIF
     </button>
@@ -85,13 +86,18 @@
 <script>
 import { isMobile } from "mobile-device-detect";
 import { mapState } from "vuex";
+import GifSearch from "@/components/chat/GifSearch.vue"
 
 export default {
   data() {
     return {
       string: "",
       isHidden: true,
+      showgifs: false
     };
+  },
+  components: {
+    GifSearch
   },
   computed: {
     ...mapState(["chats", "user"]),
