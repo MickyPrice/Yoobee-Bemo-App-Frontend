@@ -1,5 +1,5 @@
 <template>
-  <p>hello world</p>
+  <router-link to="chat">Chat</router-link>
 </template>
 
 <script>
