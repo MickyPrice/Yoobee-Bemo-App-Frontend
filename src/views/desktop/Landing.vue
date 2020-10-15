@@ -4,7 +4,7 @@
       <h3 class="nav__title">Bemo</h3>
       <button class="nav__btn">Get Started</button>
     </nav>
-    <div>
+    <div class="landing__gifs">
       <!-- GIFS -->
       <img
         class="landing__gif"
@@ -33,13 +33,16 @@
     </div>
     <main class="landing__main">
       <div class="landing__inner">
-        <h1 class="landing__title">
-          <span class="landing__title--top">Payments</span><br />
-          <span class="landing__title--bottom">Made Social</span>
-        </h1>
-        <p class="landing__subtitle">
-          The future of sending and receiving payments from friends and family.
-        </p>
+        <div class="landing__header">
+          <h1 class="landing__title">
+            <span class="landing__title--top">Payments</span><br />
+            <span class="landing__title--bottom">Made Social</span>
+          </h1>
+          <p class="landing__subtitle">
+            The future of sending and receiving payments from friends and
+            family.
+          </p>
+        </div>
         <img
           class="landing__preview"
           src="@/assets/images/landing_preview.svg"
@@ -88,6 +91,13 @@ export default {
     }
   }
 
+  // &__gifs {
+  //   position: absolute;
+  //   // transform: translateX(-50%);
+  //   // left: 50%;
+  //   top: 0; bottom: 0;
+  // }
+
   &__main {
     position: relative;
     height: 100vh;
@@ -102,6 +112,14 @@ export default {
   &__inner {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+  }
+  &__header {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
   }
 
   &__title {
@@ -112,6 +130,9 @@ export default {
     margin-bottom: 20px;
     @media screen and (max-width: 850px) {
       font-size: 48px;
+    }
+    @media screen and (min-width: 1000px) {
+      font-size: 5vw;
     }
     &--top {
       background: linear-gradient(92.73deg, #f65e82 4.52%, #6f81f7 101.56%),
@@ -131,6 +152,10 @@ export default {
     color: #7c7c7c;
     margin: 0 auto;
     max-width: 400px;
+    @media screen and (min-width: 1000px) {
+      max-width: 900px;
+      font-size: 1vw;
+    }
   }
 
   &__preview {
@@ -138,6 +163,11 @@ export default {
     margin-bottom: -35%;
     max-width: 800px;
     display: block;
+    @media screen and (min-width: 1000px) {
+      max-width: 1000px;
+      margin: 0 auto;
+      margin-bottom: -30%;
+    }
     @media screen and (max-width: 850px) {
       display: none;
     }
