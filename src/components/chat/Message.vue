@@ -1,13 +1,12 @@
 <template>
   <div
-    v-if="payment"
+    v-if="payment && user.status == 1"
     :class="
       currentUser
         ? 'msg-container__stack--clear'
         : 'msg-container__stack-other--clear'
     "
   >
-    <!-- Sent Payment -->
     <button
       class="msg-box msg-box--payment"
       v-if="contentType == 'PAYMENT' && payments.status == 1"
@@ -58,10 +57,12 @@ export default {
   computed: {
     ...mapState(["chats", "chat", "user", "payments"]),
     payment() {
-      if (this.payments.status == 1) {
-        return this.payments.data[this.content];
+      if (this.contentType == "PAYMENT") {
+        if (this.contentType == "PAYMENT") {
+          return this.payments.data[this.content];
+        }
       }
-      return null;
+      return false;
     },
     gif() {
       if (this.contentType == "GIF") {

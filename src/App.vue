@@ -1,11 +1,24 @@
 <template>
-  <div id="app">
+  <div v-if="!mobile" class="app" id="desktop">
+    <router-view />
+  </div>
+  <div class="app" id="app" v-else>
     <router-view />
   </div>
 </template>
 
 <script>
+import { isMobile, isElectron } from "mobile-device-detect";
+
 export default {
+  computed: {
+    mobile() {
+      if (isMobile && !isElectron) {
+        return true;
+      }
+      return false;
+    },
+  },
   sockets: {
     connect() {
       console.log("socket connected");
@@ -37,7 +50,7 @@ export default {
   src: url(./scss/font/aileron-regular.otf);
   font-family: Aileron;
 }
-#app {
+.app {
   font-family: Aileron;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
