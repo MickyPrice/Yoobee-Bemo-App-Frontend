@@ -14,6 +14,7 @@
   "main": "background.js",
   "dependencies": {
     "@giphy/js-components": "^3.6.1",
+    "@giphy/js-fetch-api": "^1.7.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "mobile-device-detect": "^0.4.3",
