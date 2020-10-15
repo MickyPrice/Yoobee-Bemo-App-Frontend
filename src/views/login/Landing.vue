@@ -46,7 +46,7 @@ export default {
 @import "@/scss/_variables";
 .landing {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   .toplayer {
     width: 100%;
     height: 100%;

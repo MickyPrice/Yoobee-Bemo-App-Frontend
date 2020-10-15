@@ -14,7 +14,19 @@
         <time class="channel__time">{{ lastUpdated }}</time>
       </div>
       <div class="channel__flex">
-        <p class="channel__message">{{ message }}</p>
+        <p class="channel__message">
+          <span v-if="messageType == 'PAYMENT'">
+            <span class="channel__message--sentMoney" v-if="messagePayment(message.content).source == currentUser">
+              Sent 
+            </span>
+            <span class="channel__message--revMoney" v-else>
+              Received 
+            </span>
+            ${{ messagePayment(message.content).amount/100 }}
+          </span>
+          <span v-else-if="messageType == 'GIF'">Sent Gif</span>
+          <span v-else>{{ message.content }}</span>
+        </p>
         <span v-if="unread" class="channel__unreadDot"></span>
       </div>
       <hr class="channel__underline" />
@@ -23,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import moment from "moment";
 moment.updateLocale("en", {
   relativeTime: {
@@ -47,13 +60,22 @@ export default {
     };
   },
   computed: {
+    ...mapState(["payments"]),
     channelId() {
       return this.channelKey;
+    },
+    messageType() {
+      if (this.channel.latestMsg) {
+        if (this.channel.latestMsg.contentType) {
+          return this.channel.latestMsg.contentType;
+        }
+      }
+      return false;
     },
     message() {
       if (this.channel.latestMsg) {
         if (this.channel.latestMsg.content) {
-          return this.channel.latestMsg.content;
+          return this.channel.latestMsg;
         }
       }
       return false;
@@ -91,6 +113,11 @@ export default {
           })
           .join(", ");
       }
+    },
+  },
+  methods: {
+    messagePayment(id) {
+      return this.payments.data[id];
     },
   },
   props: {
@@ -156,13 +183,21 @@ export default {
   &__message {
     font-family: $font-noto;
     text-overflow: ellipsis;
-    // white-space: nowrap;
-    max-width: 100%;
+    white-space: nowrap;
+    width: 50vw;
+    max-width: 300px;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     color: lighten($black-500, 30);
+
+    &--sentMoney {
+      color: $red-300;
+    }
+    &--recvMoney {
+      color: $green-300;
+    }
   }
   &__time {
     font-weight: light;

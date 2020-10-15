@@ -5,7 +5,7 @@
         <div
           class="msg-container"
           infinite-wrapper
-          v-chat-scroll="{ always: false, smooth: true }"
+          v-chat-scroll="{ always: false, smooth: true, notSmoothOnInit: true }"
         >
           <infinite-loading
             force-use-infinite-wrapper
@@ -108,6 +108,8 @@ export default {
 @import "@/scss/_variables";
 
 .messages {
+  display: flex;
+  display: -webkit-flex;
   position: relative;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
@@ -115,6 +117,7 @@ export default {
   min-height: 0;
   min-width: 0;
   z-index: 0;
+  overflow: hidden;
 
   &__padding {
     height: 100%;
@@ -129,6 +132,8 @@ export default {
       max-height: 100%;
       padding-top: 10px;
       overflow-y: scroll;
+      overflow-scrolling: auto;
+      -webkit-overflow-scrolling: touch;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
 
