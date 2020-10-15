@@ -1,8 +1,39 @@
 <template>
   <div class="landing">
+    <Modal v-if="modal == 'LOGIN'">
+      <h2 class="login__title">Welcome Back</h2>
+      <p class="login__subtitle">Enter your phone number to login</p>
+      <form @submit.prevent="loginUser">
+        <PhoneNumberBoxForm v-model="form.phone">
+          <p class="login__formtooltip">Only In New Zealand</p>
+        </PhoneNumberBoxForm>
+        <SubmitButton class="login__submit" />
+      </form>
+      <p class="login__bottomText">
+        Please use the mobile version of this website to sign up for an account
+      </p>
+    </Modal>
+
+    <Modal v-if="modal == 'VERIFY'">
+      <div>
+        <h1 class="verify__title">Enter your code</h1>
+        <h5 class="verify__subtitle">The code was sent to your phone number</h5>
+        <input
+          class="heading__lg--balance passcode"
+          type="text"
+          pattern="\d*"
+          placeholder="******"
+          v-model="form.code"
+          maxlength="6"
+          autocomplete="one-time-code"
+        />
+        <button class="verify__btn" @click="verifyUser">Check Code</button>
+      </div>
+    </Modal>
+
     <nav class="nav">
       <h3 class="nav__title">Bemo</h3>
-      <button class="nav__btn">Get Started</button>
+      <button class="nav__btn" @click="modal = 'LOGIN'">Login</button>
     </nav>
     <div class="landing__gifs">
       <!-- GIFS -->
@@ -59,8 +90,42 @@
 </template>
 
 <script>
+import Modal from "./Modal";
+import PhoneNumberBoxForm from "../../components/form/PhoneNumberBoxForm.vue";
+import SubmitButton from "../../components/form/SubmitButton.vue";
+import { login, verify } from "@/services/api/auth.js";
+
 export default {
+  data: function() {
+    return {
+      form: {
+        phone: "",
+        code: "",
+      },
+      modal: "",
+    };
+  },
   name: "DesktopLanding",
+  components: {
+    Modal,
+    PhoneNumberBoxForm,
+    SubmitButton
+  },
+  methods: {
+    loginUser() {
+      login(this.form).then(() => {
+        this.modal = "VERIFY";
+      });
+    },
+    verifyUser() {
+      verify(this.form).then((res) => {
+        if (res.data.success == true) {
+          localStorage.setItem("authenticated", true);
+          this.$router.push("/chat");
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -80,14 +145,17 @@ export default {
     opacity: 0.9;
     filter: drop-shadow(0px 4px 19px rgba(0, 0, 0, 0.15));
     border-radius: 15px;
-    width: 200px;
+    width: 250px;
     position: absolute;
-    // z-index: -1;
-    height: 130px;
+    height: 145px;
     object-fit: cover;
     object-position: center;
     @media screen and (max-width: 850px) {
       display: none;
+    }
+    @media screen and (min-width: 3000px) {
+      width: 600px;
+      height: 390px;
     }
   }
 
@@ -113,6 +181,9 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    @media screen and (max-width: 1000px) {
+      width: 90vw;
+    }
   }
   &__header {
     flex-direction: column;
@@ -153,7 +224,7 @@ export default {
     margin: 0 auto;
     max-width: 400px;
     @media screen and (min-width: 1000px) {
-      max-width: 900px;
+      max-width: 100%;
       font-size: 1vw;
     }
   }
@@ -161,10 +232,10 @@ export default {
   &__preview {
     width: 100%;
     margin-bottom: -35%;
-    max-width: 800px;
+    max-width: 95%;
     display: block;
     @media screen and (min-width: 1000px) {
-      max-width: 1000px;
+      width: 80vw;
       margin: 0 auto;
       margin-bottom: -30%;
     }
@@ -190,6 +261,9 @@ export default {
   right: 0;
   top: 0;
   z-index: 2;
+  @media screen and (min-width: 2000px) {
+    font-size: 1vw;
+  }
   &__title {
     color: #8b55ff;
   }
@@ -199,6 +273,34 @@ export default {
     padding: 10px 30px;
     border: none;
     border-radius: 11px;
+    flex-grow: 0;
+    @media screen and (min-width: 2000px) {
+      font-size: 1vw;
+    }
+  }
+}
+
+.verify {
+  &__btn {
+    font-size: 20px;
+    background-color: #00d6a3;
+    color: #16191c;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 11px;
+    flex-grow: 0;
+  }
+}
+
+.passcode {
+  width: 100%;
+  margin-top: 40px;
+  background-color: $white-100;
+  border-radius: $corners-10;
+  border: none;
+  outline: none;
+  &[type="text"] {
+    text-align: center;
   }
 }
 </style>

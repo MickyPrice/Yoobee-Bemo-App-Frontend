@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "index",
+    // name: "home",
     component: () => import("../views/login/index.vue"),
     children: [
       {
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: "/chat",
-    name: "chatIndex",
+    // name: "chatIndex",
     meta: {
       requiresAuth: true,
     },
