@@ -1,6 +1,6 @@
 <template>
-  <div class="chats">
-    <Layout>
+  <div class="desktop">
+    <div class="chats">
       <h1 class="heading__base chats__heading">Chats</h1>
       <SearchBar
         @input-keyup="currentSearch = $event.target.value"
@@ -10,34 +10,28 @@
         placeholder="Search"
         type="search"
       />
-      <div class="chats__friends">
-        <Friends class="chats__friendsList" />
-      </div>
       <Channels v-if="!(searchOpen && currentSearch)" />
       <UserSearch v-else :search="currentSearch" />
-    </Layout>
-    <Navigation :darkTheme="true" gradientColour="#FFF" />
+    </div>
+    <router-view />
+    <div class="sidebar">
+
+    </div>
   </div>
 </template>
 
 <script>
-import Layout from "@/components/layout/Layout";
-import Navigation from "@/components/navigation/Navigation";
 import SearchBar from "@/components/form/FormInput";
-import Friends from "@/components/chats/Friends";
 import Channels from "@/components/chats/Channels";
 import UserSearch from "@/components/chats/UserSearch";
 
 export default {
   components: {
-    Layout,
-    Navigation,
     SearchBar,
-    Friends,
     Channels,
     UserSearch,
   },
-  data: function () {
+  data: function() {
     return {
       searchOpen: false,
       currentSearch: "",
@@ -51,34 +45,36 @@ export default {
     },
   },
   methods: {
-      closeSearch() {
-        setTimeout(() => {this.searchOpen = false}, 100)
-      }
-  }
+    closeSearch() {
+      setTimeout(() => {
+        this.searchOpen = false;
+      }, 100);
+    },
+  },
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/scss/_variables";
 
 .chats {
   height: 100%;
-  padding-top: $padding-40;
+  background-color: #FCFCFE;
+  padding: 50px 50px;
+  max-width: 500px;
   &__heading {
     color: $purple-500;
     font-weight: bold;
   }
-
-  &__friends {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 140px;
-  }
-  &__friendsList {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
+}
+.desktop {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.sidebar {
+  height: 100%;
+  min-width: 400px;
+  background-color: #FCFCFE;
 }
 </style>

@@ -52,7 +52,7 @@
 .signup {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   width: 100vw;
   &__main {

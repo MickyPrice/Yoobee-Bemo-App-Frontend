@@ -213,7 +213,7 @@ export default {
 @import "@/scss/_variables";
 
 .payments {
-  height: 100vh;
+  height: 100%;
   background-color: $purple-500;
 
   &__title {
