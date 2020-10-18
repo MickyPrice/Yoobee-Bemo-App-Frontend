@@ -1,7 +1,7 @@
 <template>
   <nav
     class="nav"
-    :style=" { backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), ${gradientColour} 60%)` }"
+    :class="{'nav--bg': background}"
   >
     <router-link
       active-class="nav__link--active"
@@ -125,7 +125,7 @@ export default {
     darkTheme: Boolean,
     chatNotification: Boolean,
     alertsNotification: Boolean,
-    gradientColour: String
+    background: Boolean
   }
 };
 </script>
@@ -138,10 +138,14 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 50px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
+
+  &--bg {
+    background-color: rgba(255,255,255,0.5)
+  }
 
   // Style individual icons
   &__svg {
