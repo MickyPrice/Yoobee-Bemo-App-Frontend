@@ -61,7 +61,7 @@ export default {
   height: 100%;
   background-color: #FCFCFE;
   padding: 50px 50px;
-  max-width: 500px;
+  min-width: 500px;
   &__heading {
     color: $purple-500;
     font-weight: bold;

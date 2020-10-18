@@ -1,22 +1,19 @@
 <template>
-  <div v-if="!mobile" class="app" id="desktop">
+  <div class="app" id="app" v-if="mobile">
     <router-view />
   </div>
-  <div class="app" id="app" v-else>
+  <div v-else class="app" id="desktop">
     <router-view />
   </div>
 </template>
 
 <script>
-import { isMobile, isElectron } from "mobile-device-detect";
+import { isMobile } from "mobile-device-detect";
 
 export default {
   computed: {
     mobile() {
-      if (isMobile && !isElectron) {
-        return true;
-      }
-      return false;
+      return isMobile;
     },
   },
   sockets: {
