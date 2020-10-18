@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- <div class="chat__bottom"> -->
-      <Room></Room>
+    <Room></Room>
     <!-- </div> -->
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
     ChatPic,
     Room,
   },
-  data: function() {
+  data: function () {
     return {
       channel: {},
       api: process.env,
@@ -116,7 +116,7 @@ export default {
   },
   // On creation join the socket room by ID
   created() {
-    if(!this.channel[this.channelId]){
+    if (!this.channel[this.channelId]) {
       this.$socket.client.emit("getChannel", this.channelId);
     }
     this.joinChannel(this.channelId);
@@ -138,12 +138,21 @@ export default {
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
+  padding-top: 130px;
   &__top {
     padding-bottom: 10px;
     margin: 0 40px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
+
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 130px;
+
     &--small {
       justify-self: center;
       height: 75px;

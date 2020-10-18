@@ -145,6 +145,11 @@ export default {
   gap: 10px;
   align-items: end;
   padding: 0 5% 15px 5%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFF;
 
   form {
     width: 100%;

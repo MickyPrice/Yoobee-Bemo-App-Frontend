@@ -16,7 +16,7 @@
       <Channels v-if="!(searchOpen && currentSearch)" />
       <UserSearch v-else :search="currentSearch" />
     </Layout>
-    <Navigation :darkTheme="true" gradientColour="#FFF" />
+    <Navigation :darkTheme="true" :background="true" />
   </div>
 </template>
 

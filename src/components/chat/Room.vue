@@ -115,9 +115,11 @@ export default {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   min-height: 0;
+  height: 100vh;
   min-width: 0;
   z-index: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 80px;
 
   &__padding {
     height: 100%;
