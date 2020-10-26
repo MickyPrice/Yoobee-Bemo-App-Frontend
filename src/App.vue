@@ -18,7 +18,7 @@ export default {
   },
   sockets: {
     connect() {
-      console.log("socket connected");
+      console.log("Server Connected 🙂");
     },
   },
   bemoerror(err) {

@@ -1,5 +1,3 @@
-const { getUser } = require("../../services/api/user");
-
 module.exports = {
   state: () => ({
     data: null,
@@ -25,10 +23,8 @@ module.exports = {
      * 
      * @param { Function } commit 
      */
-    socket_initUser({ commit }) {
-      getUser().then((user) => {
-        commit("UPDATE_USER", user.data);
-      });
+    socket_initUser({ commit }, userData) {
+      commit("UPDATE_USER", userData);
     },
     socket_updateUser({ commit }, userData) {
       commit("UPDATE_USER", userData);
