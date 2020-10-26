@@ -7,14 +7,32 @@
         : 'msg-container__stack-other--clear'
     "
   >
-    <button
+    <div
       class="msg-box msg-box--payment"
       v-if="contentType == 'PAYMENT' && payments.status == 1"
-      :disabled="currentUser || payment.status !== 'PENDING'"
+    >
+      <div class="msg-box--payment-amount">
+        <span v-if="payment.source == user.data._id">- </span>
+        <span class="msg-box__text--payment">${{ payment.amount / 100 }}</span>
+      </div>
+      <p class="msg-box__text--payment-info">
+        <span
+          v-if="payment.status == 'PENDING' && payment.source == user.data._id"
+        >
+          Requested payment from you
+        </span>
+        <span v-if="payment.source != user.data._id && payment.status == 'PENDING'">
+          Awaiting payment
+        </span>
+      </p>
+    </div>
+
+    <button
+      class="msg-box__payment-btn"
+      v-if="payment.status == 'PENDING' && payment.source == user.data._id"
       @click="fufillPayment"
     >
-      <span v-if="payment.source == user.data._id">- </span>
-      <span class="msg-box__text--payment">${{ payment.amount / 100 }}</span>
+      Send ${{ payment.amount / 100 }}
     </button>
   </div>
   <div
@@ -120,26 +138,44 @@ export default {
     object-fit: cover;
   }
 
+  &__payment-btn {
+    margin-top: 5px;
+    padding: 7px 40px;
+    background: #00D6A3;
+    color: white;
+    border-radius: 15px;
+    border: unset;
+    outline: none;
+  }
+
   &--payment {
     background-color: #303030;
     border: unset;
     outline: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding: 32px 41px 32px;
     font-size: 43px;
     color: #ffffff;
     font-weight: 600;
-    // &[disabled]{
 
-    // }
+    &-amount {
+      text-align: center;
+    }
   }
 
-  // &__text {
-  //   &--payment{
-  //     font-size: 43px;
-  //     color: #ffffff;
-  //     font-weight: 600;
-  //   }
-  // }
+  &__text {
+    &--payment-info {
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 15px;
+      flex-basis: 100%;
+      width: 100%;
+    }
+  }
   & .text-sm {
     font-size: 14px;
     line-height: 1.34;

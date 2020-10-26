@@ -13,12 +13,13 @@
       <h5 class="verify__subtitle">The code was sent to your phone number</h5>
       <input
         class="heading__lg--balance input__passcode"
-        type="text"
+        style="text-align: center;"
+        type="number"
         pattern="\d*"
         disabled
         placeholder="******"
         v-model="form.code"
-        maxlength="6"
+        maxlength="10"
         autocomplete="one-time-code"
       />
     </div>
