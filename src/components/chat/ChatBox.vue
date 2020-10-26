@@ -164,6 +164,12 @@ export default {
       max-height: 150px;
       overflow-y: scroll;
       background-color: $white-300;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
     .textbox {
       width: 100%;

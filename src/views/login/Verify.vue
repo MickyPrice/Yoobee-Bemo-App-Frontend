@@ -76,7 +76,7 @@ export default {
       verify(this.form).then((res) => {
         if (res.data.success == true) {
           localStorage.setItem("authenticated", true);
-          this.$router.push("home");
+          this.$router.go("/home");
         }
       });
     },

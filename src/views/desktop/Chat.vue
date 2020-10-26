@@ -1,88 +1,127 @@
 <template>
   <div class="chat">
-      <Room />
+    <ChatLayout>
+      <div class="messages">
+        <div class="messages__padding">
+          <div
+            class="msg-container"
+            infinite-wrapper
+            v-chat-scroll="{
+              always: false,
+              smooth: true,
+              notSmoothOnInit: true,
+            }"
+          >
+            <infinite-loading
+              force-use-infinite-wrapper
+              direction="top"
+              @infinite="loadChat"
+              spinner="waveDots"
+              ref="InfiniteLoading"
+            >
+              <div slot="no-more">
+                <!-- {{ chats.channels[channel] }} -->
+              </div>
+            </infinite-loading>
+            <MessageGroup
+              v-for="(group, $index) in chat.messages"
+              :key="$index"
+              :messageGroup="group"
+            />
+          </div>
+        </div>
+      </div>
+    </ChatLayout>
   </div>
 </template>
 
 <script>
-import Room from "@/components/chat/Room.vue";
-import { mapActions, mapState } from "vuex";
+import Vue from "vue";
+import MessageGroup from "@/components/chat/MessageGroup.vue";
+import InfiniteLoading from "vue-infinite-loading";
+import ChatLayout from "@/components/chat/ChatLayout.vue";
+import VueChatScroll from "vue-chat-scroll";
+Vue.use(VueChatScroll);
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    Room,
+    MessageGroup,
+    InfiniteLoading,
+    ChatLayout,
+  },
+  computed: {
+    ...mapState(["chats", "chat", "user", "messages"]),
   },
   data: function() {
     return {
-      channel: {},
       api: process.env,
-      channelId: this.$route.params.channelId,
+      channel: this.$route.params.channelId,
     };
   },
-  computed: {
-    // Get the state for chats and user
-    ...mapState(["chats", "user", "chat"]),
-    // Reactivly generate a chat name
-    channels() {
-      if (this.chats) {
-        return this.chats.channels;
-      }
-      return {};
-    },
-    name() {
-      if (this.channel.members) {
-        let members = this.channel.members;
-        if (this.user.data != null) {
-          delete members[this.user.data._id];
-        }
-        let users = Object.keys(members);
-        return users
-          .map((id) => {
-            if (users > 1) {
-              return members[id].fullname.split(" ")[0];
-            } else {
-              return members[id].fullname;
-            }
-          })
-          .join(", ");
-      }
-      return "Loading...";
-    },
-    // Reactivly get the users in the current channel
-    users() {
-      if (this.channel.members) {
-        let members = this.channel.members;
-        if (this.user.data != null) {
-          delete members[this.user.data._id];
-        }
-        return members;
-      }
-      return [];
-    },
-  },
-  watch: {
-    channels: {
-      immediate: true,
-      handler(val) {
-        if (val[this.channelId]) {
-          this.channel = val[this.channelId];
-        }
-      },
-    },
+  beforeRouteUpdate(to, from, next) {
+    if (!this.chats.channels[to.params.channelId]) {
+      this.$socket.client.emit("getChannel", to.params.channelId);
+    }
+    this.joinChannel(to.params.channelId);
+    if (this.$refs.InfiniteLoading) {
+      this.$refs.InfiniteLoading.stateChanger.reset();
+    }
+    next();
   },
   methods: {
     ...mapActions(["joinChannel", "leaveChannel"]),
+    currentUser() {
+      if (this.user.data) {
+        if (this.user.data._id) {
+          return this.user.data._id;
+        }
+      }
+    },
+    loadChat($state) {
+      const length = this.getSum();
+
+      if (this.chat.chatLength <= this.getSum() && this.chat.chatLength != 0) {
+        $state.complete();
+      } else if (this.chat.chatLength > this.chat.messages.length) {
+        this.getMsgs($state, length);
+      } else if (this.chat.chatLength == 0) {
+        this.getMsgs($state, length);
+      } else {
+        $state.loaded();
+      }
+    },
+    getSum() {
+      let sum = 0;
+      this.chat.messages.forEach((group) => {
+        sum += group.length;
+      });
+      return sum;
+    },
+    getMsgs($state, length) {
+      this.$socket.client.emit("getMsgs", {
+        channelId: this.$route.params.channelId,
+        num: length,
+      });
+
+      let timeoutLoad = setTimeout(() => {
+        clearInterval(checkLoad);
+        if (this.chat.chatLength == this.getSum()) {
+          $state.complete();
+        }
+      }, 5000);
+
+      let checkLoad = setInterval(() => {
+        if (this.getSum() > length) {
+          $state.loaded();
+          clearTimeout(timeoutLoad);
+          clearInterval(checkLoad);
+        }
+      }, 5);
+    },
   },
-  // On creation join the socket room by ID
-  created() {
-    if(!this.channel[this.channelId]){
-      this.$socket.client.emit("getChannel", this.channelId);
-    }
-    this.joinChannel(this.channelId);
-  },
-  // On destroy leave the socket room
   destroyed() {
-    this.leaveChannel(this.channelId);
+    this.leaveChannel(this.channel);
   },
 };
 </script>
@@ -99,6 +138,46 @@ export default {
   &__bottom {
     height: 80%;
     min-height: 350px;
+  }
+}
+.messages {
+  display: flex;
+  display: -webkit-flex;
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  &__padding {
+    height: 100%;
+    width: 100%;
+    padding-right: 5%;
+    padding-left: 5%;
+    display: flex;
+    align-items: flex-end;
+
+    .msg-container {
+      width: 100%;
+      max-height: 100%;
+      padding-top: 10px;
+      overflow-y: scroll;
+      overflow-scrolling: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+      }
+      &__stack {
+        margin-left: 10%;
+        margin-bottom: 10px;
+      }
+    }
   }
 }
 </style>
